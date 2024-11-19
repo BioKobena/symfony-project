@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  app:
+    build: .  # Utilise le Dockerfile dans le même répertoire
+    container_name: symfony_app
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+
+  webserver:
+    image: nginx:alpine
+    container_name: symfony_web
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  db:
+    image: mysql:latest
+    container_name: symfony_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"  # Accède à phpMyAdmin via http://localhost:8081
+    environment:
+      PMA_HOST: db  # Indique le nom du service de base de données
+      PMA_USER: user  # Utilisateur MySQL
+      PMA_PASSWORD: password  # Mot de passe MySQL
+
+volumes:
+  db_data:
