@@ -81,5 +81,5 @@ Bienvenue sur le projet **AdopteUnDev** ! Ce projet a pour objectif de créer un
 Clonez ce dépôt sur votre machine locale.
 
 ```bash
-git clone https://github.com/votre-utilisateur/adopte-un-dev.git
-cd adopte-un-dev
+git clone https://github.com/BioKobena/symfony-project.git .
+
