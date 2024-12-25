@@ -49,14 +49,14 @@
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
 							<li class="active">
-								<a href="index.html">Accueil</a>
+								<a href="{{path('app_developer')}}">Accueil</a>
 							</li>
-							{# <li class="has-children"><a href="#">Offres</a> </li> #}
+							{# <li class="has-children"><a href="{{path('app_offre')}}">Offres</a> </li> #}
 							<li>
-								<a href="">Postes</a>
+								<a href="{{path('app_offre')}}">Offres</a>
 							</li>
 							<li>
-								<a href="elements.html">Matching</a>
+								<a href="{{path('app_profil')}}">Matching</a>
 							</li>
 							<li>
 								<a href="">Favoris</a>
@@ -125,80 +125,80 @@
 		</div>
 
 		{# <div class="testimonial-section">
-					<div class="container">
-						<div class="row align-items-center justify-content-between">
-							<div class="col-lg-4 mb-5 section-title" data-aos="fade-up" data-aos-delay="0">
-		
-								<h2 class="mb-4 font-weight-bold heading">Testimonials</h2>
-								<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
-								</p>
-								<p>
-									<a href="#" class="btn btn-primary">Product Tour</a>
-								</p>
-							</div>
-							<div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-		
-								<div class="testimonial--wrap">
-									<div class="owl-single owl-carousel no-dots no-nav">
-										<div class="testimonial-item">
-											<div class="d-flex align-items-center mb-4">
-												<div class="photo mr-3">
-													<img src="images/person_4-min.jpg" alt="Image" class="img-fluid">
-												</div>
-												<div class="author">
-													<cite class="d-block mb-0">Kaila Woodland</cite>
-													<span>Owner, Greenland, Inc.</span>
+											<div class="container">
+												<div class="row align-items-center justify-content-between">
+													<div class="col-lg-4 mb-5 section-title" data-aos="fade-up" data-aos-delay="0">
+								
+														<h2 class="mb-4 font-weight-bold heading">Testimonials</h2>
+														<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+														</p>
+														<p>
+															<a href="{{path('app_offre')}}" class="btn btn-primary">Product Tour</a>
+														</p>
+													</div>
+													<div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+								
+														<div class="testimonial--wrap">
+															<div class="owl-single owl-carousel no-dots no-nav">
+																<div class="testimonial-item">
+																	<div class="d-flex align-items-center mb-4">
+																		<div class="photo mr-3">
+																			<img src="images/person_4-min.jpg" alt="Image" class="img-fluid">
+																		</div>
+																		<div class="author">
+																			<cite class="d-block mb-0">Kaila Woodland</cite>
+																			<span>Owner, Greenland, Inc.</span>
+																		</div>
+																	</div>
+																	<blockquote>
+																		<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
+																	</blockquote>
+																</div>
+								
+																<div class="testimonial-item">
+																	<div class="d-flex align-items-center mb-4">
+																		<div class="photo mr-3">
+																			<img src="images/person_1-min.jpg" alt="Image" class="img-fluid">
+																		</div>
+																		<div class="author">
+																			<cite class="d-block mb-0">Kaila Woodland</cite>
+																			<span>Owner, Greenland, Inc.</span>
+																		</div>
+																	</div>
+																	<blockquote>
+																		<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
+																	</blockquote>
+																</div>
+								
+																<div class="testimonial-item">
+																	<div class="d-flex align-items-center mb-4">
+																		<div class="photo mr-3">
+																			<img src="images/person_2-min.jpg" alt="Image" class="img-fluid">
+																		</div>
+																		<div class="author">
+																			<cite class="d-block mb-0">Kaila Woodland</cite>
+																			<span>Owner, Greenland, Inc.</span>
+																		</div>
+																	</div>
+																	<blockquote>
+																		<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
+																	</blockquote>
+																</div>
+															</div>
+															<div class="custom-nav-wrap">
+																<a href="{{path('app_offre')}}" class="custom-owl-prev">
+																	<span class="icon-keyboard_backspace"></span>
+																</a>
+																<a href="{{path('app_offre')}}" class="custom-owl-next">
+																	<span class="icon-keyboard_backspace"></span>
+																</a>
+															</div>
+														</div>
+								
+													</div>
 												</div>
 											</div>
-											<blockquote>
-												<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
-											</blockquote>
-										</div>
-		
-										<div class="testimonial-item">
-											<div class="d-flex align-items-center mb-4">
-												<div class="photo mr-3">
-													<img src="images/person_1-min.jpg" alt="Image" class="img-fluid">
-												</div>
-												<div class="author">
-													<cite class="d-block mb-0">Kaila Woodland</cite>
-													<span>Owner, Greenland, Inc.</span>
-												</div>
-											</div>
-											<blockquote>
-												<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
-											</blockquote>
-										</div>
-		
-										<div class="testimonial-item">
-											<div class="d-flex align-items-center mb-4">
-												<div class="photo mr-3">
-													<img src="images/person_2-min.jpg" alt="Image" class="img-fluid">
-												</div>
-												<div class="author">
-													<cite class="d-block mb-0">Kaila Woodland</cite>
-													<span>Owner, Greenland, Inc.</span>
-												</div>
-											</div>
-											<blockquote>
-												<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
-											</blockquote>
-										</div>
-									</div>
-									<div class="custom-nav-wrap">
-										<a href="#" class="custom-owl-prev">
-											<span class="icon-keyboard_backspace"></span>
-										</a>
-										<a href="#" class="custom-owl-next">
-											<span class="icon-keyboard_backspace"></span>
-										</a>
-									</div>
-								</div>
-		
-							</div>
-						</div>
-					</div>
-				</div> #}
+										</div> #}
 
 		<div class="site-section bg-light" id="blog-section">
 			<div class="container">
@@ -210,15 +210,15 @@
 
 					<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
 						<div class="blog_entry">
-							<a href="#"><img src="images/img_h_3-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
+							<a href="{{path('app_offre')}}"><img src="images/img_h_3-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
 							<div class="p-4 bg-white">
 								<h3>
-									<a href="#">Far far away, behind the word mountains</a>
+									<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
 								</h3>
 								<span class="date">April 25, 2019</span>
 								<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 								<p class="more">
-									<a href="#">Continue reading...</a>
+									<a href="{{path('app_offre')}}">Continue reading...</a>
 								</p>
 							</div>
 						</div>
@@ -226,15 +226,15 @@
 
 					<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
 						<div class="blog_entry">
-							<a href="#"><img src="images/img_h_5-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
+							<a href="{{path('app_offre')}}"><img src="images/img_h_5-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
 							<div class="p-4 bg-white">
 								<h3>
-									<a href="#">Far far away, behind the word mountains</a>
+									<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
 								</h3>
 								<span class="date">April 25, 2019</span>
 								<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 								<p class="more">
-									<a href="#">Continue reading...</a>
+									<a href="{{path('app_offre')}}">Continue reading...</a>
 								</p>
 							</div>
 						</div>
@@ -242,15 +242,15 @@
 
 					<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
 						<div class="blog_entry">
-							<a href="#"><img src="images/img_h_7-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
+							<a href="{{path('app_offre')}}"><img src="images/img_h_7-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
 							<div class="p-4 bg-white">
 								<h3>
-									<a href="#">Far far away, behind the word mountains</a>
+									<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
 								</h3>
 								<span class="date">April 25, 2019</span>
 								<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 								<p class="more">
-									<a href="#">Continue reading...</a>
+									<a href="{{path('app_offre')}}">Continue reading...</a>
 								</p>
 							</div>
 						</div>
@@ -258,7 +258,7 @@
 				</div>
 				<div class="row mt-5">
 					<div class="col-lg-4 mx-auto">
-						<a href="#" class="btn btn-primary btn-block">Voir plus</a>
+						<a href="{{path('app_offre')}}" class="btn btn-primary btn-block">Voir plus</a>
 					</div>
 				</div>
 			</div>
@@ -276,22 +276,22 @@
 							<h3>Connectez-vous avec nous</h3>
 							<ul class="social list-unstyled">
 								<li>
-									<a href="#">
+									<a href="{{path('app_offre')}}">
 										<span class="icon-facebook"></span>
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="{{path('app_offre')}}">
 										<span class="icon-twitter"></span>
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="{{path('app_offre')}}">
 										<span class="icon-instagram"></span>
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="{{path('app_offre')}}">
 										<span class="icon-linkedin"></span>
 									</a>
 								</li>
@@ -309,19 +309,19 @@
 								<div class="widget">
 									<ul class="links list-unstyled">
 										<li>
-											<a href="#">Accueil</a>
+											<a href="{{path('app_offre')}}">Accueil</a>
 										</li>
 										<li>
-											<a href="#">Offres</a>
+											<a href="{{path('app_offre')}}">Offres</a>
 										</li>
 										<li>
-											<a href="#">Matching</a>
+											<a href="{{path('app_offre')}}">Matching</a>
 										</li>
 										<li>
-											<a href="#">Favoris</a>
+											<a href="{{path('app_offre')}}">Favoris</a>
 										</li>
 										<li>
-											<a href="#">Contact</a>
+											<a href="{{path('app_offre')}}">Contact</a>
 										</li>
 									</ul>
 								</div>
@@ -330,19 +330,19 @@
 								<div class="widget">
 									<ul class="links list-unstyled">
 										<li>
-											<a href="#">À propos de nous</a>
+											<a href="{{path('app_offre')}}">À propos de nous</a>
 										</li>
 										<li>
-											<a href="#">Politique de confidentialité</a>
+											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
 										</li>
 										<li>
-											<a href="#">FAQ</a>
+											<a href="{{path('app_offre')}}">FAQ</a>
 										</li>
 										<li>
-											<a href="#">Carrières</a>
+											<a href="{{path('app_offre')}}">Carrières</a>
 										</li>
 										<li>
-											<a href="#">Support</a>
+											<a href="{{path('app_offre')}}">Support</a>
 										</li>
 									</ul>
 								</div>
@@ -351,14 +351,14 @@
 					</div>
 				</div>
 
-				<div class="text-center copyright">
+				<div class="text-center" copyright">
 					<div class="col-md-8">
 						<p>Copyright &copy;<script>
 								document.write(new Date().getFullYear());
 							</script>. Tous droits réservés.
-							<a href="#">Bio Kobena</a>
+							<a href="{{path('app_offre')}}">Bio Kobena</a>
 						</p>
-					
+
 					</div>
 				</div>
 			</div>
