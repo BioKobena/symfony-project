@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProfilController extends AbstractController
 {
-    #[Route('/profil', name: 'app_profil')]
+    #[Route('/profil', name: 'app')]
     public function index(): Response
     {
         return $this->render('profil/index.html.twig', [
@@ -16,7 +16,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'app_profil')]
+    #[Route('/profile', name: 'app_profil')]
     public function accueil(): Response
     {
         return $this->render('profil/index.html.twig', [

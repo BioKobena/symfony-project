@@ -1513,7 +1513,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
       top: 0;
       background: rgba(0, 0, 0, 0.2); }
   .hero-slant .container {
-    position: relative; }
+    position: relative; 
+    /* margin-top: 5rem; */
+  }
   .hero-slant, .hero-slant > .container > .row {
     height: 120vh; }
   .hero-slant .sign-up-form {
