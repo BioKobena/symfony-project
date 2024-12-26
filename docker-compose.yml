@@ -27,9 +27,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: symfony_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: adopte_dev
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
     volumes:
       - db_data:/var/lib/mysql
 

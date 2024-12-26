@@ -15,4 +15,12 @@ class AuthController extends AbstractController
             'controller_name' => 'AuthController',
         ]);
     }
+
+    #[Route('/auth/signin', name: 'app_signin')]
+    public function signin(): Response
+    {
+        return $this->render('auth/signin.html.twig', [
+            'controller_name' => 'AuthController',
+        ]);
+    }
 }

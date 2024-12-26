@@ -15,4 +15,12 @@ class MatchingController extends AbstractController
             'controller_name' => 'MatchingController',
         ]);
     }
+
+    #[Route('/matching/match', name: 'match')]
+    public function matching(): Response
+    {
+        return $this->render('matching/match.html.twig', [
+            'controller_name' => 'MatchingController',
+        ]);
+    }
 }

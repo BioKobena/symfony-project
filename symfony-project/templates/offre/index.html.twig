@@ -74,7 +74,7 @@
 								<a class="text-black text-bold" href="{{path('app_offre')}}">Offres</a>
 							</li>
 							<li class="active">
-								<a class="text-black text-bold" href="{{path('app_profil')}}">Matching</a>
+								<a class="text-black text-bold" href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
 								<a class="text-black text-bold" href="">Favoris</a>
@@ -99,10 +99,16 @@
 
 		<div class="section-grey bg-light" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem;">
 			<div class="col-lg-6 text-center">
-				<h4 class="font-weight-bold">Plongez au coeur des métiers</h4>
-				<p class="text-black mb-4" data-aos="fade-up" data-aos-delay="100">Apprenez-en plus sur les métiers et secteurs d’activité et découvrez ce qui vous plait vrai</p>
+				<h4 class="font-weight-bold">Vous pourrez matcher avec ces entreprises</h4>
+				<p class="text-black mb-4" data-aos="fade-up" data-aos-delay="100">Votre avenir se trouve peut-être là !</p>
 			</div>
 
+			<div class="search-bar" style="width: 100%; margin-bottom: 20px;">
+				<input type="text" placeholder="Recherchez ici..." class="form-control" style="width: 100%; padding: 15px; font-size: 18px; border-radius: 5px; border: 1px solid #ccc;">
+				<button type="button" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; border-radius: 0 5px 5px 0; border: none; color: white; cursor: pointer; margin-left:-2rem">
+					Rechercher
+				</button>
+			</div>
 			<div class="row">
 
 
@@ -154,58 +160,6 @@
 					</div>
 				</div>
 			</div>
-            	<div class="row">
-
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_3-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_5-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_7-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-            
 		</div>
 
 
@@ -257,7 +211,7 @@
 											<a href="{{path('app_developer')}}">Accueil</a>
 										</li>
 										<li>
-											<a href="{{path('app_offre')}}" class="active">Offres</a>
+											<a href="{{path('app_offre')}}">Offres</a>
 										</li>
 										<li>
 											<a href="{{path('app_offre')}}">Matching</a>

@@ -19,7 +19,7 @@ class ProfilController extends AbstractController
     #[Route('/profile', name: 'app_profil')]
     public function accueil(): Response
     {
-        return $this->render('developer/offre.html.twig', [
+        return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
         ]);
     }
