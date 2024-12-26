@@ -15,4 +15,12 @@ class DeveloperController extends AbstractController
             'controller_name' => 'DeveloperController',
         ]);
     }
+
+    #[Route('/offre-info', name: 'app_infojob')]
+    public function info_job(): Response
+    {
+        return $this->render('developer/offre.html.twig', [
+            'controller_name' => 'DeveloperController',
+        ]);
+    }
 }

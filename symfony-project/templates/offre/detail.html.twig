@@ -21,47 +21,34 @@
 		<link rel="stylesheet" href="css/jquery.fancybox.min.css">
 		<link rel="stylesheet" href="css/aos.css">
 		<link rel="stylesheet" href="css/style.css">
-
-		<title>AdopteUnDev</title>
+		<title>Détails de l'offre - VINCI Construction SI</title>
 	</head>
 	<body>
 
-
-		<div class="site-mobile-menu site-navbar-target">
-			<div class="site-mobile-menu-header">
-				<div class="site-mobile-menu-close">
-					<span class="icofont-close js-menu-toggle"></span>
-				</div>
-			</div>
-			<div class="site-mobile-menu-body"></div>
-		</div>
-
-		<div class="container">
-
-
-			<nav class="site-nav">
+		<div class="container w-100" style="margin-bottom:5rem;width:100vw">
+			<nav class="site-nav" style="width:100vw;">
 				<div class="logo">
-					<a href="index.html" class="text-white">AdopteUnDev<span class="text-black">.</span>
+					<a class="text-black text-bold">AdopteUnDev<span class="text-black text-bold">.</span>
 					</a>
 				</div>
 				<div class="row align-items-center">
 
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
+							<li>
+								<a class="text-black text-bold" href="{{path('app_developer')}}">Accueil</a>
+							</li>
 							<li class="active">
-								<a href="{{path('app_developer')}}">Accueil</a>
+								<a class="text-black text-bold" href="{{path('app_offre')}}">Offres</a>
+							</li>
+							<li class="active">
+								<a class="text-black text-bold" href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
-								<a href="{{path('app_offre')}}">Offres</a>
+								<a class="text-black text-bold" href="">Favoris</a>
 							</li>
 							<li>
-								<a href="{{path('app_matching')}}">Matching</a>
-							</li>
-							<li>
-								<a href="">Favoris</a>
-							</li>
-							<li>
-								<a href="{{path('app_auth')}}">
+								<a class="text-black text-bold" href="">
 									<span class="fa fa-user"></span>
 									Mon compte
 								</a>
@@ -72,118 +59,56 @@
 
 				</div>
 			</nav>
-			<!-- END nav -->
-
-		</div>
-		<!-- END container -->
-
-
-		<div class="hero-slant overlay" data-stellar-background-ratio="0.5" style="background-image: url('https://images.unsplash.com/photo-1653669486781-7265d7824b44?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
-
-			<div class="container">
-				<div class="row align-items-center justify-content-between">
-					<div class="col-lg-7 intro">
-						<h1 class="text-white font-weight-bold mb-4" data-aos="fade-up" data-aos-delay="0">
-							Transformez vos compétences en opportunités exceptionnelles.</h1>
-						<p class="text-white mb-4" data-aos="fade-up" data-aos-delay="100">Nous donnons vie à des projets uniques en connectant des développeurs passionnés à des entreprises visionnaires, créant ainsi un écosystème dynamique d'innovation et de collaboration.</p>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="slant" style="background-image: url('images/slant.svg');"></div>
 		</div>
 
-		<div class="py-3">
-			<div class="container">
 
-				<div class="owl-logos owl-carousel d-flex justify-center align-center">
-
-					<div class="item">
-						<img src="https://telecomnancy.univ-lorraine.fr/wp-content/uploads/2022/10/LOGO-ssg-1024x137.png" alt="Image" class="img-fluid">
-					</div>
-					<div class="item">
-						<img src="https://bim-w.com/wp-content/uploads/3DS_Corp_Logotype_Blue_RGB.png" alt="Image" class="img-fluid">
-					</div>
-					<div class="item">
-						<img src="https://rennesbusinessmag.fr/wp-content/uploads/2021/03/Logo_6TM21.png" alt="Image" class="img-fluid">
-					</div>
-					<div class="item">
-						<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" alt="Image" class="img-fluid">
-					</div>
-					<div class="item">
-						<img src="https://cdn.cookielaw.org/logos/9c9e1da5-cb5e-4789-be00-8f37c0e84ef3/2ffce58c-95ef-42c4-9c00-42881e5a0889/7c02a52b-9889-4293-99bd-553ef548c490/Randstad_Digital_Logo.png" alt="Image" class="img-fluid">
-					</div>
-
-
+		<div class="container mt-5">
+			<div class="card shadow-lg">
+				<div class="card-header bg-primary text-white text-center">
+					<h2 class="mb-0">Chef de projet SI - Stage de fin d'études</h2>
 				</div>
-
-
-			</div>
-
-		</div>
-
-	
-
-		<div class="site-section bg-light" id="blog-section">
-			<div class="container">
-				<div class="row">
-					<h2 class="font-weight-bold text-center">Les postes récents</h2>
-				</div>
-				<div class="container">
 				<div
-					class="row">
-					<!-- Offre 1 -->
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
-							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-							<div class="card-body">
-								<h5 class="card-title">Chef de projet SI</h5>
-								<p class="card-text">
-									Stage de 6 mois
-									<br>
-									Nanterre, France
-								</p>
-								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-							</div>
-						</div>
-					</div>
-					<!-- Offre 2 -->
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
-							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-							<div class="card-body">
-								<h5 class="card-title">Software Developer</h5>
-								<p class="card-text">
-									CDI
-									<br>
-									Boulogne-Billancourt, France
-								</p>
-								<a href="{{ path('app_infojob') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-							</div>
-						</div>
-					</div>
-					<!-- Offre 3 -->
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
-							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-							<div class="card-body">
-								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
-								<p class="card-text">
-									Stage de 4 à 6 mois
-									<br>
-									Courbevoie, France
-								</p>
-								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+					class="card-body">
+					<!-- Informations générales -->
+					<h4 class="text-primary">Informations générales</h4>
+					<p>
+						<strong>Localisation :</strong>
+						Nanterre</p>
+					<p>
+						<strong>Type de contrat :</strong>
+						Stage (6 mois)</p>
+					<p>
+						<strong>Date de début :</strong>
+						Février 2025</p>
+					<p>
+						<strong>Niveau d'études requis :</strong>
+						Master, MSc ou Programme Grande École</p>
+					<p>
+						<strong>Télétravail :</strong>
+						Partiel</p>
 
-				<div class="row mt-5">
-					<div class="col-lg-4 mx-auto">
-						<a href="{{path('app_offre')}}" class="btn btn-primary btn-block">Voir plus</a>
+					<!-- Description de l'entreprise -->
+					<h4 class="text-primary mt-4">Qui sommes-nous ?</h4>
+					<p>
+						Rejoindre les équipes de VINCI Construction SI, c'est participer à la transformation digitale du Groupe au
+												          service des utilisateurs. Nos missions incluent :
+					</p>
+					<ul>
+						<li>La modernisation des outils de gestion et des applications métiers.</li>
+						<li>L'amélioration de la cybersécurité et des infrastructures IT.</li>
+						<li>La construction du futur numérique (IA, BIM, IoT...).</li>
+					</ul>
+
+					<!-- Avantages pour les stagiaires -->
+					<h4 class="text-primary mt-4">Pourquoi choisir un stage chez VINCI Construction SI ?</h4>
+					<p>
+						Chez VINCI Construction SI, les stagiaires participent pleinement aux enjeux des équipes et des directions. Vous serez intégré(e) à une équipe dynamique où des responsabilités importantes vous seront confiées afin de vous permettre d'évoluer et de monter en compétences.
+					</p>
+
+					<!-- Actions -->
+					<div class="text-center mt-4">
+						<a href="/apply" class="btn btn-primary btn-lg">Candidature simplifiée</a>
+						<a href="/save-offer" class="btn btn-outline-primary btn-lg ml-2">Enregistrer</a>
 					</div>
 				</div>
 			</div>
@@ -234,7 +159,7 @@
 								<div class="widget">
 									<ul class="links list-unstyled">
 										<li>
-											<a href="{{path('app_offre')}}">Accueil</a>
+											<a href="{{path('app_developer')}}">Accueil</a>
 										</li>
 										<li>
 											<a href="{{path('app_offre')}}">Offres</a>
