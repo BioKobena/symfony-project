@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<title>Succès - AdopteUnDev</title>
+	</head>
+
+	<body>
+		<div class="container text-center mt-5">
+			<div class="card shadow-lg">
+				<div class="card-body">
+					<div class="text-success mb-4">
+						<img style="width:50vw; height:30vw" src="https://img.freepik.com/free-vector/bright-flyer-easy-access-online-cartoon-flat_81522-3962.jpg?ga=GA1.1.73765508.1719503126&semt=ais_hybrid">
+					</div>
+					<h2 class="card-title">Envoi réussi !</h2>
+					<p class="card-text">Votre formulaire a été soumis avec succès. Merci pour votre confiance.</p>
+					<hr>
+					<p class="card-text">Que souhaitez-vous faire ensuite ?</p>
+					<div class="d-flex justify-content-center">
+						<a href="{{path('app_auth')}}" class="btn btn-primary mx-2">Retour à l'accueil</a>
+						<a href="{{path('app_offre')}}" class="btn btn-success mx-2">Explorer les offres</a>
+						<a href="{{path('app_favorites')}}" class="btn btn-secondary mx-2">Voir mon profil</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

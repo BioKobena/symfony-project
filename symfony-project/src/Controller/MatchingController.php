@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MatchingController extends AbstractController
 {
+    // Matching Dev --> Entreprise 
     #[Route('/matching', name: 'app_matching')]
     public function index(): Response
     {
@@ -16,11 +17,12 @@ class MatchingController extends AbstractController
         ]);
     }
 
-    #[Route('/matching/match', name: 'match')]
-    public function matching(): Response
+    // Matching Entreprise --> Dev
+    #[Route('/matching-dev', name: 'match-dev')]
+    public function matching_dev(): Response
     {
-        return $this->render('matching/match.html.twig', [
-            'controller_name' => 'MatchingController',
+        return $this->render('matching/matching_entreprise.html.twig', [
+            'controller_name' => 'ProfilController',
         ]);
     }
 }

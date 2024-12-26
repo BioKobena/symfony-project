@@ -26,16 +26,6 @@
 	</head>
 	<body>
 
-
-		<div class="site-mobile-menu site-navbar-target">
-			<div class="site-mobile-menu-header">
-				<div class="site-mobile-menu-close">
-					<span class="icofont-close js-menu-toggle"></span>
-				</div>
-			</div>
-			<div class="site-mobile-menu-body"></div>
-		</div>
-
 		<div class="container">
 
 
@@ -49,7 +39,7 @@
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
 							<li class="active">
-								<a href="{{path('app_developer')}}">Accueil</a>
+								<a class="font-weight-bold" href="{{path('app_developer')}}">Accueil</a>
 							</li>
 							<li>
 								<a href="{{path('app_offre')}}">Offres</a>
@@ -123,7 +113,6 @@
 
 		</div>
 
-	
 
 		<div class="site-section bg-light" id="blog-section">
 			<div class="container">
@@ -131,64 +120,126 @@
 					<h2 class="font-weight-bold text-center">Les postes récents</h2>
 				</div>
 				<div class="container">
-				<div
-					class="row">
-					<!-- Offre 1 -->
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
-							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-							<div class="card-body">
-								<h5 class="card-title">Chef de projet SI</h5>
-								<p class="card-text">
-									Stage de 6 mois
-									<br>
-									Nanterre, France
-								</p>
-								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+					<div
+						class="row">
+						<!-- Offre 1 -->
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm">
+								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+								<div class="card-body">
+									<h5 class="card-title">Chef de projet SI</h5>
+									<p class="card-text">
+										Stage de 6 mois
+										<br>
+										Nanterre, France
+									</p>
+									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Offre 2 -->
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
-							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-							<div class="card-body">
-								<h5 class="card-title">Software Developer</h5>
-								<p class="card-text">
-									CDI
-									<br>
-									Boulogne-Billancourt, France
-								</p>
-								<a href="{{ path('app_infojob') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+						<!-- Offre 2 -->
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm">
+								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+								<div class="card-body">
+									<h5 class="card-title">Software Developer</h5>
+									<p class="card-text">
+										CDI
+										<br>
+										Boulogne-Billancourt, France
+									</p>
+									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Offre 3 -->
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
-							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-							<div class="card-body">
-								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
-								<p class="card-text">
-									Stage de 4 à 6 mois
-									<br>
-									Courbevoie, France
-								</p>
-								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+						<!-- Offre 3 -->
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm">
+								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+								<div class="card-body">
+									<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
+									<p class="card-text">
+										Stage de 4 à 6 mois
+										<br>
+										Courbevoie, France
+									</p>
+									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
 				<div class="row mt-5">
 					<div class="col-lg-4 mx-auto">
-						<a href="{{path('app_offre')}}" class="btn btn-primary btn-block">Voir plus</a>
+						<a href="{{path('app_infojob')}}" class="btn btn-primary btn-block">Voir plus</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="site-section bg-light" id="blog-section">
+			<div class="container">
+				<div class="row">
+					<h2 class="font-weight-bold text-center">Dernières offres publiées</h2>
+				</div>
+				<div class="container">
+					<div
+						class="row">
+						<!-- Offre 1 -->
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm">
+								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+								<div class="card-body">
+									<h5 class="card-title">Chef de projet SI</h5>
+									<p class="card-text">
+										Stage de 6 mois
+										<br>
+										Nanterre, France
+									</p>
+									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+								</div>
+							</div>
+						</div>
+						<!-- Offre 2 -->
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm">
+								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+								<div class="card-body">
+									<h5 class="card-title">Software Developer</h5>
+									<p class="card-text">
+										CDI
+										<br>
+										Boulogne-Billancourt, France
+									</p>
+									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+								</div>
+							</div>
+						</div>
+						<!-- Offre 3 -->
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm">
+								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+								<div class="card-body">
+									<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
+									<p class="card-text">
+										Stage de 4 à 6 mois
+										<br>
+										Courbevoie, France
+									</p>
+									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<div class="row mt-5">
+					<div class="col-lg-4 mx-auto">
+						<a href="{{path('app_infojob')}}" class="btn btn-primary btn-block">Voir plus</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="site-footer text-white">
 			<div class="container">
 				<div class="row justify-content-between">
@@ -276,16 +327,6 @@
 					</div>
 				</div>
 
-				<div class="text-center" copyright">
-					<div class="col-md-8">
-						<p>Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script>. Tous droits réservés.
-							<a href="{{path('app_offre')}}">Bio Kobena</a>
-						</p>
-
-					</div>
-				</div>
 			</div>
 		</div>
 

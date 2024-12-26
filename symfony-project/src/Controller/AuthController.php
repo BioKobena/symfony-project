@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AuthController extends AbstractController
 {
+
+    // Développeurs
     #[Route('/auth', name: 'app_auth')]
     public function index(): Response
     {
@@ -20,6 +22,24 @@ class AuthController extends AbstractController
     public function signin(): Response
     {
         return $this->render('user/index.html.twig', [
+            'controller_name' => 'AuthController',
+        ]);
+    }
+
+
+    // Connexion entreprise
+    #[Route('/auth-company', name: 'auth-company')]
+    public function login_company(): Response
+    {
+        return $this->render('auth/auth-company.html.twig', [
+            'controller_name' => 'AuthController',
+        ]);
+    }
+
+    #[Route('/signin-company', name: 'signin-company')]
+    public function signin_company(): Response
+    {
+        return $this->render('auth/signin-company.html.twig', [
             'controller_name' => 'AuthController',
         ]);
     }

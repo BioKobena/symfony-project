@@ -98,109 +98,100 @@
 
 
 		<div class="section-grey bg-light" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem;">
-			<div class="col-lg-6 text-center">
-				<h4 class="font-weight-bold">Vous pourrez matcher avec ces entreprises</h4>
-				<p class="text-black mb-4" data-aos="fade-up" data-aos-delay="100">Votre avenir se trouve peut-être là !</p>
+			<div class="container mt-5">
+				<div class="text-center mb-4">
+					<h4 class="font-weight-bold">Matching</h4>
+					<p class="text-muted">Trouvez les entreprises correspondant à vos critères</p>
+				</div>
+
+				<!-- Formulaire de critères -->
+				<form id="matchingForm" class="bg-light p-4 shadow-sm rounded">
+					<div
+						class="row">
+						<!-- Langages -->
+						<div class="col-md-6 mb-3">
+							<label for="languages" class="form-label">Langages ou technologies</label>
+							<select id="languages" name="languages[]" class="form-control" multiple>
+								<option value="python">Python</option>
+								<option value="javascript">JavaScript</option>
+								<option value="java">Java</option>
+								<option value="php">PHP</option>
+								<option value="csharp">C#</option>
+							</select>
+							<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
+						</div>
+
+						<!-- Salaire -->
+						<div class="col-md-6 mb-3">
+							<label for="salary" class="form-label">Salaire minimum souhaité (€)</label>
+							<input type="number" id="salary" name="salary" class="form-control" placeholder="Ex : 40000">
+						</div>
+
+						<!-- Localisation -->
+						<div class="col-md-6 mb-3">
+							<label for="location" class="form-label">Localisation</label>
+							<input type="text" id="location" name="location" class="form-control" placeholder="Ex : Paris, France">
+						</div>
+
+						<!-- Niveau d'expérience -->
+						<div class="col-md-6 mb-3">
+							<label for="experience" class="form-label">Niveau d'expérience</label>
+							<input type="number" id="experience" name="experience" class="form-control" min="1" max="5" placeholder="Ex : 3">
+						</div>
+					</div>
+
+					<!-- Bouton de recherche -->
+					<div class="text-center">
+						<button type="button" id="matchButton" class="btn btn-primary">Trouver des entreprises</button>
+					</div>
+				</form>
 			</div>
-
-			<div class="row">
-
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('match')}}"><img src="images/img_h_3-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('match')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('match')}}">Continue reading...</a>
-							</p>
+			<div class="container">
+				<div
+					class="row">
+					<!-- Offre 1 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Chef de projet SI</h5>
+								<p class="card-text">
+									Stage de 6 mois
+									<br>
+									Nanterre, France
+								</p>
+								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('match')}}"><img src="images/img_h_5-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('match')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('match')}}">Continue reading...</a>
-							</p>
+					<!-- Offre 2 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Software Developer</h5>
+								<p class="card-text">
+									CDI
+									<br>
+									Boulogne-Billancourt, France
+								</p>
+								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('match')}}"><img src="images/img_h_7-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('match')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('match')}}">Continue reading...</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('match')}}"><img src="images/img_h_3-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('match')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('match')}}">Continue reading...</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_5-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_7-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
+					<!-- Offre 3 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
+								<p class="card-text">
+									Stage de 4 à 6 mois
+									<br>
+									Courbevoie, France
+								</p>
+								<a href="{{ path('app_offre') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -254,19 +245,19 @@
 								<div class="widget">
 									<ul class="links list-unstyled">
 										<li>
-											<a href="{{path('app_developer')}}">Accueil</a>
+											<a class="text-black" href="{{path('app_developer')}}">Accueil</a>
 										</li>
 										<li>
-											<a href="{{path('app_offre')}}" class="active">Offres</a>
+											<a class="text-black" href="{{path('app_offre')}}">Offres</a>
 										</li>
 										<li>
-											<a href="{{path('app_offre')}}">Matching</a>
+											<a class="text-black font-weight-bold" style:"font-weight:bold;" href="{{path('app_matching')}}">Matching</a>
 										</li>
 										<li>
-											<a href="{{path('app_offre')}}">Favoris</a>
+											<a class="text-black" href="{{path('app_offre')}}">Favoris</a>
 										</li>
 										<li>
-											<a href="{{path('app_offre')}}">Contact</a>
+											<a class="text-black" href="{{path('app_offre')}}">Contact</a>
 										</li>
 									</ul>
 								</div>
@@ -296,16 +287,6 @@
 					</div>
 				</div>
 
-				<div class="text-center" copyright">
-					<div class="col-md-8">
-						<p>Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script>. Tous droits réservés.
-							<a href="{{path('app_offre')}}">Bio Kobena</a>
-						</p>
-
-					</div>
-				</div>
 			</div>
 		</div>
 
