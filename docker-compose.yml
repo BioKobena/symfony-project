@@ -26,23 +26,27 @@ services:
     container_name: symfony_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: adopte_dev
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: root      # Définition du mot de passe pour l'utilisateur root
+      MYSQL_DATABASE: adopte_dev     # Nom de la base de données par défaut
+      MYSQL_USER: root               # Utilisateur principal (root ici)
+      MYSQL_PASSWORD: root           # Mot de passe de l'utilisateur root
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql       # Volume pour stocker les données MySQL
+    ports:
+      - "3306:3306"                  # Expose MySQL pour un accès externe si nécessaire
 
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: phpmyadmin
     restart: always
     ports:
-      - "8081:80"  # Accède à phpMyAdmin via http://localhost:8081
+      - "8081:80"                    # Accès à phpMyAdmin via http://localhost:8081
     environment:
-      PMA_HOST: db  # Indique le nom du service de base de données
-      PMA_USER: user  # Utilisateur MySQL
-      PMA_PASSWORD: password  # Mot de passe MySQL
+      PMA_HOST: db                   # Nom du service MySQL (doit correspondre à 'db')
+      PMA_USER: root                 # Utilisateur MySQL
+      PMA_PASSWORD: root             # Mot de passe MySQL (doit correspondre à MYSQL_PASSWORD)
+    depends_on:
+      - db
 
 volumes:
   db_data:
