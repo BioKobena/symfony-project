@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<title>Inscription - AdopteUnDev</title>
+	</head>
+
+	<body>
+		<div class="container" style="margin-bottom:5rem;width:100vw">
+			<nav class="site-nav min-vw-100">
+				<div class="logo">
+					<a class="text-black">AdopteUnDev<span class="font-weight-bold">.</span>
+					</a>
+				</div>
+				<div class="row align-items-center">
+
+					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
+						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
+							<li>
+								<a class="text-black" href="{{path('app_developer')}}">Accueil</a>
+							</li>
+							<li class="active">
+								<a class="text-black" href="{{path('app_offre')}}">Offres</a>
+							</li>
+							<li class="active">
+								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
+							</li>
+							<li>
+								<a class="text-black" href="">Favoris</a>
+							</li>
+							<li class="has-children">
+								<a href="#" class="text-black font-weight-bold">Mon compte</a>
+								<ul class="dropdown">
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_login')}}">Connexion</a>
+									</li>
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+
+					</div>
+
+				</div>
+			</nav>
+		</div>
+
+		<div class="container d-flex justify-content-center align-items-center min-vh-100" style="margin-top:5rem">
+			<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40">
+				<h2 class="text-center mb-4 text-primary">Inscrivez-vous pour trouver votre voie avec AdopteUnDev</h2>
+				<form action="{{ path('app_inscription') }}" method="POST" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="firstName">Prénom</label>
+							<input type="text" id="firstName" name="firstName" class="form-control" placeholder="Votre prénom" required>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="lastName">Nom</label>
+							<input type="text" id="lastName" name="lastName" class="form-control" placeholder="Votre nom" required>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="email">Adresse e-mail</label>
+							<input type="email" id="email" name="email" class="form-control" placeholder="Votre e-mail" required>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="location">Localisation</label>
+							<input type="text" id="location" name="location" class="form-control" placeholder="Votre localisation">
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="password">Mot de passe</label>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Votre mot de passe" required>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="confirmPassword">Confirmez le mot de passe</label>
+							<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirmez votre mot de passe" required>
+						</div>
+					</div>
+
+					{# <div class="form-group">
+																					<label for="languages">Langages de programmation :</label>
+																					<select id="languages" name="languages[]" class="form-control" multiple size="5">
+																						<option value="python">Python</option>
+																						<option value="javascript">JavaScript</option>
+																						<option value="java">Java</option>
+																						<option value="php">PHP</option>
+																						<option value="csharp">C#</option>
+																					</select>
+																					<small class="form-text text-muted">Maintenez la touche Ctrl (ou Command sur Mac) pour sélectionner plusieurs.</small>
+																				</div> #}
+
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="experience">Niveau d'expérience :</label>
+							<input type="number" id="experience" name="experience" class="form-control" placeholder="Ex : 3 (sur 5)" min="1" max="5">
+						</div>
+
+						<div class="col-md-6 form-group">
+							<label for="salary">Salaire minimum souhaité (en €)</label>
+							<input type="number" id="salary" name="salary" class="form-control" placeholder="Ex : 40000">
+						</div>
+
+
+					</div>
+
+					<div class="form-group">
+						<label for="languages">Languages de programmation</label>
+						<input type="text" id="languages" name="languages" class="form-control" placeholder="Vos languages de programmation">
+					</div>
+
+					<div class="form-group">
+						<label for="bio">Courte biographie :</label>
+						<textarea id="bio" name="bio" class="form-control" rows="3" placeholder="Décrivez-vous brièvement"></textarea>
+					</div>
+
+					{# <div class="form-check mb-3">
+																					<input type="checkbox" id="cgu" name="cgu" class="form-check-input" required>
+																					<label class="form-check-label" for="cgu">
+																						J'accepte les
+																						<a href="#" target="_blank">conditions générales d'utilisation</a>.
+																					</label>
+																				</div> #}
+
+					<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+					<p class="text-center mt-3">
+						Déjà un compte ?
+						<a href="{{path('app_developer_login')}}">Se connecter</a>
+					</p>
+				</form>
+			</div>
+
+		</div>
+	</body>
+
+</html>

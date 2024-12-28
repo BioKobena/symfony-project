@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="author" content="Untree.co">
+		<meta name="inscriptionor" content="Untree.co">
 		<link rel="shortcut icon" href="https://cdn0.iconfinder.com/data/icons/job-seeker/256/choose_job_seeker_employee_unemployee_work-512.png">
 
 		<meta name="description" content=""/>
@@ -79,11 +79,16 @@
 							<li>
 								<a class="text-black" href="">Favoris</a>
 							</li>
-							<li>
-								<a class="text-black" href="">
-									<span class="fa fa-user"></span>
-									Mon compte
-								</a>
+							<li class="has-children">
+								<a href="#" class="text-black">Mon compte</a>
+								<ul class="dropdown">
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Connexion</a>
+									</li>
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="">Inscription</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 
@@ -91,75 +96,165 @@
 
 				</div>
 			</nav>
-			<!-- END nav -->
-
 		</div>
-		<!-- END container -->
 
 
 		<div class="section-grey bg-light" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem;">
-			<div class="col-lg-6 text-center">
-				<h4 class="font-weight-bold">Vous pourrez matcher avec ces entreprises</h4>
-				<p class="text-black mb-4" data-aos="fade-up" data-aos-delay="100">Votre avenir se trouve peut-être là !</p>
-			</div>
-
 			<div class="search-bar" style="width: 100%; margin-bottom: 20px;">
 				<input type="text" placeholder="Recherchez ici..." class="form-control" style="width: 100%; padding: 15px; font-size: 18px; border-radius: 5px; border: 1px solid #ccc;">
 				<button type="button" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; border-radius: 0 5px 5px 0; border: none; color: white; cursor: pointer; margin-left:-2rem">
 					Rechercher
 				</button>
 			</div>
-			<div class="row">
-
-
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_3-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
+			<div class="container">
+				<div
+					class="row">
+					<!-- Offre 1 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Chef de projet SI</h5>
+								<p class="card-text">
+									Stage de 6 mois
+									<br>
+									Nanterre, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
+						</div>
+					</div>
+					<!-- Offre 2 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Software Developer</h5>
+								<p class="card-text">
+									CDI
+									<br>
+									Boulogne-Billancourt, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
+						</div>
+					</div>
+					<!-- Offre 3 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
+								<p class="card-text">
+									Stage de 4 à 6 mois
+									<br>
+									Courbevoie, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_5-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
+				<div
+					class="row">
+					<!-- Offre 1 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Chef de projet SI</h5>
+								<p class="card-text">
+									Stage de 6 mois
+									<br>
+									Nanterre, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
+						</div>
+					</div>
+					<!-- Offre 2 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Software Developer</h5>
+								<p class="card-text">
+									CDI
+									<br>
+									Boulogne-Billancourt, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
+						</div>
+					</div>
+					<!-- Offre 3 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
+								<p class="card-text">
+									Stage de 4 à 6 mois
+									<br>
+									Courbevoie, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-					<div class="blog_entry">
-						<a href="{{path('app_offre')}}"><img src="images/img_h_7-min.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
-						<div class="p-4 bg-white">
-							<h3>
-								<a href="{{path('app_offre')}}">Far far away, behind the word mountains</a>
-							</h3>
-							<span class="date">April 25, 2019</span>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p class="more">
-								<a href="{{path('app_offre')}}">Continue reading...</a>
-							</p>
+				<div
+					class="row">
+					<!-- Offre 1 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Chef de projet SI</h5>
+								<p class="card-text">
+									Stage de 6 mois
+									<br>
+									Nanterre, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
+						</div>
+					</div>
+					<!-- Offre 2 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Software Developer</h5>
+								<p class="card-text">
+									CDI
+									<br>
+									Boulogne-Billancourt, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
+						</div>
+					</div>
+					<!-- Offre 3 -->
+					<div class="col-md-6 col-lg-4 mb-4">
+						<div class="card shadow-sm">
+							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+							<div class="card-body">
+								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
+								<p class="card-text">
+									Stage de 4 à 6 mois
+									<br>
+									Courbevoie, France
+								</p>
+								<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
 
 
@@ -250,6 +345,16 @@
 					</div>
 				</div>
 
+				<div class="text-center" copyright">
+					<div class="col-md-8">
+						<p>Copyright &copy;<script>
+								document.write(new Date().getFullYear());
+							</script>. Tous droits réservés.
+							<a href="{{path('app_offre')}}"></a>
+						</p>
+
+					</div>
+				</div>
 			</div>
 		</div>
 

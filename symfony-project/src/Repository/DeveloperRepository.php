@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\DeveloperProfile;
+use App\Entity\Developer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<DeveloperProfile>
+ * @extends ServiceEntityRepository<Developer>
  */
-class DeveloperProfileRepository extends ServiceEntityRepository
+class DeveloperRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, DeveloperProfile::class);
+        parent::__construct($registry, Developer::class);
     }
 
     //    /**
-    //     * @return DeveloperProfile[] Returns an array of DeveloperProfile objects
+    //     * @return Developer[] Returns an array of Developer objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class DeveloperProfileRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?DeveloperProfile
+    //    public function findOneBySomeField($value): ?Developer
     //    {
     //        return $this->createQueryBuilder('d')
     //            ->andWhere('d.exampleField = :val')

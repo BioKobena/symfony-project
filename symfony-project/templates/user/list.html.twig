@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block body %}
+<h1>Liste des Utilisateurs</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Lieu</th>
+            <th>Bio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.location }}</td>
+                <td>{{ user.bio }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun utilisateur trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
