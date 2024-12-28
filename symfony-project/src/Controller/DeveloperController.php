@@ -22,6 +22,18 @@ class DeveloperController extends AbstractController
         ]);
     }
 
+    #[Route('/developers', name: 'app_developers')]
+    public function lastCreate(EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer les 3 derniers développeurs créés
+        $developers = $entityManager->getRepository(Developer::class)
+            ->findBy([], ['createdAt' => 'DESC'], 3); // Trier par la date de création décroissante
+
+        return $this->render('developer/index.html.twig', [
+            'developers' => $developers,
+        ]);
+    }
+
     #[Route('/offre-info', name: 'app_infojob')]
     public function info_job(): Response
     {
@@ -84,39 +96,35 @@ class DeveloperController extends AbstractController
     }
 
     #[Route('/auth-dev', name: 'app_developer_login', methods: ['GET', 'POST'])]
-    public function login_dev(Request $request, EntityManagerInterface $entityManager): Response
+    public function loginDeveloper(Request $request, EntityManagerInterface $entityManager): Response
     {
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
-            $password = $request->request->get('password');
 
-            // Validation des champs
-            if (empty($email) || empty($password)) {
-                $this->addFlash('error', 'Veuillez remplir tous les champs.');
+            if (!$email) {
+                $this->addFlash('error', 'Veuillez entrer votre adresse e-mail.');
                 return $this->redirectToRoute('app_developer_login');
             }
 
-            // Recherche du développeur dans la base de données
-            $developer = $entityManager->getRepository(Developer::class)->findBy(['email' => $email]);
+            // Rechercher le développeur avec cet email
+            $developer = $entityManager->getRepository(Developer::class)->findOneBy(['email' => $email]);
 
-            if (!$developer) {
-                $this->addFlash('error', 'Adresse e-mail ou mot de passe incorrect.');
+            if ($developer) {
+                // // Connexion réussie
+                // // Par exemple, stocker l'utilisateur en session
+                // $session = $request->getSession();
+                // $session->set('developer', $developer->getId());
+
+                $this->addFlash('success', 'Connexion réussie !');
+                return $this->redirectToRoute('app_developer'); // Redirigez vers une page pertinente
+            } else {
+                $this->addFlash('error', 'Adresse e-mail introuvable.');
                 return $this->redirectToRoute('app_developer_login');
             }
-
-            // Vérification du mot de passe
-            // if (!password_verify($password, $developer->getPassword())) {
-            //     $this->addFlash('error', 'Adresse e-mail ou mot de passe incorrect.');
-            //     return $this->redirectToRoute('app_developer_login');
-            // }
-
-            // Connexion réussie
-            $this->addFlash('success', 'Connexion réussie.');
-            return $this->redirectToRoute('app_developer'); // Redirection après succès
         }
 
-        // Affichage du formulaire de connexion
         return $this->render('developer/connexion.html.twig');
     }
+
 
 }

@@ -7,19 +7,55 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Company;
+use App\Entity\Developer;
 use Symfony\Component\HttpFoundation\Request;
 
 
 class CompanyController extends AbstractController
 {
     #[Route('/company', name: 'app_company')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        // Récupération des 3 derniers développeurs
+        $developers = $entityManager->getRepository(Developer::class)
+            ->findBy([], ['id' => 'DESC'], 3); // Les 3 derniers développeurs
+
         return $this->render('company/index.html.twig', [
             'controller_name' => 'CompanyController',
+            'developers' => $developers, // Passer les développeurs au template
         ]);
     }
 
+    #[Route('/company-login', name: 'app_company_login', methods: ['GET', 'POST'])]
+    public function login_company(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if ($request->isMethod('POST')) {
+            $email = $request->request->get('email');
+
+            if (!$email) {
+                $this->addFlash('error', 'Veuillez entrer votre adresse e-mail.');
+                return $this->redirectToRoute('app_company_login');
+            }
+
+            // Rechercher le développeur avec cet email
+            $company = $entityManager->getRepository(Company::class)->findOneBy(['email' => $email]);
+
+            if ($company) {
+                // // Connexion réussie
+                // // Par exemple, stocker l'utilisateur en session
+                // $session = $request->getSession();
+                // $session->set('developer', $developer->getId());
+
+                $this->addFlash('success', 'Connexion réussie !');
+                return $this->redirectToRoute('app_company'); // Redirigez vers une page pertinente
+            } else {
+                $this->addFlash('error', 'Adresse e-mail introuvable.');
+                return $this->redirectToRoute('app_company_login');
+            }
+        }
+
+        return $this->render('company/connexion-entreprise.html.twig');
+    }
     #[Route('/inscription-company', name: 'inscription-company')]
     public function inscription_company(Request $request, EntityManagerInterface $entityManager)
     {

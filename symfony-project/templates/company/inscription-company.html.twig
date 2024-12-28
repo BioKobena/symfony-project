@@ -8,115 +8,203 @@
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		<title>Inscription - AdopteUnDev</title>
 	</head>
-
 	<body>
 
-		{% if app.session.flashbag.get('success')|length > 0 %}
-			<div class="alert alert-success" role="alert">
-				{{ app.session.flashbag.get('success')[0] }}
-			</div>
-		{% endif %}
+		<div>
+			<div class="container" style="margin-bottom:5rem;width:100vw">
+				<nav class="site-nav min-vw-100">
+					<div class="logo">
+						<a class="text-black">AdopteUnDev<span class="font-weight-bold">.</span>
+						</a>
+					</div>
+					<div class="row align-items-center">
 
-		<div class="container" style="margin-bottom:5rem;width:100vw">
-			<nav class="site-nav min-vw-100">
-				<div class="logo">
-					<a class="text-black">AdopteUnDev<span class="font-weight-bold">.</span>
-					</a>
-				</div>
-				<div class="row align-items-center">
+						<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
+							<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
+								<li>
+									<a class="text-black" href="{{path('app_developer')}}">Accueil</a>
+								</li>
+								<li class="active">
+									<a class="text-black" href="{{path('app_offre')}}">Offres</a>
+								</li>
+								<li class="active">
+									<a class="text-black" href="{{path('app_matching')}}">Matching</a>
+								</li>
+								<li>
+									<a class="text-black" href="">Favoris</a>
+								</li>
+								<li class="has-children">
+									<a href="#" class="text-black font-weight-bold">Mon compte</a>
+									<ul class="dropdown">
+										<li>
+											<a class="text-black" style="cursor:pointer;" href="{{path('app_company_login')}}">Connexion</a>
+										</li>
+										<li>
+											<a class="text-black" style="cursor:pointer;" href="{{path('inscription-company')}}">Inscription</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
 
-					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
-						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
-							<li>
-								<a class="text-black" href="{{path('app_developer')}}">Accueil</a>
-							</li>
-							<li class="active">
-								<a class="text-black" href="{{path('app_offre')}}">Offres</a>
-							</li>
-							<li class="active">
-								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
-							</li>
-							<li>
-								<a class="text-black" href="">Favoris</a>
-							</li>
-							<li class="has-children">
-								<a href="#" class="text-black font-weight-bold">Mon compte</a>
-								<ul class="dropdown">
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Connexion</a>
-									</li>
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						</div>
 
 					</div>
-
-				</div>
-			</nav>
-		</div>
-
-		<div class="container d-flex justify-content-center align-items-center min-vh-100" style="margin-top:5rem">
-			<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40">
-				<h2 class="text-center mb-4 text-primary">Inscrivez votre entreprise sur AdopteUnDev</h2>
-				<form action="{{ path('inscription-company') }}" method="POST" enctype="multipart/form-data">
-					<div class="form-row">
-						<div class="col-md-6 form-group">
-							<label for="nom">Nom de l'entreprise</label>
-							<input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" required>
-						</div>
-						<div class="col-md-6 form-group">
-							<label for="localisation">Localisation</label>
-							<input type="text" id="localisation" name="localisation" class="form-control" placeholder="Votre localisation" required>
-						</div>
-					</div>
-
-					<div class="form-row">
-						<div class="col-md-6 form-group">
-							<label for="email">Adresse e-mail</label>
-							<input type="email" id="email" name="email" class="form-control" placeholder="Votre e-mail" required>
-						</div>
-						<div class="col-md-6 form-group">
-							<label for="password">Mot de passe</label>
-							<input type="password" id="password" name="password" class="form-control" placeholder="Votre mot de passe" required>
-						</div>
-                        
-						<div class="col-md-6 form-group">
-							<label for="confirmPassword">Confirmez le mot de passe</label>
-							<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirmez votre mot de passe" required>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="description">Description</label>
-						<textarea id="description" name="description" class="form-control" rows="3" placeholder="Décrivez brièvement votre entreprise"></textarea>
-					</div>
-
-					<div class="form-row">
-						<div class="col-md-6 form-group">
-							<label for="taille_entreprise">Taille de l'entreprise</label>
-							<input type="text" id="taille_entreprise" name="taille_entreprise" class="form-control" placeholder="Ex : 10-50 employés">
-						</div>
-
-						<div class="col-md-6 form-group">
-							<label for="secteur">Secteur</label>
-							<input type="text" id="secteur" name="secteur" class="form-control" placeholder="Votre secteur d'activité" required>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="type_entreprise">Type d'entreprise</label>
-						<input type="text" id="type_entreprise" name="type_entreprise" class="form-control" placeholder="Ex : Start-up, PME, Multinationale" required>
-					</div>
-
-					<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
-				</form>
+				</nav>
 			</div>
 
-		</div>
+			<div class="container d-flex justify-content-center align-items-center min-vh-100" style="margin-top:5rem">
+				<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40">
+					<h2 class="text-center mb-4 text-primary h4">Inscrivez votre entreprise sur AdopteUnDev</h2>
+					<form action="{{ path('inscription-company') }}" method="POST" enctype="multipart/form-data">
+						<div class="form-row">
+							<div class="col-md-6 form-group">
+								<label for="nom">Nom de l'entreprise</label>
+								<input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" required>
+							</div>
+							<div class="col-md-6 form-group">
+								<label for="localisation">Localisation</label>
+								<input type="text" id="localisation" name="localisation" class="form-control" placeholder="Votre localisation" required>
+							</div>
+						</div>
 
+						<div class="form-row">
+							<div class="col-md-6 form-group">
+								<label for="email">Adresse e-mail</label>
+								<input type="email" id="email" name="email" class="form-control" placeholder="Votre e-mail" required>
+							</div>
+							<div class="col-md-6 form-group">
+								<label for="password">Mot de passe</label>
+								<input type="password" id="password" name="password" class="form-control" placeholder="Votre mot de passe" required>
+							</div>
+
+							<div class="col-md-6 form-group">
+								<label for="confirmPassword">Confirmez le mot de passe</label>
+								<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirmez votre mot de passe" required>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="description">Description</label>
+							<textarea id="description" name="description" class="form-control" rows="3" placeholder="Décrivez brièvement votre entreprise"></textarea>
+						</div>
+
+						<div class="form-row">
+							<div class="col-md-6 form-group">
+								<label for="taille_entreprise">Taille de l'entreprise</label>
+								<input type="text" id="taille_entreprise" name="taille_entreprise" class="form-control" placeholder="Ex : 10-50 employés">
+							</div>
+
+							<div class="col-md-6 form-group">
+								<label for="secteur">Secteur</label>
+								<input type="text" id="secteur" name="secteur" class="form-control" placeholder="Votre secteur d'activité" required>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="type_entreprise">Type d'entreprise</label>
+							<input type="text" id="type_entreprise" name="type_entreprise" class="form-control" placeholder="Ex : Start-up, PME, Multinationale" required>
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+					</form>
+
+					<p class="text-center mt-3">
+						Déjà un compte ?
+						<a href="{{path('app_company_login')}}">Se connecter</a>
+					</p>
+				</div>
+
+			</div>
+		</div>
+		<div class="site-footer text-white">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-4">
+						<div class="widget">
+							<h3>À propos</h3>
+							<p>AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+						</div>
+						<div class="widget">
+							<h3>Connectez-vous avec nous</h3>
+							<ul class="social list-unstyled">
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-facebook"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-twitter"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-instagram"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-linkedin"></span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-12">
+								<div class="widget">
+									<h3>Navigation</h3>
+								</div>
+							</div>
+							<div class="col-6 col-sm-6 col-md-4">
+								<div class="widget">
+									<ul class="links list-unstyled">
+										<li>
+											<a href="{{path('app_offre')}}">Accueil</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Profil</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Matching</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Favoris</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Contact</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-6 col-sm-6 col-md-4">
+								<div class="widget">
+									<ul class="links list-unstyled">
+										<li>
+											<a href="{{path('app_offre')}}">À propos de nous</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">FAQ</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Carrières</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Support</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</body>
 
 </html>

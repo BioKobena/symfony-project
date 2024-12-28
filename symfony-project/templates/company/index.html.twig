@@ -41,22 +41,22 @@
 								<a href="{{path('app_company')}}" class="font-weight-bold">Accueil</a>
 							</li>
 							<li>
-								<a href="{{path('app_profil')}}">Profils</a>
+								<a class="text-white" href="{{path('app_profil')}}">Profils</a>
 							</li>
 							<li>
-								<a href="{{path('match-dev')}}">Matching</a>
+								<a class="text-white" href="{{path('match-dev')}}">Matching</a>
 							</li>
 							<li>
-								<a href="">Statistiques</a>
+								<a class="text-white" href="">Statistiques</a>
 							</li>
 							<li class="has-children">
-								<a href="#" class="text-black">Mon compte</a>
+								<a href="#" class="text-white">Mon compte</a>
 								<ul class="dropdown">
 									<li>
-										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('inscription-company')}}">Connexion</a>
+										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('app_company_login')}}">Connexion</a>
 									</li>
 									<li>
-										<a class="text-black text-bold" style="cursor:pointer;" href="#">Inscription</a>
+										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('inscription-company')}}">Inscription</a>
 									</li>
 								</ul>
 							</li>
@@ -78,8 +78,8 @@
 				<div class="row align-items-center justify-content-between">
 					<div class="col-lg-7 intro">
 						<h1 class="text-white font-weight-bold mb-4" data-aos="fade-up" data-aos-delay="0">
-							Transformez vos compétences en opportunités exceptionnelles.</h1>
-						<p class="text-white mb-4" data-aos="fade-up" data-aos-delay="100">Nous donnons vie à des projets uniques en connectant des développeurs passionnés à des entreprises visionnaires, créant ainsi un écosystème dynamique d'innovation et de collaboration.</p>
+							Découvrez vos futurs collaborateurs.</h1>
+						<p class="text-white mb-4" data-aos="fade-up" data-aos-delay="100">Nous vous connectons à vos futurs talents pour des innovations plus accentuées.</p>
 
 					</div>
 				</div>
@@ -118,77 +118,37 @@
 		</div>
 
 
-		<div class="site-section bg-light" id="profiles-section">
-			<div class="container">
-				<div class="row text-center mb-5">
-					<h2 class="font-weight-bold">Les derniers profils créés</h2>
-					<p class="text-muted w-100 font-weight-bold">Découvrez les talents récemment inscrits</p>
-				</div>
-				<div class="row">
+		<div class="container mt-5">
+			<div class="row text-center mb-5">
+				<h2 class="font-weight-bold">Les derniers profils créés</h2>
+				<p class="text-muted w-100 font-weight-bold">Découvrez les talents récemment inscrits</p>
+			</div>
+			<div class="row">
+				{% for developer in developers %}
 					<div class="col-md-6 col-lg-4 mb-4">
 						<div class="card shadow-sm position-relative">
 							<div class="position-relative top-0 end-0 p-3">
-								<img src="https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
+								<img src="{{ developer.avatarUrl | default('https://via.placeholder.com/150') }}" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Jean Dupont</h5>
+								<h5 class="card-title">{{ developer.nom }}</h5>
 								<p class="card-text">
-									Développeur Full Stack
+									{{ developer.bio }}
 									<br>
-									3 ans d'expérience
-									<br>
-									Paris, France
+									{{ developer.experience }}
+									ans d'expérience
 								</p>
-								<a href={{path('app_profil')}} class="btn btn-primary text-white btn-sm">Voir le profil</a>
-							</div>
-
-						</div>
-					</div>
-					<div class="col-md-4 col-lg-4 mb-4">
-						<div class="card shadow-sm position-relative">
-							<div class="position-relative top-0 end-0 p-3">
-								<img src="https://img.freepik.com/free-vector/simple-geometric-pastel-tiktok-profile-picture_742173-5465.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Marie Lefèvre</h5>
-								<p class="card-text">
-									Data Scientist
-									<br>
-									5 ans d'expérience
-									<br>
-									Lyon, France
-								</p>
-								<a href={{path('app_profil')}} class="btn btn-primary text-white btn-sm">Voir le profil</a>
+								<a href="{{ path('app_developer', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+									Voir le profil
+								</a>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm position-relative">
-							<div class="position-relative top-0 end-0 p-3">
-								<img src="https://img.freepik.com/free-photo/closeup-handsome-man_144627-3697.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Paul Moreau</h5>
-								<p class="card-text">
-									UX/UI Designer
-									<br>
-									2 ans d'expérience
-									<br>
-									Toulouse, France
-								</p>
-								<a href={{path('app_profil')}} class="btn btn-primary text-white btn-sm">Voir le profil</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-4 mx-auto">
-						<a href="" class="btn btn-primary btn-block">Voir tous les profils</a>
-					</div>
-				</div>
+				{% else %}
+					<p class="text-center text-muted">Aucun développeur disponible pour le moment.</p>
+				{% endfor %}
 			</div>
 		</div>
-
 
 		<div class="site-section bg-light" id="profiles-section">
 			<div class="container">
@@ -197,62 +157,30 @@
 					<p class="text-muted w-100 font-weight-bold">Découvrez les plus attirants</p>
 				</div>
 				<div class="row">
+				{% for developer in developers %}
 					<div class="col-md-6 col-lg-4 mb-4">
 						<div class="card shadow-sm position-relative">
 							<div class="position-relative top-0 end-0 p-3">
-								<img src="https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
+								<img src="{{ developer.avatarUrl | default('https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg') }}" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Jean Dupont</h5>
+								<h5 class="card-title">{{ developer.nom }}</h5>
 								<p class="card-text">
-									Développeur Full Stack
+									{{ developer.bio }}
 									<br>
-									3 ans d'expérience
-									<br>
-									Paris, France
+									{{ developer.experience }}
+									ans d'expérience
 								</p>
-								<a href={{path('app_profil')}} class="btn btn-primary text-white btn-sm">Voir le profil</a>
-							</div>
-
-						</div>
-					</div>
-					<div class="col-md-4 col-lg-4 mb-4">
-						<div class="card shadow-sm position-relative">
-							<div class="position-relative top-0 end-0 p-3">
-								<img src="https://img.freepik.com/free-vector/simple-geometric-pastel-tiktok-profile-picture_742173-5465.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Marie Lefèvre</h5>
-								<p class="card-text">
-									Data Scientist
-									<br>
-									5 ans d'expérience
-									<br>
-									Lyon, France
-								</p>
-								<a href={{path('app_profil')}} class="btn btn-primary text-white btn-sm">Voir le profil</a>
+								<a href="{{ path('app_developer', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+									Voir le profil
+								</a>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm position-relative">
-							<div class="position-relative top-0 end-0 p-3">
-								<img src="https://img.freepik.com/free-photo/closeup-handsome-man_144627-3697.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Paul Moreau</h5>
-								<p class="card-text">
-									UX/UI Designer
-									<br>
-									2 ans d'expérience
-									<br>
-									Toulouse, France
-								</p>
-								<a href={{path('app_profil')}} class="btn btn-primary text-white btn-sm">Voir le profil</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% else %}
+					<p class="text-center text-muted">Aucun développeur disponible pour le moment.</p>
+				{% endfor %}
+			</div>
 				<div class="row mt-5">
 					<div class="col-lg-4 mx-auto">
 						<a href="" class="btn btn-primary btn-block">Voir tous les profils</a>

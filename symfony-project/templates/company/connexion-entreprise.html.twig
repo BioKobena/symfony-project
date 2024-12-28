@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<title>Connexion - AdopteUnDev</title>
+	</head>
+
+	<body>
+
+		<div class="container-fluid w-100 vh-100 d-flex justify-content-center align-items-center">
+
+			<div class="col-md-5 d-flex justify-content-center align-items-center">
+				<div class="w-100">
+					<h2 class="text-center mb-4">Connexion</h2>
+					<form method="POST" action="{{ path('app_company_login') }}">
+						<div class="form-group">
+							<label for="email">Adresse e-mail</label>
+							<input type="email" id="email" class="form-control" placeholder="Votre e-mail">
+						</div>
+						<div class="form-group">
+							<label for="password">Mot de passe</label>
+							<input type="password" id="password" class="form-control" placeholder="Votre mot de passe">
+						</div>
+						<button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+					</form>
+					<p class="text-center mt-3">
+						Pas encore de compte ?
+						<a href="{{ path('inscription-company') }}">S'inscrire</a>
+					</p>
+				</div>
+			</div>
+			<div class="w-100 vh-100 d-flex justify-content-center align-items-center">
+				<img style="border-radius:2rem; height:90vh" src="https://img.freepik.com/vecteurs-libre/personnes-detenant-icones-cercle-copie-espace-connecte_53876-66231.jpg?ga=GA1.1.576508064.1735162157&semt=ais_hybrid" alt="Image de connexion" class="img-fluid w-100">
+			</div>
+		</div>
+
+
+	</body>
+
+</html>

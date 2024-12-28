@@ -51,9 +51,9 @@
 			</nav>
 		</div>
 
-		<div class="container d-flex justify-content-center align-items-center min-vh-100" style="margin-top:5rem">
-			<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40">
-				<h2 class="text-center mb-4 text-primary">Inscrivez-vous pour trouver votre voie avec AdopteUnDev</h2>
+		<div class="site-section bg-light d-flex justify-content-center align-items-center min-vh-100">
+			<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40 bg-white">
+				<h2 class="text-center mb-4 text-primary h4">Inscrivez-vous pour trouver votre voie avec AdopteUnDev</h2>
 				<form action="{{ path('app_inscription') }}" method="POST" enctype="multipart/form-data">
 					<div class="form-row">
 						<div class="col-md-6 form-group">
@@ -89,16 +89,16 @@
 					</div>
 
 					{# <div class="form-group">
-																					<label for="languages">Langages de programmation :</label>
-																					<select id="languages" name="languages[]" class="form-control" multiple size="5">
-																						<option value="python">Python</option>
-																						<option value="javascript">JavaScript</option>
-																						<option value="java">Java</option>
-																						<option value="php">PHP</option>
-																						<option value="csharp">C#</option>
-																					</select>
-																					<small class="form-text text-muted">Maintenez la touche Ctrl (ou Command sur Mac) pour sélectionner plusieurs.</small>
-																				</div> #}
+																																									<label for="languages">Langages de programmation :</label>
+																																									<select id="languages" name="languages[]" class="form-control" multiple size="5">
+																																										<option value="python">Python</option>
+																																										<option value="javascript">JavaScript</option>
+																																										<option value="java">Java</option>
+																																										<option value="php">PHP</option>
+																																										<option value="csharp">C#</option>
+																																									</select>
+																																									<small class="form-text text-muted">Maintenez la touche Ctrl (ou Command sur Mac) pour sélectionner plusieurs.</small>
+																																								</div> #}
 
 
 					<div class="form-row">
@@ -126,12 +126,12 @@
 					</div>
 
 					{# <div class="form-check mb-3">
-																					<input type="checkbox" id="cgu" name="cgu" class="form-check-input" required>
-																					<label class="form-check-label" for="cgu">
-																						J'accepte les
-																						<a href="#" target="_blank">conditions générales d'utilisation</a>.
-																					</label>
-																				</div> #}
+																																									<input type="checkbox" id="cgu" name="cgu" class="form-check-input" required>
+																																									<label class="form-check-label" for="cgu">
+																																										J'accepte les
+																																										<a href="#" target="_blank">conditions générales d'utilisation</a>.
+																																									</label>
+																																								</div> #}
 
 					<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
 					<p class="text-center mt-3">
@@ -141,6 +141,96 @@
 				</form>
 			</div>
 
+		</div>
+
+		<div class="site-footer text-white">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-4">
+						<div class="widget">
+							<h3>À propos</h3>
+							<p>AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+						</div>
+						<div class="widget">
+							<h3>Connectez-vous avec nous</h3>
+							<ul class="social list-unstyled">
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-facebook"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-twitter"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-instagram"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-linkedin"></span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-12">
+								<div class="widget">
+									<h3>Navigation</h3>
+								</div>
+							</div>
+							<div class="col-6 col-sm-6 col-md-4">
+								<div class="widget">
+									<ul class="links list-unstyled">
+										<li>
+											<a href="{{path('app_offre')}}">Accueil</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Offres</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Matching</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Favoris</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Contact</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-6 col-sm-6 col-md-4">
+								<div class="widget">
+									<ul class="links list-unstyled">
+										<li>
+											<a href="{{path('app_offre')}}">À propos de nous</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">FAQ</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Carrières</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Support</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</body>
 

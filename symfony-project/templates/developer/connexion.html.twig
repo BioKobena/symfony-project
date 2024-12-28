@@ -8,26 +8,35 @@
 		<link rel="stylesheet" href="css/style.css">
 		<title>Connexion - AdopteUnDev</title>
 	</head>
-
 	<body>
-		<div class="container mt-5">
-			<h2 class="text-center mb-4">Connexion</h2>
-			<form class="w-50 mx-auto" method="POST" action="{{ path('app_developer_login') }}">
-				<div class="form-group">
-					<label for="email">Adresse e-mail</label>
-					<input type="email" id="email" class="form-control" placeholder="Votre e-mail">
+
+		<div class="container-fluid vh-100">
+			<div class="row h-100">
+				<div class="col-md-6 d-flex justify-content-center align-items-center">
+					<div class="w-75">
+						<h2 class="text-center mb-4">Connexion</h2>
+						<form method="POST" action="{{ path('app_developer_login') }}">
+							<div class="form-group">
+								<label for="email">Adresse e-mail</label>
+								<input type="email" id="email" class="form-control" placeholder="Votre e-mail">
+							</div>
+							<div class="form-group">
+								<label for="password">Mot de passe</label>
+								<input type="password" id="password" class="form-control" placeholder="Votre mot de passe">
+							</div>
+							<button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+						</form>
+						<p class="text-center mt-3">
+							Pas encore de compte ?
+							<a href="{{ path('app_inscription') }}">S'inscrire</a>
+						</p>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="password">Mot de passe</label>
-					<input type="password" id="password" class="form-control" placeholder="Votre mot de passe">
+
+				<div class="col-md-6 d-flex justify-content-center align-items-center">
+					<img style="border-radius:2rem; height:90vh" src="https://img.freepik.com/photos-gratuite/papier-perfore-maillons-connectes_53876-71201.jpg?t=st=1735420345~exp=1735423945~hmac=d8910c16db68c84f6c708fc107dd39f8eddf334f15aa199dfece6836c77f00d9&w=1800" alt="Image de connexion" class="img-fluid w-100">
 				</div>
-				<button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-				<p class="text-center mt-3">
-					Pas encore de compte ?
-					<a href="{{path('app_inscription')}}">S'inscrire</a>
-				</p>
-			</form>
+			</div>
 		</div>
 	</body>
-
 </html>

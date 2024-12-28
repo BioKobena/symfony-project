@@ -79,11 +79,16 @@
 							<li>
 								<a class="text-black" href="">Favoris</a>
 							</li>
-							<li>
-								<a class="text-black" href="">
-									<span class="fa fa-user"></span>
-									Mon compte
-								</a>
+							<li class="has-children">
+								<a href="#" class="text-black">Mon compte</a>
+								<ul class="dropdown">
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_login')}}">Connexion</a>
+									</li>
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 
@@ -92,10 +97,8 @@
 				</div>
 			</nav>
 			<!-- END nav -->
-
 		</div>
 		<!-- END container -->
-
 
 		<div class="section-grey bg-light" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem;">
 			<div class="container mt-5">
@@ -104,43 +107,39 @@
 					<p class="text-muted">Trouvez les entreprises correspondant à vos critères</p>
 				</div>
 
-				<!-- Formulaire de critères -->
-				<form id="matchingForm" class="bg-light p-4 shadow-sm rounded">
-					<div
-						class="row">
-						<!-- Langages -->
-						<div class="col-md-6 mb-3">
-							<label for="languages" class="form-label">Langages ou technologies</label>
-							<select id="languages" name="languages[]" class="form-control" multiple>
-								<option value="python">Python</option>
-								<option value="javascript">JavaScript</option>
-								<option value="java">Java</option>
-								<option value="php">PHP</option>
-								<option value="csharp">C#</option>
-							</select>
-							<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
-						</div>
+				<form id="matchingForm" class="bg-white p-4 m-4 shadow-sm rounded">
 
-						<!-- Salaire -->
-						<div class="col-md-6 mb-3">
+
+					<div class="row">
+						<div class="col-md-4 mb-3">
 							<label for="salary" class="form-label">Salaire minimum souhaité (€)</label>
 							<input type="number" id="salary" name="salary" class="form-control" placeholder="Ex : 40000">
 						</div>
 
-						<!-- Localisation -->
-						<div class="col-md-6 mb-3">
+						<div class="col-md-4 mb-3">
 							<label for="location" class="form-label">Localisation</label>
 							<input type="text" id="location" name="location" class="form-control" placeholder="Ex : Paris, France">
 						</div>
 
-						<!-- Niveau d'expérience -->
-						<div class="col-md-6 mb-3">
+						<div class="col-md-4 mb-3">
 							<label for="experience" class="form-label">Niveau d'expérience</label>
 							<input type="number" id="experience" name="experience" class="form-control" min="1" max="5" placeholder="Ex : 3">
 						</div>
 					</div>
 
-					<!-- Bouton de recherche -->
+					<div class="form-group mb-3">
+						<label for="languages" class="form-label">Langages ou technologies</label>
+						<select id="languages" name="languages[]" class="form-control" multiple>
+							<option value="python">Python</option>
+							<option value="javascript">JavaScript</option>
+							<option value="java">Java</option>
+							<option value="php">PHP</option>
+							<option value="csharp">C#</option>
+						</select>
+						<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
+					</div>
+
+
 					<div class="text-center">
 						<button type="button" id="matchButton" class="btn btn-primary">Trouver des entreprises</button>
 					</div>
@@ -151,7 +150,7 @@
 					class="row">
 					<!-- Offre 1 -->
 					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
+						<div class="card shadow-sm p-3">
 							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
 							<div class="card-body">
 								<h5 class="card-title">Chef de projet SI</h5>
@@ -166,7 +165,7 @@
 					</div>
 					<!-- Offre 2 -->
 					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
+						<div class="card shadow-sm p-3">
 							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
 							<div class="card-body">
 								<h5 class="card-title">Software Developer</h5>
@@ -181,7 +180,7 @@
 					</div>
 					<!-- Offre 3 -->
 					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm">
+						<div class="card shadow-sm p-3">
 							<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
 							<div class="card-body">
 								<h5 class="card-title">Stage - Études stratégiques renouvelables</h5>
