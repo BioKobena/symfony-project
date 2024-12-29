@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UserController extends AbstractController
 {
@@ -24,6 +26,7 @@ class UserController extends AbstractController
             $password = $request->request->get('password');
             $location = $request->request->get('location');
             $bio = $request->request->get('bio');
+            $profilePicture = $request->files->get('profilePicture'); // Récupérer l'image uploadée
 
             // Validation basique
             if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
@@ -39,20 +42,33 @@ class UserController extends AbstractController
             $user->setLocation($location);
             $user->setBio($bio);
 
-            // Assurez-vous que le mot de passe n'est pas vide ou nul
+            // Sauvegarde du mot de passe
             if (!empty($password)) {
-                // Sauvegarde du mot de passe directement
                 $user->setPassword($password);
             } else {
                 $this->addFlash('error', 'Le mot de passe est requis.');
                 return $this->redirectToRoute('app_register');
             }
 
+            // Gestion de l'image
+            if ($profilePicture instanceof UploadedFile) {
+                $uploadsDirectory = $this->getParameter('uploads_directory');
+
+                $newFilename = uniqid() . '.' . $profilePicture->guessExtension();
+
+                try {
+                    $profilePicture->move($uploadsDirectory, $newFilename);
+                    $user->setProfilePicture($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
+                    return $this->redirectToRoute('app_register');
+                }
+            }
+
             // Sauvegarde en base de données
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Message de succès
             $this->addFlash('success', 'Votre compte a été créé avec succès.');
         }
 

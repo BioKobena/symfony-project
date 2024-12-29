@@ -31,6 +31,20 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $profilePicture = null;
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?string $profilePicture): ?string
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;
