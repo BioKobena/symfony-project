@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
@@ -39,6 +41,15 @@ class Company
 
     #[ORM\Column(length: 255)]
     private ?string $type_entreprise = null;
+
+
+    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: FicheDePoste::class, cascade: ['persist', 'remove'])]
+    private $fichesDePostes;
+
+    public function __construct()
+    {
+        $this->fichesDePostes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,19 +139,6 @@ class Company
 
         return $this;
     }
-
-    // public function getAvatar(): ?string
-    // {
-    //     return $this->avatar;
-    // }
-
-    // public function setAvatar(string $avatar): static
-    // {
-    //     $this->avatar = $avatar;
-
-    //     return $this;
-    // }
-
     public function getTypeEntreprise(): ?string
     {
         return $this->type_entreprise;
@@ -152,4 +150,34 @@ class Company
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, FicheDePoste>
+     */
+    public function getFichesDePostes(): Collection
+    {
+        return $this->fichesDePostes;
+    }
+
+    public function addFicheDePoste(FicheDePoste $ficheDePoste): self
+    {
+        if (!$this->fichesDePostes->contains($ficheDePoste)) {
+            $this->fichesDePostes[] = $ficheDePoste;
+            $ficheDePoste->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFicheDePoste(FicheDePoste $ficheDePoste): self
+    {
+        if ($this->fichesDePostes->removeElement($ficheDePoste)) {
+            if ($ficheDePoste->getEntreprise() === $this) {
+                $ficheDePoste->setEntreprise(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -62,12 +62,6 @@
 									</li>
 								</ul>
 							</li>
-							{# <li>
-								<a href="{{path('app_inscription')}}">
-									<span class="fa fa-user"></span>
-									Mon compte
-								</a>
-							</li> #}
 						</ul>
 
 					</div>
@@ -132,53 +126,26 @@
 					<h2 class="font-weight-bold text-center">Les postes récents</h2>
 				</div>
 				<div class="container">
-					<div
-						class="row">
-						<!-- Offre 1 -->
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm p-3">
-								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-								<div class="card-body">
-									<h5 class="card-title">Chef de projet SI</h5>
-									<p class="card-text">
-										Stage de 6 mois
-										<br>
-										Nanterre, France
-									</p>
-									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+					<div class="row">
+						{% for fiche in fiches_de_poste %}
+							<div class="col-md-6 col-lg-4 mb-4">
+								<div class="card shadow-sm p-3">
+									<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+									<div class="card-body">
+										<h3>
+											{{ fiche.entreprise.nom }}</h3>
+
+										<h5 class="card-title">{{ fiche.titre }}</h5>
+										<p class="card-text">
+											{{ fiche.description }}
+											<br>
+											{{ fiche.localisation }}
+										</p>
+										<a href="{{ path('app_detail', {'id': fiche.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+									</div>
 								</div>
 							</div>
-						</div>
-						<!-- Offre 2 -->
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm p-3">
-								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-								<div class="card-body">
-									<h5 class="card-title">Software Developer</h5>
-									<p class="card-text">
-										CDI
-										<br>
-										Boulogne-Billancourt, France
-									</p>
-									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-								</div>
-							</div>
-						</div>
-						<!-- Offre 3 -->
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm p-3">
-								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-								<div class="card-body">
-									<h5 class="card-title">Stage Développeur</h5>
-									<p class="card-text">
-										Stage de 4 à 6 mois
-										<br>
-										Courbevoie, France
-									</p>
-									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 
@@ -195,63 +162,37 @@
 					<h2 class="font-weight-bold text-center">Dernières offres publiées</h2>
 				</div>
 				<div class="container">
-					<div
-						class="row">
-						<!-- Offre 1 -->
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm p-3">
-								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-								<div class="card-body">
-									<h5 class="card-title">Chef de projet SI</h5>
-									<p class="card-text">
-										Stage de 6 mois
-										<br>
-										Nanterre, France
-									</p>
-									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+					<div class="row">
+						{% for fiche in fiches_de_poste %}
+							<div class="col-md-6 col-lg-4 mb-4">
+								<div class="card shadow-sm p-3">
+									<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
+									<div class="card-body">
+										<h3>
+											{{ fiche.entreprise.nom }}</h3>
+
+										<h5 class="card-title">{{ fiche.titre }}</h5>
+										<p class="card-text">
+											{{ fiche.description }}
+											<br>
+											{{ fiche.localisation }}
+										</p>
+										<a href="{{ path('app_detail', {'id': fiche.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
+									</div>
 								</div>
 							</div>
-						</div>
-						<!-- Offre 2 -->
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm p-3">
-								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-								<div class="card-body">
-									<h5 class="card-title">Software Developer</h5>
-									<p class="card-text">
-										CDI
-										<br>
-										Boulogne-Billancourt, France
-									</p>
-									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-								</div>
-							</div>
-						</div>
-						<!-- Offre 3 -->
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm p-3">
-								<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
-								<div class="card-body">
-									<h5 class="card-title">Stage Développeur</h5>
-									<p class="card-text">
-										Stage de 4 à 6 mois
-										<br>
-										Courbevoie, France
-									</p>
-									<a href="{{ path('app_detail') }}" class="btn btn-primary btn-sm">Voir l'offre</a>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 
 				<div class="row mt-5">
 					<div class="col-lg-4 mx-auto">
-						<a href="{{path('app_infojob')}}" class="btn btn-primary btn-block">Voir plus</a>
+						<a href="{{ path('app_infojob') }}" class="btn btn-primary btn-block">Voir plus</a>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="site-footer text-white">
 			<div class="container">
 				<div class="row justify-content-between">

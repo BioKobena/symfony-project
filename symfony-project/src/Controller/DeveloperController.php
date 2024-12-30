@@ -11,14 +11,18 @@ use App\Entity\Developer;
 // use App\Form\DeveloperType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\AuthService;
+use App\Entity\FicheDePoste;
 
 class DeveloperController extends AbstractController
 {
     #[Route('/developer', name: 'app_developer')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        // Récupérer toutes les fiches de poste
+        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)->findAll();
+
         return $this->render('developer/index.html.twig', [
-            'controller_name' => 'DeveloperController',
+            'fiches_de_poste' => $fichesDePoste,
         ]);
     }
 
