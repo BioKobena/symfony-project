@@ -32,6 +32,9 @@ class Developer
     #[ORM\Column]
     private ?int $salaire_min = null;
 
+    #[ORM\Column]
+    private int $views = 0;
+
     #[ORM\Column(type: Types::TEXT)]
     private ?string $bio = null;
 
@@ -99,18 +102,6 @@ class Developer
 
         return $this;
     }
-
-    // public function getLangagesProgrammation(): array
-    // {
-    //     return $this->langages_programmation;
-    // }
-
-    // public function setLangagesProgrammation(array $langages_programmation): static
-    // {
-    //     $this->langages_programmation = $langages_programmation;
-
-    //     return $this;
-    // }
 
     public function getExperience(): ?int
     {
@@ -182,5 +173,15 @@ class Developer
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getViews(): int
+    {
+        return $this->views;
+    }
+
+    public function incrementViews(): void
+    {
+        $this->views++;
     }
 }

@@ -20,7 +20,7 @@ class OffreController extends AbstractController
         ]);
     }
 
-    #[Route('/offre/{id}', name: 'app_detail')]
+    #[Route('/{id}', name: 'app_detail')]
     public function detail($id, EntityManagerInterface $entityManager): Response
     {
         $fiche = $entityManager->getRepository(FicheDePoste::class)->find($id);
@@ -28,6 +28,10 @@ class OffreController extends AbstractController
         if (!$fiche) {
             throw $this->createNotFoundException('Offre introuvable');
         }
+
+        $fiche->incrementViews();
+
+        $entityManager->flush();
 
         return $this->render('offre/detail.html.twig', [
             'fiche' => $fiche,

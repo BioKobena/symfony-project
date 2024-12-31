@@ -47,8 +47,14 @@
 								<a class="text-white" href="{{path('match-dev')}}">Matching</a>
 							</li>
 							<li>
+								<a href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
+							</li>
+							<li>
 								<a class="text-white" href="">Statistiques</a>
 							</li>
+							{# <li>
+																																				<a class="text-white" href="">Mes fiches</a>
+																																			</li> #}
 							<li class="has-children">
 								<a href="#" class="text-white">Mon compte</a>
 								<ul class="dropdown">
@@ -138,7 +144,7 @@
 									{{ developer.experience }}
 									ans d'expérience
 								</p>
-								<a href="{{ path('app_developer', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+								<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
 									Voir le profil
 								</a>
 							</div>
@@ -157,30 +163,30 @@
 					<p class="text-muted w-100 font-weight-bold">Découvrez les plus attirants</p>
 				</div>
 				<div class="row">
-				{% for developer in developers %}
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card shadow-sm position-relative">
-							<div class="position-relative top-0 end-0 p-3">
-								<img src="{{ developer.avatarUrl | default('https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg') }}" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">{{ developer.nom }}</h5>
-								<p class="card-text">
-									{{ developer.bio }}
-									<br>
-									{{ developer.experience }}
-									ans d'expérience
-								</p>
-								<a href="{{ path('app_developer', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
-									Voir le profil
-								</a>
+					{% for developer in mostConsulted %}
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm position-relative">
+								<div class="position-relative top-0 end-0 p-3">
+									<img src="{{ developer.avatarUrl | default('https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg') }}" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">{{ developer.nom }}</h5>
+									<p class="card-text">
+										{{ developer.bio }}
+										<br>
+										{{ developer.experience }}
+										ans d'expérience
+									</p>
+									<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+										Voir le profil
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				{% else %}
-					<p class="text-center text-muted">Aucun développeur disponible pour le moment.</p>
-				{% endfor %}
-			</div>
+					{% else %}
+						<p class="text-center text-muted">Aucun développeur disponible pour le moment.</p>
+					{% endfor %}
+				</div>
 				<div class="row mt-5">
 					<div class="col-lg-4 mx-auto">
 						<a href="" class="btn btn-primary btn-block">Voir tous les profils</a>

@@ -36,6 +36,9 @@ class FicheDePoste
     #[ORM\JoinColumn(nullable: false)]
     private $entreprise;
 
+    #[ORM\Column]
+    private int $views = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,5 +130,45 @@ class FicheDePoste
         }
 
         return $this;
+    }
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTime $createdAt;
+
+    public function __construct()
+    {
+        // Initialisation automatique de createdAt avec la date actuelle
+        $this->createdAt = new \DateTime();
+    }
+
+    // Getter et Setter pour createdAt
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    // Méthode automatique pour définir createdAt lors de l'insertion
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        if ($this->createdAt === null) {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    public function getViews(): int
+    {
+        return $this->views;
+    }
+
+    public function incrementViews(): void
+    {
+        $this->views++;
     }
 }

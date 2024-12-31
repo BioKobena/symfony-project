@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FicheDePosteController extends AbstractController
 {
     // Récupération de l'entreprise par son ID pour effectuer une route spécifique à elle ([1..n] à remplacer par {id})
-    #[Route('/entreprise/3/fiches-de-poste/create', name: 'create_fiche_de_poste')]
+    #[Route('/entreprise/3/fiches-de-poste', name: 'create_fiche_de_poste')]
     public function createFicheDePoste(Request $request, EntityManagerInterface $entityManager)
     {
         // Récupération de l'entreprise par son ID
@@ -52,11 +52,18 @@ class FicheDePosteController extends AbstractController
             return $this->redirectToRoute('app_company');
         }
 
+        // Récupération des fiches de poste associées à cette entreprise
+        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy(['entreprise' => $company]);
+
+
         // Affichage du formulaire
         return $this->render('fiche_de_poste/index.html.twig', [
             'company' => $company,
+            'fichesDePoste' => $fichesDePoste,
         ]);
     }
 
-    
+
+
 }

@@ -7,8 +7,7 @@
 
 Bienvenue sur le projet **AdopteUnDev** ! Ce projet a pour objectif de créer une application web permettant aux développeurs et aux entreprises de créer des profils ou des fiches de postes et de les faire correspondre, à la manière d'un site de rencontre. L'objectif est d'optimiser la mise en relation entre développeurs et recruteurs via des fonctionnalités conviviales et innovantes.
 
-![Logo AdopteUnDev]([./docs/images/logo.png](https://res.cloudinary.com/drrf4valz/image/upload/v1735582578/vfdoidy0lcqsyrgyjhvv.png))
-
+![Logo AdopteUnDev](./docs/images/logo.png)
 ## Table des matières
 1. [Description du projet](#description-du-projet)
 2. [Fonctionnalités](#fonctionnalités)

@@ -20,11 +20,16 @@ class CompanyController extends AbstractController
         $developers = $entityManager->getRepository(Developer::class)
             ->findBy([], ['id' => 'DESC'], 3); // Les 3 derniers développeurs
 
+        // Récupérer les 3 développeurs les plus consultés
+        $mostConsulted = $entityManager->getRepository(Developer::class)
+            ->findBy([], ['views' => 'DESC'], 3);
+
         return $this->render('company/index.html.twig', [
-            'controller_name' => 'CompanyController',
-            'developers' => $developers, // Passer les développeurs au template
+            'developers' => $developers,
+            'mostConsulted' => $mostConsulted,
         ]);
     }
+    
 
     #[Route('/company-login', name: 'app_company_login', methods: ['GET', 'POST'])]
     public function login_company(Request $request, EntityManagerInterface $entityManager): Response
@@ -103,4 +108,23 @@ class CompanyController extends AbstractController
 
         return $this->render('company/inscription-company.html.twig');
     }
+
+    #[Route('/{id}/developer', name: 'developer_detail')]
+    public function showDeveloper(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $developer = $entityManager->getRepository(Developer::class)->find($id);
+
+        if (!$developer) {
+            throw $this->createNotFoundException('Développeur introuvable.');
+        }
+
+        $developer->incrementViews();
+        $entityManager->flush();
+
+        return $this->render('company/dev-info.html.twig', [
+            'developer' => $developer,
+        ]);
+    }
+
+
 }

@@ -63,41 +63,47 @@
 
 
 		<div class="container mt-5">
-        <div class="card shadow-lg">
-            <div class="card-header bg-primary text-white text-center">
-                <h2 class="mb-0">{{ fiche.titre }}</h2>
-            </div>
-            <div class="card-body">
-                <!-- Informations générales -->
-                <h4 class="text-primary">Informations générales</h4>
-                <p><strong>Localisation :</strong> {{ fiche.localisation }}</p>
-                <p><strong>Technologies :</strong> {{ fiche.technologies }}</p>
-                {# <p><strong>Niveau d'expérience :</strong> {{ fiche.niveau_experience }}</p> #}
-                {# <p><strong>Salaire proposé :</strong> {{ fiche.salaire_propose }}</p> #}
-                <p><strong>Description :</strong> {{ fiche.description }}</p>
+			<div class="card shadow-lg">
+				<div class="card-header bg-primary text-white text-center">
+					<h2 class="mb-0 text-white">{{ fiche.titre }}</h2>
+				</div>
+				<div
+					class="card-body">
+					<!-- Informations générales -->
+					<h4 class="text-primary">Informations générales</h4>
+					<p>
+						<strong>Localisation :</strong>
+						{{ fiche.localisation }}</p>
+					<p>
+						<strong>Technologies :</strong>
+						{{ fiche.technologies }}</p>
+					{# <p><strong>Niveau d'expérience :</strong> {{ fiche.niveau_experience }}</p> #}
+					{# <p><strong>Salaire proposé :</strong> {{ fiche.salaire_propose }}</p> #}
+					<p>
+						<strong>Description :</strong>
+						{{ fiche.description }}</p>
 
-                <!-- Description de l'entreprise -->
-                {# <h4 class="text-primary mt-4">Qui sommes-nous ?</h4>
-                <p>{{ fiche.entreprise.description }}</p>
+					<!-- Description de l'entreprise -->
+					{# <h4 class="text-primary mt-4">Qui sommes-nous ?</h4>
+					                <p>{{ fiche.entreprise.description }}</p>
+					
+					                <ul>
+					                    {% for mission in fiche.entreprise.missions %}
+					                        <li>{{ mission }}</li>
+					                    {% endfor %}
+					                </ul>
+					
+					                <!-- Avantages pour les stagiaires -->
+					                <h4 class="text-primary mt-4">Pourquoi choisir un stage chez {{ fiche.entreprise.nom }} ?</h4>
+					                <p>{{ fiche.avantages }}</p> #}
 
-                <ul>
-                    {% for mission in fiche.entreprise.missions %}
-                        <li>{{ mission }}</li>
-                    {% endfor %}
-                </ul>
-
-                <!-- Avantages pour les stagiaires -->
-                <h4 class="text-primary mt-4">Pourquoi choisir un stage chez {{ fiche.entreprise.nom }} ?</h4>
-                <p>{{ fiche.avantages }}</p> #}
-
-                <!-- Actions -->
-                <div class="text-center mt-4">
-                    <a href="{{ path('app_success') }}" class="btn btn-primary btn-lg">Candidature simplifiée</a>
-                    <a href="{{ path('app_success') }}" class="btn btn-outline-primary btn-lg ml-2">Enregistrer</a>
-                </div>
-            </div>
-        </div>
-    </div>
+					<!-- Actions -->
+						<div class="text-center mt-4"> <a href="{{ path('app_success') }}" class="btn btn-primary btn-lg">Candidature simplifiée</a>
+						<a href="{{ path('app_success') }}" class="btn btn-outline-primary btn-lg ml-2">Enregistrer</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="site-footer text-white">
 			<div class="container">

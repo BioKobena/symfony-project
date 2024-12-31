@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Developer;
-// use App\Form\DeveloperType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\AuthService;
 use App\Entity\FicheDePoste;
@@ -18,31 +17,30 @@ class DeveloperController extends AbstractController
     #[Route('/developer', name: 'app_developer')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        // Récupérer toutes les fiches de poste
-        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)->findAll();
+        //Les postes récents
+        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy([], ['createdAt' => 'DESC'], 3);
+
+        // Les postes populaires
+        $offres = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy([], ['views' => 'DESC'], 3); 
+
 
         return $this->render('developer/index.html.twig', [
             'fiches_de_poste' => $fichesDePoste,
+            'offres' => $offres,
         ]);
     }
 
-    #[Route('/developers', name: 'app_developers')]
-    public function lastCreate(EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer les 3 derniers développeurs créés
-        $developers = $entityManager->getRepository(Developer::class)
-            ->findBy([], ['createdAt' => 'DESC'], 3); // Trier par la date de création décroissante
-
-        return $this->render('developer/index.html.twig', [
-            'developers' => $developers,
-        ]);
-    }
 
     #[Route('/offre-info', name: 'app_infojob')]
-    public function info_job(): Response
+    public function offres(EntityManagerInterface $entityManager): Response
     {
+        $offres = $entityManager->getRepository(FicheDePoste::class)->findAll();
+
+        // Récupérer les 3 derniers développeurs créés
         return $this->render('developer/offre.html.twig', [
-            'controller_name' => 'DeveloperController',
+            'offres' => $offres,
         ]);
     }
 
@@ -128,6 +126,33 @@ class DeveloperController extends AbstractController
         }
 
         return $this->render('developer/connexion.html.twig');
+    }
+
+
+
+    #[Route('/search', name: 'app_search')]
+    public function search(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $searchTerm = $request->query->get('search', '');
+        $offres = $this->searchOffres($entityManager, $searchTerm);
+
+        return $this->render('developer/search.html.twig', [
+            'offres' => $offres,
+        ]);
+    }
+
+    public function searchOffres(EntityManagerInterface $entityManager, string $searchTerm): array
+    {
+        $queryBuilder = $entityManager->getRepository(FicheDePoste::class)->createQueryBuilder('f');
+        if (!empty($searchTerm)) {
+            $queryBuilder->where('f.titre LIKE :search')
+                ->orWhere('f.entreprise.nom LIKE :search')
+                ->setParameter('search', '%' . $searchTerm . '%');
+        }
+
+        $offres = $queryBuilder->getQuery()->getResult();
+
+        return $offres;
     }
 
 

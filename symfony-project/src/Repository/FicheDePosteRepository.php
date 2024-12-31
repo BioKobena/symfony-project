@@ -16,6 +16,17 @@ class FicheDePosteRepository extends ServiceEntityRepository
         parent::__construct($registry, FicheDePoste::class);
     }
 
+    public function searchOffres($search)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.titre LIKE :search')
+            ->orWhere('o.description LIKE :search')
+            ->orWhere('o.localisation LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return FicheDePoste[] Returns an array of FicheDePoste objects
     //     */
