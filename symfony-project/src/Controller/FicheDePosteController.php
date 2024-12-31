@@ -12,11 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class FicheDePosteController extends AbstractController
 {
     // Récupération de l'entreprise par son ID pour effectuer une route spécifique à elle ([1..n] à remplacer par {id})
-    #[Route('/entreprise/3/fiches-de-poste', name: 'create_fiche_de_poste')]
+    #[Route('/entreprise/1/fiches-de-poste', name: 'create_fiche_de_poste')]
     public function createFicheDePoste(Request $request, EntityManagerInterface $entityManager)
     {
         // Récupération de l'entreprise par son ID
-        $company = $entityManager->getRepository(Company::class)->find(3);
+        $company = $entityManager->getRepository(Company::class)->find(1);
 
         if (!$company) {
             return $this->json(['error' => 'Entreprise non trouvée'], 404);

@@ -28,7 +28,7 @@
 							<li class="active">
 								<a class="text-black" href="{{path('match-dev')}}">Matching</a>
 							</li>
-							<li  class="text-black font-weight-bold">
+							<li class="text-black font-weight-bold">
 								<a class="text-black" href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
 							</li>
 							<li>
@@ -112,6 +112,9 @@
 											{{ fiche.salairePropose }}
 											€<br>
 											{{ fiche.description }}
+											<br>
+											<strong>Vues :</strong>
+											{{ fiche.views }}
 										</p>
 										<a href="#" class="btn btn-sm btn-success">Supprimer</a>
 									</div>
