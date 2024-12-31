@@ -53,8 +53,8 @@
 								<a class="text-white" href="">Statistiques</a>
 							</li>
 							{# <li>
-																																											<a class="text-white" href="">Mes fiches</a>
-																																										</li> #}
+																																																		<a class="text-white" href="">Mes fiches</a>
+																																																	</li> #}
 							<li class="has-children">
 								<a href="#" class="text-white">Mon compte</a>
 								<ul class="dropdown">
@@ -95,11 +95,11 @@
 						{{ developer.localisation }}
 					</p>
 					{# <p>
-											<strong>Langages de programmation:</strong>
-											{% for language in developer.programmingLanguages %}
-												<span class="badge badge-primary">{{ language }}</span>
-											{% endfor %}
-										</p> #}
+																<strong>Langages de programmation:</strong>
+																{% for language in developer.programmingLanguages %}
+																	<span class="badge badge-primary">{{ language }}</span>
+																{% endfor %}
+															</p> #}
 					<p>
 						<strong>Niveau d'expérience:</strong>
 						{{ developer.experience }}
@@ -127,89 +127,125 @@
 					<div class="col-lg-4">
 						<div class="widget">
 							<h3>À propos</h3>
-							<p>AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+							<p class="text-black">
+								AdopteUnDev, la plateforme qui connecte développeurs talentueux et entreprises ambitieuses pour un matching parfait. Rejoignez-nous pour construire un avenir numérique collaboratif !
+							</p>
 						</div>
 						<div class="widget">
-							<h3>Connectez-vous avec nous</h3>
+							<h3>Restez connecté</h3>
 							<ul class="social list-unstyled">
 								<li>
-									<a href="{{path('app_offre')}}">
+									<a href="#">
 										<span class="icon-facebook"></span>
 									</a>
 								</li>
 								<li>
-									<a href="{{path('app_offre')}}">
+									<a href="#">
 										<span class="icon-twitter"></span>
 									</a>
 								</li>
 								<li>
-									<a href="{{path('app_offre')}}">
+									<a href="#">
 										<span class="icon-instagram"></span>
 									</a>
 								</li>
 								<li>
-									<a href="{{path('app_offre')}}">
+									<a href="#">
 										<span class="icon-linkedin"></span>
 									</a>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-12">
-								<div class="widget">
-									<h3>Navigation</h3>
-								</div>
-							</div>
-							<div class="col-6 col-sm-6 col-md-4">
-								<div class="widget">
-									<ul class="links list-unstyled">
-										<li>
-											<a href="{{path('app_offre')}}">Accueil</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Profil</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Matching</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Favoris</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Contact</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-6 col-sm-6 col-md-4">
-								<div class="widget">
-									<ul class="links list-unstyled">
-										<li>
-											<a href="{{path('app_offre')}}">À propos de nous</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">FAQ</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Carrières</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Support</a>
-										</li>
-									</ul>
-								</div>
-							</div>
+
+					<div class="col-lg-2">
+						<div class="widget">
+							<h3>Pour les développeurs</h3>
+							<ul class="links list-unstyled">
+								<li>
+									<a href="#">Nous rejoindre</a>
+								</li>
+								<li>
+									<a href="#">Créer un profil</a>
+								</li>
+								<li>
+									<a href="#">Nos offres</a>
+								</li>
+								<li>
+									<a href="#">Favoris</a>
+								</li>
+								<li>
+									<a href="#">Contact support</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Section Pour les entreprises -->
+					<div class="col-lg-2">
+						<div class="widget">
+							<h3>Pour les entreprises</h3>
+							<ul class="links list-unstyled">
+								<li>
+									<a href="#">Publier une offre</a>
+								</li>
+								<li>
+									<a href="#">Trouver un développeur</a>
+								</li>
+								<li>
+									<a href="#">Nos solutions</a>
+								</li>
+								<li>
+									<a href="#">Évaluer un développeur</a>
+								</li>
+								<li>
+									<a href="#">Assistance</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Section Légal -->
+					<div class="col-lg-2">
+						<div class="widget">
+							<h3>Légal</h3>
+							<ul class="links list-unstyled">
+								<li>
+									<a href="#">Mentions légales</a>
+								</li>
+								<li>
+									<a href="#">Politique de confidentialité</a>
+								</li>
+								<li>
+									<a href="#">Conditions générales</a>
+								</li>
+								<li>
+									<a href="#">Politique de cookies</a>
+								</li>
+								<li>
+									<a href="#">FAQ</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
 
+				<!-- Bas de page -->
+				<div class="row mt-4">
+					<div class="col-12 text-center">
+						<p class="mb-0">
+							Copyright © AdopteUnDev 2024 - Tous droits réservés.
+							<a href="#">Mentions légales</a>
+							|
+							<a href="#">Cookies</a>
+							|
+							<a href="#">Confidentialité</a>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
+
 
 	</body>
 </html></div><div id="overlayer"></div><div class="loader">
