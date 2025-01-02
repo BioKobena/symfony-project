@@ -48,7 +48,13 @@
 								<a href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
-								<a href="">Favoris</a>
+								<a href="{{ path('app_notifications') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
+							</li>
+							<li>
+								<a href="{{path('app_favori')}}">Favoris</a>
 							</li>
 
 							<li class="has-children">
@@ -141,6 +147,9 @@
 											<br>
 											{{ fiche.localisation }}
 										</p>
+									</div>
+									<div class="ontainer">
+										<a href="{{ path('developer_add_fiche_favoris', { ficheId: fiche.id }) }}" class="btn btn-success">Ajouter favoris</a>
 										<a href="{{ path('app_detail', {'id': fiche.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
 									</div>
 								</div>
@@ -178,6 +187,9 @@
 											<br>
 											{{ fiche.localisation }}
 										</p>
+									</div>
+									<div class="ontainer">
+										<a href="{{ path('developer_add_fiche_favoris', { ficheId: fiche.id }) }}" class="btn btn-success">Ajouter favoris</a>
 										<a href="{{ path('app_detail', {'id': fiche.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
 									</div>
 								</div>

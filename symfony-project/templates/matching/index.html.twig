@@ -77,7 +77,13 @@
 								<a class="text-black font-weight-bold" href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
-								<a class="text-black" href="">Favoris</a>
+								<a class="text-black" href="{{ path('app_notifications') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
+							</li>
+							<li>
+								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
 							</li>
 							<li class="has-children">
 								<a href="#" class="text-black">Mon compte</a>
@@ -114,7 +120,7 @@
 					<div class="row">
 						{% set hasMatches = false %}
 						{% for match in matches %}
-							{% if match.score >= 40 %}
+							{% if match.score >= 50 %}
 								{% set hasMatches = true %}
 								<div class="col-md-4">
 									<div class="card mb-3">

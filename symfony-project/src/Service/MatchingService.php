@@ -5,9 +5,54 @@ namespace App\Service;
 use App\Entity\Developer;
 use App\Entity\Company;
 use App\Entity\FicheDePoste;
+use App\Repository\DeveloperRepository;
+use App\Repository\CompanyRepository;
+use App\Repository\FicheDePosteRepository;
+
 
 class MatchingService
 {
+    public function __construct(
+        private DeveloperRepository $developerRepository,
+        private CompanyRepository $companyRepository,
+        private FicheDePosteRepository $jobRepository,
+        private NotificationService $notificationService
+    ) {
+    }
+
+    public function calculateMatchAndNotify(): void
+    {
+        $developers = $this->developerRepository->findAll();
+        $jobs = $this->jobRepository->findAll();
+
+        foreach ($developers as $developer) {
+            foreach ($jobs as $job) {
+                $score = $this->calculateMatchScore($developer, $job);
+
+                if ($score >= 0) {
+                    $this->notificationService->notifyDeveloper($developer, $job);
+                }
+            }
+        }
+    }
+
+    public function calculateMatchCompanyAndNotify(): void
+    {
+        $developers = $this->developerRepository->findAll();
+        $companies = $this->companyRepository->findAll();
+        $jobs = $this->jobRepository->findAll();
+
+        foreach ($companies as $company) {
+            foreach ($developers as $developer) {
+                $score = $this->calculateDeveloperMatchScore($company, $developer);
+                foreach ($jobs as $job) {
+                    if ($score >= 50) {
+                        $this->notificationService->notifyCompanyAboutMatchingDeveloper($company, $developer, $job);
+                    }
+                }
+            }
+        }
+    }
     public function calculateMatchScore(Developer $developer, FicheDePoste $job): ?int
     {
         $score = 0;

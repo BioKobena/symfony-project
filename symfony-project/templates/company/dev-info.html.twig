@@ -26,43 +26,45 @@
 	</head>
 	<body>
 		<div class="container">
-
-
 			<nav class="site-nav">
 				<div class="logo">
-					<a href="index.html" class="text-white">AdopteUnDev<span class="text-black">.</span>
+					<a class="text-black">AdopteUnDev<span class="text-black">.</span>
 					</a>
 				</div>
 				<div class="row align-items-center">
 
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
+							<li>
+								<a class="text-black" href="{{path('app_company')}}">Accueil</a>
+							</li>
 							<li class="active">
-								<a href="{{path('app_company')}}" class="font-weight-bold">Accueil</a>
+								<a class="text-black font-weight-bold" href="{{path('app_profil')}}">Profils</a>
+							</li>
+							<li class="active">
+								<a class="text-black" href="{{path('match-dev')}}">Matching</a>
 							</li>
 							<li>
-								<a class="text-white" href="{{path('app_profil')}}">Profils</a>
+								<a class="text-black" href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
 							</li>
 							<li>
-								<a class="text-white" href="{{path('match-dev')}}">Matching</a>
+								<a class="text-black" href="{{ path('app_notifications_company') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
 							</li>
 							<li>
-								<a href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
+								<a class="text-black" href="">Statistiques</a>
 							</li>
-							<li>
-								<a class="text-white" href="">Statistiques</a>
-							</li>
-							{# <li>
-																																																		<a class="text-white" href="">Mes fiches</a>
-																																																	</li> #}
+
 							<li class="has-children">
-								<a href="#" class="text-white">Mon compte</a>
+								<a href="#" class="text-black font-weight-bold">Mon compte</a>
 								<ul class="dropdown">
 									<li>
-										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('app_company_login')}}">Connexion</a>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_company_login')}}">Connexion</a>
 									</li>
 									<li>
-										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('inscription-company')}}">Inscription</a>
+										<a class="text-black" style="cursor:pointer;" href="{{path('inscription-company')}}">Inscription</a>
 									</li>
 								</ul>
 							</li>
@@ -72,43 +74,40 @@
 
 				</div>
 			</nav>
-			<!-- END nav -->
-
 		</div>
+
 		<!-- END container -->
 
-
-		<div class="container" style="margin-top:10rem;">
-			<div class="team row">
-				<div
-					class="col-md-4 col-lg-3 pic">{# <img src="{{ developer.imagePath }}" alt="Image" class="w-95 img-fluid"> #}
+		<div class="site-section bg-light h-100" style="display:flex; justify-content:center; align-items:center">
+			<div class="container team" style="display:flex; justify-content:center; align-items:center">
+				<div class="col-md-6 col-lg-6 pic">
+					<img src="images/person_1-min.jpg" alt="Image" class="w-95 img-fluid">
 				</div>
-				<div class="col-md-8 col-lg-9">
+
+				<div class="col-md-6 col-lg-6 d-flex flex-column my-8 justify-center align-center">
 					<h3>
 						<a href="#">
 							<span>{{ developer.nom }}</span>
 							{{ developer.prenom }}</a>
 					</h3>
-					{# <span class="d-block position">{{ developer.localisation }}</span> #}
+					<span class="d-block position">{{ developer.localisation }}</span>
 					<p>
 						<strong>Localisation:</strong>
 						{{ developer.localisation }}
 					</p>
-					{# <p>
-																<strong>Langages de programmation:</strong>
-																{% for language in developer.programmingLanguages %}
-																	<span class="badge badge-primary">{{ language }}</span>
-																{% endfor %}
-															</p> #}
+					<p>
+						<strong>Langages de programmation:</strong>
+						<span class="badge badge-primary">{{ developer.languages }}</span>
+					</p>
 					<p>
 						<strong>Niveau d'expérience:</strong>
 						{{ developer.experience }}
 						ans
 					</p>
-					<p>
-						<strong>Salaire minimum souhaité:</strong>
-						{# {{ developer.salaire_min }}€ #}
-					</p>
+					{# <p>
+																<strong>Salaire minimum souhaité:</strong>
+																{{ developer.salaire_min }} €
+															</p> #}
 					<p>
 						<strong>Biographie:</strong>
 						{{ developer.bio }}

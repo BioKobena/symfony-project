@@ -60,7 +60,7 @@
 		<div class="container">
 			<nav class="site-nav">
 				<div class="logo">
-					<a class="text-black text-bold">AdopteUnDev<span class="text-black text-bold">.</span>
+					<a class="text-black">AdopteUnDev<span class="text-black">.</span>
 					</a>
 				</div>
 				<div class="row align-items-center">
@@ -68,26 +68,35 @@
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
 							<li>
-								<a class="text-black text-bold" href="{{path('app_company')}}">Accueil</a>
+								<a class="text-black" href="{{path('app_company')}}">Accueil</a>
 							</li>
 							<li class="active">
-								<a class="text-black text-bold font-weight-bold" href="{{path('app_profil')}}">Profils</a>
+								<a class="text-black font-weight-bold" href="{{path('app_profil')}}">Profils</a>
 							</li>
 							<li class="active">
-								<a class="text-black text-bold" href="{{path('match-dev')}}">Matching</a>
+								<a class="text-black" href="{{path('match-dev')}}">Matching</a>
 							</li>
 							<li>
-								<a class="text-black text-bold" href="">Statistiques</a>
+								<a class="text-black" href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
+							</li>
+							<li>
+								<a class="text-black" href="{{ path('app_notifications_company') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
+							</li>
+							<li>
+								<a class="text-black" href="">Statistiques</a>
 							</li>
 
 							<li class="has-children">
-								<a href="#" class="text-black">Mon compte</a>
+								<a href="#" class="text-black font-weight-bold">Mon compte</a>
 								<ul class="dropdown">
 									<li>
-										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('app_company_login')}}">Connexion</a>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_company_login')}}">Connexion</a>
 									</li>
 									<li>
-										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('inscription-company')}}">Inscription</a>
+										<a class="text-black" style="cursor:pointer;" href="{{path('inscription-company')}}">Inscription</a>
 									</li>
 								</ul>
 							</li>
@@ -101,20 +110,59 @@
 
 		<div class="container" style="margin-top:10rem;">
 
-			<div class="search-bar" style="width: 100%; margin-bottom: 20px;">
-				<input type="text" placeholder="Recherchez ici..." class="form-control" style="width: 100%; padding: 15px; font-size: 18px; border-radius: 5px; border: 1px solid #ccc;">
-				<button type="button" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; border-radius: 0 5px 5px 0; border: none; color: white; cursor: pointer; margin-left:-2rem">
-					Rechercher
-				</button>
+			<div class="container mt-5">
+				<div class="text-center mb-4">
+					<h4 class="font-weight-bold">Matching</h4>
+					<p class="text-muted">Trouvez les développeurs correspondant à vos critères</p>
+				</div>
+
+				<form id="matchingForm" class="bg-white m-4 p-4 shadow-sm rounded">
+					<div
+						class="row">
+						<!-- Salaire -->
+						<div class="col-md-4 mb-3">
+							<label for="salary" class="form-label">Salaire minimum souhaité (€)</label>
+							<input type="number" id="salary" name="salary" class="form-control" placeholder="Ex : 40000">
+						</div>
+
+						<!-- Localisation -->
+						<div class="col-md-4 mb-3">
+							<label for="location" class="form-label">Localisation</label>
+							<input type="text" id="location" name="location" class="form-control" placeholder="Ex : Paris, France">
+						</div>
+
+						<!-- Niveau d'expérience -->
+						<div class="col-md-4 mb-3">
+							<label for="experience" class="form-label">Niveau d'expérience</label>
+							<input type="number" id="experience" name="experience" class="form-control" min="1" max="5" placeholder="Ex : 3">
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<label for="languages" class="form-label">Langages ou technologies</label>
+						<select id="languages" name="languages[]" class="form-control" multiple>
+							<option value="python">Python</option>
+							<option value="javascript">JavaScript</option>
+							<option value="java">Java</option>
+							<option value="php">PHP</option>
+							<option value="csharp">C#</option>
+						</select>
+						<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
+					</div>
+
+					<!-- Bouton de recherche -->
+					<div class="text-center">
+						<button type="button" id="matchButton" class="btn btn-primary">Trouver des Devs</button>
+					</div>
+				</form>
 			</div>
 
-			<div class="container">
+			<div class="container site-section">
 				<div class="row">
 					{% for developer in developers %}
 						<div class="col-md-6 col-lg-4 mb-4">
 							<div class="card shadow-sm position-relative">
 								<div class="position-relative top-0 end-0 p-3">
-									<img src="" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="{{ developer.name }} Avatar">
+									<img src="https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="{{ developer.nom }} Avatar">
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">{{ developer.nom }}</h5>
@@ -126,7 +174,9 @@
 										<br>
 										{{ developer.bio }}
 									</p>
-									{# <a href="{{ path('app_profil', { id: developer.id }) }}" class="btn btn-primary text-white btn-sm">Voir le profil</a> #}
+									<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+										Voir le profil
+									</a>
 								</div>
 							</div>
 						</div>
@@ -142,7 +192,7 @@
 					<div class="col-lg-4">
 						<div class="widget">
 							<h3>À propos</h3>
-							<p>AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+							<p class="text-black">AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
 						</div>
 						<div class="widget">
 							<h3>Connectez-vous avec nous</h3>

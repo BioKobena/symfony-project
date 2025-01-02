@@ -11,6 +11,8 @@ use App\Entity\Developer;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\AuthService;
 use App\Entity\FicheDePoste;
+use App\Entity\Favoris;
+use App\Repository\DeveloperRepository;
 
 class DeveloperController extends AbstractController
 {
@@ -23,7 +25,7 @@ class DeveloperController extends AbstractController
 
         // Les postes populaires
         $offres = $entityManager->getRepository(FicheDePoste::class)
-            ->findBy([], ['views' => 'DESC'], 3); 
+            ->findBy([], ['views' => 'DESC'], 3);
 
 
         return $this->render('developer/index.html.twig', [
@@ -155,5 +157,39 @@ class DeveloperController extends AbstractController
         return $offres;
     }
 
+    #[Route('/developer/add-fiche-favoris/{ficheId}', name: 'developer_add_fiche_favoris')]
+    public function addFicheFavoris(int $ficheId, EntityManagerInterface $entityManager, DeveloperRepository $developerRepository, ): Response
+    {
+        $developer = $developerRepository->find(17);
 
+        if (!$developer) {
+            return $this->redirectToRoute('login');
+        }
+
+        $ficheDePoste = $entityManager->getRepository(FicheDePoste::class)->find($ficheId);
+
+        if (!$ficheDePoste) {
+            throw $this->createNotFoundException('Fiche de poste introuvable.');
+        }
+
+        $favoris = $entityManager->getRepository(Favoris::class)->findOneBy([
+            'developer' => $developer,
+            'ficheDePoste' => $ficheDePoste,
+        ]);
+
+        if (!$favoris) {
+            $favoris = new Favoris();
+            $favoris->setDeveloper($developer);
+            $favoris->setFicheDePoste($ficheDePoste);
+
+            $entityManager->persist($favoris);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Fiche de poste ajoutée à vos favoris avec succès !');
+        } else {
+            $this->addFlash('info', 'Cette fiche de poste est déjà dans vos favoris.');
+        }
+
+        return $this->redirectToRoute('app_favori');  // Redirection vers le tableau de bord du développeur
+    }
 }

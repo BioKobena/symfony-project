@@ -26,8 +26,6 @@
 	</head>
 	<body>
 		<div class="container">
-
-
 			<nav class="site-nav">
 				<div class="logo">
 					<a href="index.html" class="text-white">AdopteUnDev<span class="text-black">.</span>
@@ -47,14 +45,20 @@
 								<a class="text-white" href="{{path('match-dev')}}">Matching</a>
 							</li>
 							<li>
-								<a href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
+								<a class="text-white" href="{{path('create_fiche_de_poste')}}">Fiches de postes</a>
+							</li>
+							<li>
+								<a class="text-white" href="{{ path('app_notifications_company') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
 							</li>
 							<li>
 								<a class="text-white" href="">Statistiques</a>
 							</li>
 							{# <li>
-																																																		<a class="text-white" href="">Mes fiches</a>
-																																																	</li> #}
+																																																																														<a class="text-white" href="">Mes fiches</a>
+																																																																													</li> #}
 							<li class="has-children">
 								<a href="#" class="text-white">Mon compte</a>
 								<ul class="dropdown">
@@ -73,7 +77,6 @@
 				</div>
 			</nav>
 			<!-- END nav -->
-
 		</div>
 		<!-- END container -->
 
@@ -197,8 +200,7 @@
 
 		<div class="site-footer text-white">
 			<div class="container">
-				<div
-					class="row justify-content-between">
+				<div class="row justify-content-between">
 					<div class="col-lg-4">
 						<div class="widget">
 							<h3>À propos</h3>

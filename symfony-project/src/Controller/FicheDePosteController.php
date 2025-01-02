@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\FicheDePoste;
 use App\Entity\Company;
+use App\Service\MatchingService;
+use App\Service\NotificationService;
+use App\Repository\DeveloperRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +16,7 @@ class FicheDePosteController extends AbstractController
 {
     // Récupération de l'entreprise par son ID pour effectuer une route spécifique à elle ([1..n] à remplacer par {id})
     #[Route('/entreprise/1/fiches-de-poste', name: 'create_fiche_de_poste')]
-    public function createFicheDePoste(Request $request, EntityManagerInterface $entityManager)
+    public function createFicheDePoste(Request $request, EntityManagerInterface $entityManager, DeveloperRepository $developerRepository, MatchingService $matchingService, NotificationService $notificationService)
     {
         // Récupération de l'entreprise par son ID
         $company = $entityManager->getRepository(Company::class)->find(1);
@@ -47,6 +50,18 @@ class FicheDePosteController extends AbstractController
             // Persistance de la fiche de poste
             $entityManager->persist($ficheDePoste);
             $entityManager->flush();
+
+
+            // Vérifier les correspondances
+            $developers = $developerRepository->findAll();
+            foreach ($developers as $developer) {
+                $score = $matchingService->calculateMatchScore($developer, $ficheDePoste);
+
+                // Si le score est suffisant, créer une notification
+                if ($score >= 50) {
+                    $notificationService->notifyDeveloper($developer, $ficheDePoste);
+                }
+            }
 
             // Retour ou redirection après succès
             return $this->redirectToRoute('app_company');

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\NotificationService;
 class MatchingController extends AbstractController
 {
     // Matching Dev --> Entreprise 
@@ -67,7 +68,8 @@ class MatchingController extends AbstractController
     public function matchDevelopersToCompany(
         CompanyRepository $companyRepository,
         DeveloperRepository $developerRepository,
-        MatchingService $matchingService
+        MatchingService $matchingService,
+        NotificationService $notificationService,
     ): Response {
         // Récupérer l'entreprise par ID
         $company = $companyRepository->find(3);
@@ -86,18 +88,19 @@ class MatchingController extends AbstractController
             $matchingJobs = [];
             foreach ($company->getFichesDePostes() as $job) {
                 $jobScore = $matchingService->calculateMatchScore($developer, $job);
-                if ($jobScore > 49) {
+                if ($jobScore >= 50) {
                     $matchingJobs[] = [
                         'job' => $job,
                         'score' => $jobScore,
                     ];
+                    $notificationService->notifyCompanyAboutMatchingDeveloper($company, $developer, $job);
                 }
             }
 
             // Calculer le score global pour le développeur et l'entreprise
             $developerScore = $matchingService->calculateDeveloperMatchScore($company, $developer);
 
-            if ($developerScore > 49) {
+            if ($developerScore >= 49) {
                 $matches[] = [
                     'developer' => $developer,
                     'score' => $developerScore,

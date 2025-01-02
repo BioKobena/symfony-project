@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Company;
 use App\Entity\Developer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 
 class CompanyController extends AbstractController
@@ -109,7 +110,7 @@ class CompanyController extends AbstractController
         return $this->render('company/inscription-company.html.twig');
     }
 
-    #[Route('/{id}/developer', name: 'developer_detail')]
+    #[Route('/{id}-developper-adopte-un-dev', name: 'developer_detail')]
     public function showDeveloper(int $id, EntityManagerInterface $entityManager): Response
     {
         $developer = $entityManager->getRepository(Developer::class)->find($id);

@@ -29,7 +29,7 @@ class OffreController extends AbstractController
     }
 
 
-    #[Route('/{id}/offres', name: 'app_detail')]
+    #[Route('/{id}-offres-developpeurs', name: 'app_detail')]
     public function detail($id, EntityManagerInterface $entityManager): Response
     {
         $fiche = $entityManager->getRepository(FicheDePoste::class)->find($id);

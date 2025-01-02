@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\DeveloperRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: DeveloperRepository::class)]
 class Developer
@@ -183,5 +185,18 @@ class Developer
     public function incrementViews(): void
     {
         $this->views++;
+    }
+
+    #[ORM\OneToMany(mappedBy: 'developer', targetEntity: Notification::class, cascade: ['persist', 'remove'])]
+    private Collection $notifications;
+
+    public function __construct()
+    {
+        $this->notifications = new ArrayCollection();
+    }
+
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
     }
 }

@@ -77,7 +77,13 @@
 								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
-								<a class="text-black" href="">Favoris</a>
+								<a class="text-black" href="{{ path('app_notifications') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
+							</li>
+							<li>
+								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
 							</li>
 							<li class="has-children">
 								<a href="#" class="text-black">Mon compte</a>
@@ -99,8 +105,8 @@
 		</div>
 
 
-		<div class="section-grey bg-light" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem;">
-			<div class="container mt-5">
+		<div class="site-section bg-light" id="blog-section">
+			<div class="container">
 				<div class="text-center mb-4">
 					<h4 class="font-weight-bold">Les offres</h4>
 					<p class="text-muted">Trouvez les entreprises correspondant à vos critères</p>
@@ -158,6 +164,9 @@
 										<br>
 										{{ fiche.localisation }}
 									</p>
+								</div>
+								<div class="ontainer">
+									<a href="{{ path('developer_add_fiche_favoris', { ficheId: fiche.id }) }}" class="btn btn-success">Ajouter favoris</a>
 									<a href="{{ path('app_detail', {'id': fiche.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
 								</div>
 							</div>
@@ -165,7 +174,6 @@
 					{% endfor %}
 				</div>
 			</div>
-
 		</div>
 
 
@@ -175,7 +183,7 @@
 					<div class="col-lg-4">
 						<div class="widget">
 							<h3>À propos</h3>
-							<p>AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+							<p class="text-black">AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
 						</div>
 						<div class="widget">
 							<h3>Connectez-vous avec nous</h3>

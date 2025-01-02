@@ -77,7 +77,13 @@
 								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
-								<a class="text-black" href="">Favoris</a>
+								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
+							</li>
+							<li>
+								<a class="text-black" href="{{ path('app_notifications') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
 							</li>
 							<li class="has-children">
 								<a href="#" class="text-black">Mon compte</a>
@@ -122,6 +128,7 @@
 										<br>
 										{{ fiche.localisation }}
 									</p>
+									
 									<a href="{{ path('app_detail', {'id': fiche.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
 								</div>
 							</div>
@@ -138,7 +145,7 @@
 					<div class="col-lg-4">
 						<div class="widget">
 							<h3>À propos</h3>
-							<p>AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+							<p class="text-black">AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
 						</div>
 						<div class="widget">
 							<h3>Connectez-vous avec nous</h3>

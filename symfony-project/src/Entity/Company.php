@@ -46,9 +46,17 @@ class Company
     #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: FicheDePoste::class, cascade: ['persist', 'remove'])]
     private $fichesDePostes;
 
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Notification::class, cascade: ['persist', 'remove'])]
+    private Collection $notifications;
     public function __construct()
     {
         $this->fichesDePostes = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+    }
+
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
     }
 
     public function getId(): ?int
