@@ -28,7 +28,7 @@
 		<div class="container w-100" style="margin-bottom:5rem;width:100vw">
 			<nav class="site-nav" style="width:100vw;">
 				<div class="logo">
-					<a class="text-black">AdopteUnDev<span class="text-black font-weight-black">.</span>
+					<a class="text-black">AdopteUnDev<span class="text-black">.</span>
 					</a>
 				</div>
 				<div class="row align-items-center">
@@ -45,13 +45,24 @@
 								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
 							</li>
 							<li>
-								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
+								<a class="text-black" href="{{ path('app_notifications') }}">
+									Notifications
+									<span class="icon-notifications"></span>
+								</a>
 							</li>
 							<li>
-								<a class="text-black" href="">
-									<span class="fa fa-user"></span>
-									Mon compte
-								</a>
+								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
+							</li>
+							<li class="has-children">
+								<a href="#" class="text-black">Mon compte</a>
+								<ul class="dropdown">
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_login')}}">Connexion</a>
+									</li>
+									<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 
@@ -60,7 +71,8 @@
 				</div>
 			</nav>
 		</div>
-		<div class="site-section bg-light d-flex" ">
+
+		<div class="site-section bg-light d-flex">
 			<div class="container">
 				<div class="card shadow-lg">
 					<div class="card-header bg-primary text-white text-center">

@@ -79,6 +79,5 @@ class FicheDePosteController extends AbstractController
         ]);
     }
 
-
-
+    
 }

@@ -8,6 +8,7 @@ parameters:
     
 services:   
     App\Entity\Company: ~
+    App\Entity\Developer: ~
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -21,6 +22,10 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+            
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
             
 
     # add more service definitions when explicit configuration is needed

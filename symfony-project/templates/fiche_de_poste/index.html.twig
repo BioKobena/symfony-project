@@ -59,8 +59,8 @@
 			</nav>
 		</div>
 
-		<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-			<div class="register-card shadow p-4 rounded w-75">
+		<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
+			<div class="register-card shadow p-4 rounded w-75 bg-white">
 				<h2 class="text-center mb-4 text-primary h4">Créer une fiche de poste</h2>
 				<form action="{{ path('create_fiche_de_poste') }}" method="POST">
 					<div class="form-row">
@@ -97,7 +97,7 @@
 			</div>
 
 			<div class="container">
-				<h3 class="text-center mt-4">Toutes les fiches de poste</h3>
+				<h3 class="text-center mt-4">Toutes vos fiches de poste</h3>
 				{% if fichesDePoste is empty %}
 					<p class="text-center">Aucune fiche de poste créée pour cette entreprise.</p>
 				{% else %}
@@ -131,8 +131,5 @@
 				{% endif %}
 			</div>
 		</div>
-
-
 	</body>
-
 </html>

@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Company;
+use App\Entity\Favoris;
+use App\Repository\DeveloperRepository;
 use App\Entity\Developer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -30,7 +32,7 @@ class CompanyController extends AbstractController
             'mostConsulted' => $mostConsulted,
         ]);
     }
-    
+
 
     #[Route('/company-login', name: 'app_company_login', methods: ['GET', 'POST'])]
     public function login_company(Request $request, EntityManagerInterface $entityManager): Response
@@ -127,5 +129,39 @@ class CompanyController extends AbstractController
         ]);
     }
 
+    #[Route('/favorites/add/{developperId}', name: 'company_add_fiche_favoris')]
+    public function add(int $developperId, Developer $developer, EntityManagerInterface $entityManager): Response
+    {
+        $company = $entityManager->getRepository(Company::class)->find(1); // Assurez-vous que l'utilisateur est une entreprise
+
+        $developer = $entityManager->getRepository(Developer::class)->find($developperId);
+
+        if (!$developer) {
+            throw $this->createNotFoundException('Fiche de poste introuvable.');
+        }
+
+
+        // Vérifiez si le favori existe déjà
+        $existingFavorite = $entityManager->getRepository(Favoris::class)->findOneBy([
+            'company' => $company,
+            'developer' => $developer,
+        ]);
+
+
+        if (!$existingFavorite) {
+            $favorite = new Favoris();
+            $favorite->setCompany($company);
+            $favorite->setDeveloper($developer);
+
+            $entityManager->persist($favorite);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Développeur ajouté aux favoris.');
+        } else {
+            $this->addFlash('info', 'Ce développeur est déjà dans vos favoris.');
+        }
+
+        return $this->redirectToRoute('app_company');
+    }
 
 }
