@@ -16,7 +16,21 @@ class NotificationController extends AbstractController
     #[Route('/notifications-dev', name: 'app_notifications')]
     public function index(DeveloperRepository $developerRepository, ): Response
     {
-        $developer = $developerRepository->find(17); // Exemple d'ID
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        // Récupérer le développeur correspondant à l'utilisateur connecté
+        $developer = $developerRepository->findOneBy(['user' => $user]);
+
+        // Vérifier que le développeur existe
+        if (!$developer) {
+            throw $this->createNotFoundException('Développeur non trouvé pour cet utilisateur.');
+        }
 
         // $developer = $this->getUser(); // Supposons que le développeur est connecté
         $notifications = $developer->getNotifications();
@@ -30,7 +44,7 @@ class NotificationController extends AbstractController
     public function companyNotifications(CompanyRepository $companyRepository): Response
     {
         // Récupérer l'entreprise par ID
-        $company = $companyRepository->find(3);
+        $company = $this->getUser()->getCompany();
 
         if (!$company) {
             throw $this->createNotFoundException('Entreprise non trouvée.');

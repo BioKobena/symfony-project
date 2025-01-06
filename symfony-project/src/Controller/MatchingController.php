@@ -22,7 +22,21 @@ class MatchingController extends AbstractController
         MatchingService $matchingService
     ): Response {
 
-        $developer = $developerRepository->find(17); // Exemple d'ID
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        // Récupérer le développeur correspondant à l'utilisateur connecté
+        $developer = $developerRepository->findOneBy(['user' => $user]);
+
+        // Vérifier que le développeur existe
+        if (!$developer) {
+            throw $this->createNotFoundException('Développeur non trouvé pour cet utilisateur.');
+        }
 
         // Récupérer tous les postes
         $jobs = $jobRepository->findAll();
@@ -69,13 +83,14 @@ class MatchingController extends AbstractController
         CompanyRepository $companyRepository,
         DeveloperRepository $developerRepository,
         MatchingService $matchingService,
-        NotificationService $notificationService,
+        NotificationService $notificationService
     ): Response {
-        // Récupérer l'entreprise par ID
-        $company = $companyRepository->find(3);
+        // Récupérer l'entreprise associée à l'utilisateur connecté
+        $company = $this->getUser()->getCompany();
 
         if (!$company) {
-            throw $this->createNotFoundException('Entreprise non trouvée.');
+            // throw $this->createNotFoundException('Entreprise non trouvée.');
+            return $this->redirectToRoute('app_company_login');
         }
 
         // Récupérer tous les développeurs

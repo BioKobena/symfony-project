@@ -17,15 +17,12 @@ class OffreController extends AbstractController
         $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
         ->findAll();
 
-        $offres = $entityManager->getRepository(FicheDePoste::class)->findAll();
-
+        
+        
         // Récupérer les 3 derniers développeurs créés
         return $this->render('offre/index.html.twig', [
             'fiches_de_poste' => $fichesDePoste,
         ]);
-        // return $this->render('offre/index.html.twig', [
-        //     'controller_name' => 'OffreController',
-        // ]);
     }
 
 
@@ -37,6 +34,7 @@ class OffreController extends AbstractController
         if (!$fiche) {
             throw $this->createNotFoundException('Offre introuvable');
         }
+
 
         $fiche->incrementViews();
 

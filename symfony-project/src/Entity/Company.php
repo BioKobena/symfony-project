@@ -6,6 +6,8 @@ use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
+
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
@@ -20,12 +22,6 @@ class Company
 
     #[ORM\Column(length: 255)]
     private ?string $localisation = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
@@ -45,6 +41,10 @@ class Company
 
     #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: FicheDePoste::class, cascade: ['persist', 'remove'])]
     private $fichesDePostes;
+
+    #[ORM\OneToOne(inversedBy: 'entreprise', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Notification::class, cascade: ['persist', 'remove'])]
     private Collection $notifications;
@@ -84,30 +84,6 @@ class Company
     public function setLocalisation(string $localisation): static
     {
         $this->localisation = $localisation;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
 
         return $this;
     }
@@ -184,6 +160,18 @@ class Company
                 $ficheDePoste->setEntreprise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

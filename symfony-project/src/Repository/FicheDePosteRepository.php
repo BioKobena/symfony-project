@@ -16,15 +16,31 @@ class FicheDePosteRepository extends ServiceEntityRepository
         parent::__construct($registry, FicheDePoste::class);
     }
 
-    public function searchOffres($search)
+    public function searchFiches(array $criteria): array
     {
-        return $this->createQueryBuilder('o')
-            ->where('o.titre LIKE :search')
-            ->orWhere('o.description LIKE :search')
-            ->orWhere('o.localisation LIKE :search')
-            ->setParameter('search', '%' . $search . '%')
-            ->getQuery()
-            ->getResult();
+        $queryBuilder = $this->createQueryBuilder('f');
+
+        if (!empty($criteria['salairePropose'])) {
+            $queryBuilder->andWhere('f.salairePropose >= :salairePropose')
+                ->setParameter('salairePropose', $criteria['salairePropose']);
+        }
+
+        if (!empty($criteria['localisation'])) {
+            $queryBuilder->andWhere('f.localisation LIKE :localisation')
+                ->setParameter('localisation', '%' . $criteria['localisation'] . '%');
+        }
+
+        if (!empty($criteria['niveauExperience'])) {
+            $queryBuilder->andWhere('f.niveauExperience <= :niveauExperience')
+                ->setParameter('niveauExperience', $criteria['niveauExperience']);
+        }
+
+        // if (!empty($criteria['technologies'])) {
+        //     $queryBuilder->andWhere('f.technologies LIKE :technologies')
+        //         ->setParameter('technologies', '%' . implode(',', $criteria['technologies']) . '%');
+        // }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     //    /**

@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: DeveloperRepository::class)]
 class Developer
@@ -40,17 +41,12 @@ class Developer
     #[ORM\Column(type: Types::TEXT)]
     private ?string $bio = null;
 
-    // #[ORM\Column(length: 255)]
-    // private ?string $avatar = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
     #[ORM\Column(length: 255)]
     private ?string $languages = null;
+
+    #[ORM\OneToOne(inversedBy: 'developer', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -141,42 +137,6 @@ class Developer
         return $this;
     }
 
-    // public function getAvatar(): ?string
-    // {
-    //     return $this->avatar;
-    // }
-
-    // public function setAvatar(string $avatar): static
-    // {
-    //     $this->avatar = $avatar;
-
-    //     return $this;
-    // }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getViews(): int
     {
         return $this->views;
@@ -198,5 +158,17 @@ class Developer
     public function getNotifications(): Collection
     {
         return $this->notifications;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

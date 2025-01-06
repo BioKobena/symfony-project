@@ -2,11 +2,26 @@
 <html lang="fr">
 
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		<title>Inscription - AdopteUnDev</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="Untree.co">
+		<link rel="shortcut icon" href="https://cdn0.iconfinder.com/data/icons/job-seeker/256/choose_job_seeker_employee_unemployee_work-512.png">
+
+		<meta name="description" content=""/>
+		<meta name="keywords" content="Boostrap"/>
+
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/owl.carousel.min.css">
+		<link rel="stylesheet" href="css/owl.theme.default.min.css">
+		<link rel="stylesheet" href="fonts/icomoon/style.css">
+		<link rel="stylesheet" href="fonts/feather/style.css">
+		<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+		<link rel="stylesheet" href="css/jquery.fancybox.min.css">
+		<link rel="stylesheet" href="css/aos.css">
+		<link rel="stylesheet" href="css/style.css">
+		<title>Vos favoris - AdopteUnDev</title>
 	</head>
 
 	<body>
@@ -17,7 +32,6 @@
 					</a>
 				</div>
 				<div class="row align-items-center">
-
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
 							<li>
@@ -70,7 +84,7 @@
 									<div class="card-body">
 										<h5 class="card-title">{{ fiche.titre }}</h5>
 										<p class="card-text">Entreprise :
-											{{ fiche.entreprise.nom }}</p>
+											{# {{ fiche.entreprise.nom }}</p> #}
 										<p class="card-text">Localisation :
 											{{ fiche.localisation }}</p>
 										<a href="{{ path('app_favori_remove', { 'id': fiche.id }) }}" class="btn btn-danger">Supprimer</a>
@@ -78,12 +92,18 @@
 									</div>
 								</div>
 							</div>
+						{% else %}
+							<div class="container">
+
+								<li class="list-group-item text-center">
+									Aucun favori ajouté pour l'instant
+								</li>
+							</div>
 						{% endfor %}
 					</div>
 				</div>
 			</div>
 		</div>
-
 
 		<div class="site-footer text-white">
 			<div class="container">
@@ -171,9 +191,7 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</body>
-
 </html>

@@ -16,6 +16,29 @@ class DeveloperRepository extends ServiceEntityRepository
         parent::__construct($registry, Developer::class);
     }
 
+
+    public function findByCriteria(array $criteria): array
+{
+    $qb = $this->createQueryBuilder('d');
+
+    if (!empty($criteria['salary'])) {
+        $qb->andWhere('d.salaireMin >= :salary')
+           ->setParameter('salary', $criteria['salary']);
+    }
+
+    if (!empty($criteria['location'])) {
+        $qb->andWhere('d.localisation LIKE :location')
+           ->setParameter('location', '%' . $criteria['location'] . '%');
+    }
+
+    if (!empty($criteria['experience'])) {
+        $qb->andWhere('d.experience >= :experience')
+           ->setParameter('experience', $criteria['experience']);
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
     //    /**
     //     * @return Developer[] Returns an array of Developer objects
     //     */

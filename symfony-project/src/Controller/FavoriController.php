@@ -17,7 +17,22 @@ class FavoriController extends AbstractController
     #[Route('/favori', name: 'app_favori')]
     public function index(EntityManagerInterface $entityManager, DeveloperRepository $developerRepository): Response
     {
-        $developer = $developerRepository->find(17); // ou récupérer un utilisateur spécifique si nécessaire
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        // Récupérer le développeur correspondant à l'utilisateur connecté
+        $developer = $developerRepository->findOneBy(['user' => $user]);
+
+        // Vérifier que le développeur existe
+        if (!$developer) {
+            throw $this->createNotFoundException('Développeur non trouvé pour cet utilisateur.');
+        }
+
         $favoris = $entityManager->getRepository(Favoris::class)
             ->findBy(['developer' => $developer]);
 
@@ -36,6 +51,13 @@ class FavoriController extends AbstractController
     #[Route('/favori-company', name: 'app_favori_company')]
     public function company_favoris(EntityManagerInterface $entityManager, CompanyRepository $companyRepository): Response
     {
+
+        $user = $this->getUser();
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
         $entreprise = $companyRepository->find(17); // ou récupérer un utilisateur spécifique si nécessaire
         $favoris = $entityManager->getRepository(Favoris::class)
             ->findBy(['company' => $entreprise]);
@@ -51,6 +73,7 @@ class FavoriController extends AbstractController
         ]);
     }
 
+    
     #[Route('/favori/remove/{id}', name: 'app_favori_remove')]
     public function removeFavori(int $id, EntityManagerInterface $entityManager): Response
     {
@@ -86,5 +109,5 @@ class FavoriController extends AbstractController
     //     ]);
     // }
 
-   
+
 }

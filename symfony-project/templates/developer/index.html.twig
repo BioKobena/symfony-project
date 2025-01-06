@@ -57,6 +57,8 @@
 								<a href="{{path('app_favori')}}">Favoris</a>
 							</li>
 
+							{# sdljsf #}
+
 							<li class="has-children">
 								<a href="#">Mon compte</a>
 								<ul class="dropdown">
@@ -65,6 +67,9 @@
 									</li>
 									<li>
 										<a class="text-black text-bold" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
+									</li>
+										<li>
+										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_profile')}}">Profil</a>
 									</li>
 								</ul>
 							</li>
@@ -80,14 +85,29 @@
 		<!-- END container -->
 
 
-		<div class="hero-slant overlay" data-stellar-background-ratio="0.5" style="background-image: url('https://images.unsplash.com/photo-1653669486781-7265d7824b44?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
+		<div class="hero-slant overlay" data-stellar-background-ratio="0.5" style="background-image: url('https://images.unsplash.com/photo-1653669486781-7265d7824b44?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
 
 			<div class="container">
 				<div class="row align-items-center justify-content-between">
 					<div class="col-lg-7 intro">
+						{% if developer %}
+							<h2 class="text-primary font-weight-bold mb-4" data-aos="fade-up" data-aos-delay="0">
+								Bienvenue
+								{{ developer.nom }} </h2>
+						{% else %}
+							<h3 class="text-primary font-weight-bold mb-4" data-aos="fade-up" data-aos-delay="0">
+								Bienvenue sur AdopteUnDev
+							</h3>
+						{% endif %}
+
 						<h1 class="text-white font-weight-bold mb-4" data-aos="fade-up" data-aos-delay="0">
 							Transformez vos compétences en opportunités exceptionnelles.</h1>
 						<p class="text-white mb-4" data-aos="fade-up" data-aos-delay="100">Nous donnons vie à des projets uniques en connectant des développeurs passionnés à des entreprises visionnaires, créant ainsi un écosystème dynamique d'innovation et de collaboration.</p>
+						{# {% if app.session.get('user_id') is not empty %}
+																																																	<p class="text-white" data-aos="fade-up" data-aos-delay="200">Bienvenue, utilisateur ID :
+																																																		{{ app.session.get('user_id') }}</p>
+																																																{% endif %} #}
+
 
 					</div>
 				</div>
@@ -95,6 +115,7 @@
 
 			<div class="slant" style="background-image: url('images/slant.svg');"></div>
 		</div>
+
 
 		<div class="py-3">
 			<div class="container">
@@ -139,7 +160,7 @@
 									<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
 									<div class="card-body">
 										<h3>
-											{{ fiche.entreprise.nom }}</h3>
+											{# {{ fiche.entreprise.nom }}</h3> #}
 
 										<h5 class="card-title">{{ fiche.titre }}</h5>
 										<p class="card-text">
@@ -179,7 +200,7 @@
 									<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
 									<div class="card-body">
 										<h3>
-											{{ fiche.entreprise.nom }}</h3>
+											{# {{ fiche.entreprise.nom }}</h3> #}
 
 										<h5 class="card-title">{{ fiche.titre }}</h5>
 										<p class="card-text">

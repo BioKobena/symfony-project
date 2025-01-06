@@ -113,26 +113,28 @@
 					<h2 class="font-weight-bold text-center">
 						<span class="text-primary">{{ developer.nom }}
 							{{ developer.prenom }}</span>
-						ces offres vous correspondantes à votre profil
+						ces offres correspondent à votre profil
+
 					</h2>
 				</div>
 				<div class="container">
 					<div class="row">
 						{% set hasMatches = false %}
 						{% for match in matches %}
-							{% if match.score >= 50 %}
+							{% if match.score >= 35 %}
 								{% set hasMatches = true %}
 								<div class="col-md-4">
 									<div class="card mb-3">
 										<div class="card-body">
 											<h5 class="card-title">{{ match.job.titre }}</h5>
-											<h6 class="card-subtitle mb-2 text-muted">{{ match.entreprise.nom }}</h6>
+											<h6 class="card-subtitle mb-2 text-muted">{{ match.job.id }}</h6>
 											<p class="card-text">
 												<strong>Localisation :</strong>
-												{{ match.entreprise.localisation }}<br>
+												{{ match.job.localisation }}<br>
 												<strong>Score de correspondance :</strong>
 												{{ match.score }}%
 											</p>
+											<a href="{{ path('developer_add_fiche_favoris', { ficheId: match.job.id }) }}" class="btn btn-success">Ajouter favoris</a>
 											<a href="{{ path('app_detail', {'id': match.job.id}) }}" class="btn btn-primary btn-sm">Voir l'offre</a>
 										</div>
 									</div>

@@ -14,27 +14,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FicheDePosteController extends AbstractController
 {
-    // Récupération de l'entreprise par son ID pour effectuer une route spécifique à elle ([1..n] à remplacer par {id})
-    #[Route('/entreprise/1/fiches-de-poste', name: 'create_fiche_de_poste')]
-    public function createFicheDePoste(Request $request, EntityManagerInterface $entityManager, DeveloperRepository $developerRepository, MatchingService $matchingService, NotificationService $notificationService)
+    #[Route('/entreprise-fiches-de-poste', name: 'create_fiche_de_poste')]
+    public function createFicheDePoste(Request $request, EntityManagerInterface $entityManager, MatchingService $matchingService, NotificationService $notificationService,  DeveloperRepository $developerRepository)
     {
-        // Récupération de l'entreprise par son ID
-        $company = $entityManager->getRepository(Company::class)->find(1);
+        // Récupération de l'entreprise de l'utilisateur connecté
+        $company = $this->getUser()->getCompany();
 
         if (!$company) {
-            return $this->json(['error' => 'Entreprise non trouvée'], 404);
+            return $this->json(['error' => 'Entreprise non associée à l\'utilisateur'], 404);
         }
 
         // Traitement POST
         if ($request->isMethod('POST')) {
             // Création d'une nouvelle fiche de poste
             $ficheDePoste = new FicheDePoste();
-            $ficheDePoste->setEntreprise($company); // Associer directement l'entreprise
+            $ficheDePoste->setEntreprise($company); // Associer directement l'entreprise de l'utilisateur connecté
 
             // Récupération des données de la requête
             $titre = $request->request->get('titre', '');
             $localisation = $request->request->get('localisation', '');
-            $technologies = $request->request->get('technologies', ''); // Pas de décodage JSON
+            $technologies = $request->request->get('technologies', ''); 
             $niveauExperience = $request->request->get('niveauExperience', 0);
             $salairePropose = $request->request->get('salairePropose', 0);
             $description = $request->request->get('description', '');
@@ -42,7 +41,7 @@ class FicheDePosteController extends AbstractController
             // Affectation des données à la fiche de poste
             $ficheDePoste->setTitre($titre)
                 ->setLocalisation($localisation)
-                ->setTechnologies($technologies) // Pas de JSON
+                ->setTechnologies($technologies) 
                 ->setNiveauExperience($niveauExperience)
                 ->setSalairePropose($salairePropose)
                 ->setDescription($description);
@@ -51,8 +50,6 @@ class FicheDePosteController extends AbstractController
             $entityManager->persist($ficheDePoste);
             $entityManager->flush();
 
-
-            // Vérifier les correspondances
             $developers = $developerRepository->findAll();
             foreach ($developers as $developer) {
                 $score = $matchingService->calculateMatchScore($developer, $ficheDePoste);
@@ -71,13 +68,10 @@ class FicheDePosteController extends AbstractController
         $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
             ->findBy(['entreprise' => $company]);
 
-
         // Affichage du formulaire
         return $this->render('fiche_de_poste/index.html.twig', [
             'company' => $company,
             'fichesDePoste' => $fichesDePoste,
         ]);
     }
-
-    
 }

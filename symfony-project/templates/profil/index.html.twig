@@ -85,10 +85,6 @@
 									<span class="icon-notifications"></span>
 								</a>
 							</li>
-							<li>
-								<a class="text-black" href="">Statistiques</a>
-							</li>
-
 							<li class="has-children">
 								<a href="#" class="text-black font-weight-bold">Mon compte</a>
 								<ul class="dropdown">
@@ -116,7 +112,7 @@
 					<p class="text-muted">Trouvez les développeurs correspondant à vos critères</p>
 				</div>
 
-				<form id="matchingForm" class="bg-white m-4 p-4 shadow-sm rounded">
+				<form action="{{ path('search_developers') }}" method="GET" class="bg-white m-4 p-4 shadow-sm rounded">
 					<div
 						class="row">
 						<!-- Salaire -->
@@ -137,55 +133,60 @@
 							<input type="number" id="experience" name="experience" class="form-control" min="1" max="5" placeholder="Ex : 3">
 						</div>
 					</div>
-					<div class="form-group mb-3">
-						<label for="languages" class="form-label">Langages ou technologies</label>
-						<select id="languages" name="languages[]" class="form-control" multiple>
-							<option value="python">Python</option>
-							<option value="javascript">JavaScript</option>
-							<option value="java">Java</option>
-							<option value="php">PHP</option>
-							<option value="csharp">C#</option>
-						</select>
-						<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
-					</div>
+
+					{# <div class="form-group mb-3">
+											<label for="languages" class="form-label">Langages ou technologies</label>
+											<select id="languages" name="languages[]" class="form-control" multiple>
+												<option value="python">Python</option>
+												<option value="javascript">JavaScript</option>
+												<option value="java">Java</option>
+												<option value="php">PHP</option>
+												<option value="csharp">C#</option>
+											</select>
+											<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
+										</div> #}
 
 					<!-- Bouton de recherche -->
 					<div class="text-center">
-						<button type="button" id="matchButton" class="btn btn-primary">Trouver des Devs</button>
+						<button type="submit" class="btn btn-primary">Trouver des Devs</button>
 					</div>
 				</form>
+
 			</div>
 
 			<div class="container site-section">
 				<div class="row">
-					{% for developer in developers %}
-						<div class="col-md-6 col-lg-4 mb-4">
-							<div class="card shadow-sm position-relative">
-								<div class="position-relative top-0 end-0 p-3">
-									<img src="https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="{{ developer.nom }} Avatar">
-								</div>
-								<div class="card-body">
-									<h5 class="card-title">{{ developer.nom }}</h5>
-									<p class="card-text">
-										{{ developer.localisation }}
-										<br>
-										{{ developer.experience }}
-										ans d'expérience
-										<br>
-										{{ developer.bio }}
-									</p>
-									<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
-										Voir le profil
-									</a>
-									<a href="{{ path('company_add_fiche_favoris', {developperId: developer.id}) }}">
-										Ajouter
-									</a>
+					{% if developers is not empty %}
+						{% for developer in developers %}
+							<div class="col-md-6 col-lg-4 mb-4">
+								<div class="card shadow-sm position-relative">
+									<div class="position-relative top-0 end-0 p-3">
+										<img src="https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="{{ developer.nom }} Avatar">
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">{{ developer.nom }}</h5>
+										<p class="card-text">
+											{{ developer.localisation }}<br>
+											{{ developer.experience }}
+											ans d'expérience<br>
+											{{ developer.bio }}
+										</p>
+										<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+											Voir le profil
+										</a>
+										<a href="{{ path('company_add_fiche_favoris', {developperId: developer.id}) }}" class="btn btn-secondary text-white btn-sm">
+											Ajouter
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					{% endfor %}
+						{% endfor %}
+					{% else %}
+						<p class="text-center">Aucun développeur trouvé pour ces critères.</p>
+					{% endif %}
 				</div>
 			</div>
+
 		</div>
 
 

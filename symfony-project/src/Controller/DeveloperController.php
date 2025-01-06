@@ -12,13 +12,27 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Service\AuthService;
 use App\Entity\FicheDePoste;
 use App\Entity\Favoris;
+use App\Entity\User;
 use App\Repository\DeveloperRepository;
+use App\Repository\FicheDePosteRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+// #[IsGranted('ROLE_DEV')]
 class DeveloperController extends AbstractController
 {
     #[Route('/developer', name: 'app_developer')]
     public function index(EntityManagerInterface $entityManager): Response
     {
+
+        $user = $this->getUser();
+        $developer = null;
+
+        if ($user instanceof User) {
+            $developer = $user->getDeveloper();
+        }
+
+
         //Les postes récents
         $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
             ->findBy([], ['createdAt' => 'DESC'], 3);
@@ -31,23 +45,14 @@ class DeveloperController extends AbstractController
         return $this->render('developer/index.html.twig', [
             'fiches_de_poste' => $fichesDePoste,
             'offres' => $offres,
+            'developer' => $developer,
+
         ]);
-    }
 
-
-    #[Route('/offre-info', name: 'app_infojob')]
-    public function offres(EntityManagerInterface $entityManager): Response
-    {
-        $offres = $entityManager->getRepository(FicheDePoste::class)->findAll();
-
-        // Récupérer les 3 derniers développeurs créés
-        return $this->render('developer/offre.html.twig', [
-            'offres' => $offres,
-        ]);
     }
 
     #[Route('/inscription-dev', name: 'app_inscription', methods: ['GET', 'POST'])]
-    public function inscription_dev(Request $request, EntityManagerInterface $entityManager)
+    public function inscription_dev(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
         if ($request->isMethod('POST')) {
             // Récupération des données du formulaire
@@ -69,29 +74,49 @@ class DeveloperController extends AbstractController
             }
 
 
+
+            // Création du User
+            $user = new User();
+            $user->setRoles(['ROLE_DEV']);
+            $user->setEmail($email)
+                ->setPassword($passwordHasher->hashPassword($user, $password));
+
+            $entityManager->persist($user);
+
             // Création de l'entité Developer
             $developer = new Developer();
             $developer->setNom($firstName)
                 ->setPrenom($lastName)
-                ->setEmail($email)
-                ->setPassword($password) // Mot de passe non haché
                 ->setLocalisation($location)
                 ->setLanguages($languages)
-                // ->setLanguages('languages', '[]') // Filtrage en cas de non tableau
                 ->setExperience($experience)
                 ->setSalaireMin($salary)
                 ->setBio($bio);
+            $developer->setUser($user); // Association de l'utilisateur avec le développeur
 
-            $developer->setPassword(password_hash($developer->getPassword(), PASSWORD_BCRYPT));
 
             $entityManager->persist($developer);
             $entityManager->flush();
 
             $this->addFlash('success', 'Votre inscription a été effectuée avec succès !');
-            return $this->redirectToRoute('app_developer'); // Redirection après succès
+            return $this->redirectToRoute('app_developer_login'); // Redirection après succès
         }
         return $this->render('developer/inscription.html.twig');
     }
+
+
+    #[Route('/offre-info', name: 'app_infojob')]
+    public function offres(EntityManagerInterface $entityManager): Response
+    {
+        $offres = $entityManager->getRepository(FicheDePoste::class)->findAll();
+
+        // Récupérer les 3 derniers développeurs créés
+        return $this->render('developer/offre.html.twig', [
+            'offres' => $offres,
+        ]);
+    }
+
+
     private $authService;
 
     public function __construct(AuthService $authService)
@@ -100,49 +125,27 @@ class DeveloperController extends AbstractController
     }
 
     #[Route('/auth-dev', name: 'app_developer_login', methods: ['GET', 'POST'])]
-    public function loginDeveloper(Request $request, EntityManagerInterface $entityManager): Response
+    public function login(): Response
     {
-        if ($request->isMethod('POST')) {
-            $email = $request->request->get('email');
-
-            if (!$email) {
-                $this->addFlash('error', 'Veuillez entrer votre adresse e-mail.');
-                return $this->redirectToRoute('app_developer_login');
-            }
-
-            // Rechercher le développeur avec cet email
-            $developer = $entityManager->getRepository(Developer::class)->findOneBy(['email' => $email]);
-
-            if ($developer) {
-                // // Connexion réussie
-                // // Par exemple, stocker l'utilisateur en session
-                // $session = $request->getSession();
-                // $session->set('developer', $developer->getId());
-
-                $this->addFlash('success', 'Connexion réussie !');
-                return $this->redirectToRoute('app_developer'); // Redirigez vers une page pertinente
-            } else {
-                $this->addFlash('error', 'Adresse e-mail introuvable.');
-                return $this->redirectToRoute('app_developer_login');
-            }
-        }
-
         return $this->render('developer/connexion.html.twig');
     }
 
-
-
-    #[Route('/search', name: 'app_search')]
-    public function search(EntityManagerInterface $entityManager, Request $request): Response
+    #[Route('/search', name: 'app_search', methods: ['GET'])]
+    public function search(Request $request, FicheDePosteRepository $ficheDePosteRepository)
     {
-        $searchTerm = $request->query->get('search', '');
-        $offres = $this->searchOffres($entityManager, $searchTerm);
+        $criteria = [
+            'salairePropose' => $request->query->get('salary'),
+            'localisation' => $request->query->get('location'),
+            'niveauExperience' => $request->query->get('experience'),
+        ];
 
-        return $this->render('developer/search.html.twig', [
-            'offres' => $offres,
+        $fichesDePoste = $ficheDePosteRepository->searchFiches($criteria);
+
+        return $this->render('offre/index.html.twig', [
+            'fiches_de_poste' => $fichesDePoste,
         ]);
     }
-
+    
     public function searchOffres(EntityManagerInterface $entityManager, string $searchTerm): array
     {
         $queryBuilder = $entityManager->getRepository(FicheDePoste::class)->createQueryBuilder('f');
@@ -160,10 +163,19 @@ class DeveloperController extends AbstractController
     #[Route('/developer/add-fiche-favoris/{ficheId}', name: 'developer_add_fiche_favoris')]
     public function addFicheFavoris(int $ficheId, EntityManagerInterface $entityManager, DeveloperRepository $developerRepository, ): Response
     {
-        $developer = $developerRepository->find(17);
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vérifier que l'utilisateur est bien connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        // Récupérer le développeur correspondant à l'utilisateur connecté
+        $developer = $developerRepository->findOneBy(['user' => $user]);
 
         if (!$developer) {
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_developer_login');
         }
 
         $ficheDePoste = $entityManager->getRepository(FicheDePoste::class)->find($ficheId);
@@ -191,5 +203,26 @@ class DeveloperController extends AbstractController
         }
 
         return $this->redirectToRoute('app_favori');  // Redirection vers le tableau de bord du développeur
+    }
+
+    #[Route('/profil-dev', name: 'app_developer_profile')]
+    // #[IsGranted('ROLE_DEV')] // S'assure que seul un utilisateur avec le rôle ROLE_DEV peut accéder
+    public function profil(DeveloperRepository $developerRepository): Response
+    {
+        $user = $this->getUser();
+        $developer = null;
+
+        if ($user instanceof User) {
+            $developer = $user->getDeveloper();
+        }
+        // $developer = $user->getd
+        if (!$developer) {
+            // Si aucun utilisateur n'est connecté
+            throw $this->createAccessDeniedException('Vous devez être connecté pour voir cette page.');
+        }
+
+        return $this->render('developer/profile.html.twig', [
+            'developer' => $developer,
+        ]);
     }
 }
