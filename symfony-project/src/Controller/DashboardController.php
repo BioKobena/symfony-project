@@ -81,5 +81,7 @@ class DashboardController extends AbstractController
             'new_projects_percentage' => $new_projects_percentage,
             'projects_count' => $projects_count,
         ]);
+
+        
     }
 }

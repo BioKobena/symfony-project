@@ -34,7 +34,7 @@ class FicheDePoste
 
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'fichesDePostes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Company $entreprise = null;
+    private ?Company $company = null;
 
 
 

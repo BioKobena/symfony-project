@@ -50,9 +50,11 @@ class MatchingController extends AbstractController
             $matches[] = [
                 'job' => $job,
                 'score' => $score,
-                'entreprise' => $job->getEntreprise(),
+                'entreprise' => $job->getCompany(),
             ];
         }
+
+        // dd($matches);
 
         // Trier les résultats par score décroissant
         usort($matches, fn($a, $b) => $b['score'] <=> $a['score']);
