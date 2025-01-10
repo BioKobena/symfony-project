@@ -1,208 +1,241 @@
-
 {% extends 'navbarDev.html.twig' %}
-{% block title %}Dashboard Développeur{% endblock %}
+{% block title %}Dashboard Développeur
+{% endblock %}
 
 {% block body %}
-<style>
-    
-    .customDev {
-      padding: 40px; 
-      box-shadow: 0 4px 6px rgba(0.1, 0.1, 0.1, 0.1); 
-      transition: transform 0.3s ease, box-shadow 0.3s ease; 
-     
-    }
-    .card-custom {
-        border: none !important; 
-        
-    }
-.card2 {
-    position: relative; 
-    border-radius: 10px;
-    border: 2px solid #333; 
-}
+	<style>
 
-.card-body2 img {
-    position: absolute;
-    top: 10px; 
-    right: 10px; 
-    width: 50px; 
-    height: 50px;
-    object-fit: contain; 
-    border-radius: 50%;
-    border: 2px solid #fff; 
-    background-color: #f8f9fa; 
-}
+		.customDev {
+			padding: 40px;
+			box-shadow: 0 4px 6px rgba(0.1, 0.1, 0.1, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-.card-body2 {
-    padding: 20px;
-    padding-left: 80px; 
-    border-radius: 20px;
-}
+		}
+		.card-custom {
+			border: none !important;
 
-.card-body2 h5 {
-    font-size: 22px; 
-    font-weight: bold;
-    margin-top: 20px; 
-}
+		}
+		.card2 {
+			position: relative;
+			border-radius: 10px;
+			border: 2px solid #333;
+		}
+
+		.card-body2 img {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			width: 50px;
+			height: 50px;
+			object-fit: contain;
+			border-radius: 50%;
+			border: 2px solid #fff;
+			background-color: #f8f9fa;
+		}
+
+		.card-body2 {
+			padding: 20px 20px 20px 80px;
+			border-radius: 20px;
+		}
+
+		.card-body2 h5 {
+			font-size: 22px;
+			font-weight: bold;
+			margin-top: 20px;
+		}
 
 
-.card-body2 .text-muted {
-    font-size: 14px;
-    color: #6c757d;
-}
+		.card-body2 .text-muted {
+			font-size: 14px;
+			color: #6c757d;
+		}
 
-.card-body2 .rounded-pill {
-    font-size: 12px;
-    color: #000;
-    border: 1px solid #000;
-    padding: 5px 10px;
-}
+		.card-body2 .rounded-pill {
+			font-size: 12px;
+			color: #000;
+			border: 1px solid #000;
+			padding: 5px 10px;
+		}
 
-.card-body2 .bi {
-    font-size: 14px;
-    vertical-align: middle;
-    margin-right: 5px;
-}
+		.card-body2 .bi {
+			font-size: 14px;
+			vertical-align: middle;
+			margin-right: 5px;
+		}
+		.button-edit .btn {
+			padding: 10px 15px; /* Ajuste les espacements internes du bouton */
+			font-size: 12px; /* Réduit la taille du texte */
+		}
+	</style>
 
-  </style>
+	<div
+		class="dashboard site-section grid grid-cols-1 lg:grid-cols-4 gap-6 p-1 bg-light min-h-screen">
 
-<div class="dashboard site-section grid grid-cols-1 lg:grid-cols-4 gap-6 p-1 bg-light min-h-screen">
+		<!-- Contenu Principal -->
+		<main class="col-span-1 lg:col-span-3">
 
-  <!-- Contenu Principal -->
-  <main class="col-span-1 lg:col-span-3">
-    
-<div class="container my-5">
-    <!-- Section Profil -->
-    <div class="row">
-    {% for stat in [
+			<div
+				class="container my-5">
+				<!-- Section Profil -->
+				<div class="row">
+					{% for stat in [
           { 'value': profile_views, 'percentage': profile_views_percentage, 'icon': 'user-plus', 'label': 'Vues de votre profil' },
           { 'value': applications_sent, 'percentage': null, 'icon': 'dollar-sign', 'label': 'Candidatures envoyées' },
           { 'value': recruiters_response_rate, 'percentage': favorites_count_percentage, 'icon': 'globe', 'label': 'Offres matching ' },
           { 'value': favorites_count, 'percentage': null, 'icon': 'file-plus', 'label': 'Offres ajoutées en favoris' }
          
         ] %}
-        <div class="col-sm-6 col-lg-3 mb-4">
-          <div class="card card-custom">
-            <div class="card-body customDev">
-              <div class="d-flex align-items-center">
-                <div>
-                  <div class="d-inline-flex align-items-center">
-                    <h2 class="text-dark mb-1 font-weight-bold text-3xl">{{ stat.value }}</h2>  
-                    {% if stat.percentage %}
-                      <span class="badge bg-primary font-14 text-white font-weight-medium rounded-pill ms-2">{{ stat.percentage }}%</span> 
-                    {% endif %}
-                  </div>
-                  <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate text-lg">{{ stat.label }}</h6>  
-                </div>
-                <div class="ms-auto">
-                  <span class="opacity-7 text-muted"><i data-feather="{{ stat.icon }}" class="text-2xl"></i></span>  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-        <!-- Colonne Profil -->
-        <div class="col-md-3">
-            <div class="card shadow-sm border-0 p-4">
-                <!-- Image utilisateur -->
-                <div class="d-flex justify-content-center mb-3">
-                    <img src="https://via.placeholder.com/100" alt="Photo de profil" class="rounded-circle">
-                </div>
-                <!-- Informations utilisateur -->
-                <h4 class="text-center fw-bold">Grace Kelly Roxanne Tokpa</h4>
-                <p class="text-center text-muted">Université de Rennes</p>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><i class="bi bi-book"></i> 2. Informatique - 1. Licence</li>
-                    <li class="mb-2"><i class="bi bi-calendar"></i> Diplômé·e en 2025</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="text-primary"><i class="bi bi-pencil"></i> Modifier</a>
-  
-                </div>
-            </div>
-        </div>
+						<div class="col-sm-6 col-lg-3 mb-4">
+							<div class="card card-custom">
+								<div class="card-body customDev">
+									<div class="d-flex align-items-center">
+										<div>
+											<div class="d-inline-flex align-items-center">
+												<h2 class="text-dark mb-1 font-weight-bold text-3xl">{{ stat.value }}</h2>
+												{% if stat.percentage %}
+													<span class="badge bg-primary font-14 text-white font-weight-medium rounded-pill ms-2">{{ stat.percentage }}%</span>
+												{% endif %}
+											</div>
+											<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate text-lg">{{ stat.label }}</h6>
+										</div>
+										<div class="ms-auto">
+											<span class="opacity-7 text-muted">
+												<i data-feather="{{ stat.icon }}" class="text-2xl"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					<!-- Colonne Profil -->
+					<div class="col-md-3">
+						<div
+							class="card shadow-sm border-0 p-4">
+							<!-- Image utilisateur -->
+							<div class="d-flex justify-content-center mb-3">
+								<img src="https://via.placeholder.com/100" alt="Photo de profil" class="rounded-circle">
+							</div>
+							<!-- Informations utilisateur -->
+							<h4 class="text-center fw-bold">Grace Kelly Roxanne Tokpa</h4>
+							<p class="text-center text-muted">Université de Rennes</p>
+							<ul class="list-unstyled">
+								<li class="mb-2">
+									<i class="bi bi-book"></i>
+									2. Informatique - 1. Licence</li>
+								<li class="mb-2">
+									<i class="bi bi-calendar"></i>
+									Diplômé·e en 2025</li>
+							</ul>
+							<div class="button-edit d-flex justify-content-between align-items-center">
+								<a href="/page-de-redirection" class="btn btn-primary">
+									<i class="bi bi-pencil"></i>
+									Modifier mon profil
+								</a>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<a href="#" class="text-primary">
+									<i class="bi bi-pencil"></i>
+									Mes offres favorites</a>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<a href="#" class="text-primary">
+									<i class="bi bi-pencil"></i>
+									Mes candidatures</a>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<a href="#" class="text-primary">
+									<i class="bi bi-pencil"></i>
+									Mes matchs</a>
+							</div>
+						</div>
+					</div>
 
-        <!-- Colonne Expériences et CV -->
-        <div class="col-md-9">
-            <div class="mb-4">
-                <!-- Section Mon CV -->
-                <h4 class="fw-bold">Offres populaires</h4>
-                <div class=" justify-content-between align-items-center rounded">
-                     {% for job in jobs %}
-                    <div class="card card2 shadow-sm border-0 rounded">
-                        <div class="card-body card-body2">
-                            <!-- Logo -->
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="{{ job.logo }}" alt="Logo de {{ job.company }}" class="rounded" style="width: 50px; height: 50px; object-fit: contain;">
-                                <div class="ms-3">
-                                    <p class="mb-0 fw-bold">{{ job.company }}</p>
-                                </div>
-                            </div>
+					<!-- Colonne Expériences et CV -->
+					<div class="col-md-9">
+						<div
+							class="mb-4">
+							<!-- Section Mon CV -->
+							<h4 class="fw-bold">Offres populaires</h4>
+							<div class=" justify-content-between align-items-center rounded">
+								{% for job in jobs %}
+									<div class="card card2 shadow-sm border-0 rounded">
+										<div
+											class="card-body card-body2">
+											<!-- Logo -->
+											<div class="d-flex align-items-center mb-3">
+												<img src="{{ job.logo }}" alt="Logo de {{ job.company }}" class="rounded" style="width: 50px; height: 50px; object-fit: contain;">
+												<div class="ms-3">
+													<p class="mb-0 fw-bold">{{ job.company }}</p>
+												</div>
+											</div>
 
-                            <!-- Job Title -->
-                            <h5 class="fw-bold">{{ job.title }}</h5>
+											<!-- Job Title -->
+											<h5 class="fw-bold">{{ job.title }}</h5>
 
-                            <!-- Additional Details -->
-                            <div class="d-flex align-items-center text-muted mb-3">
-                                <span class="me-3"><i class="bi bi-briefcase"></i> {{ job.type }}</span>
-                                <span class="me-3"><i class="bi bi-geo-alt"></i> {{ job.location }}</span>
-                            </div>
+											<!-- Additional Details -->
+											<div class="d-flex align-items-center text-muted mb-3">
+												<span class="me-3">
+													<i class="bi bi-briefcase"></i>
+													{{ job.type }}</span>
+												<span class="me-3">
+													<i class="bi bi-geo-alt"></i>
+													{{ job.location }}</span>
+											</div>
 
-                            <!-- Additional Tag -->
-                            <div class="text-muted mb-3">
-                                <i class="bi bi-star-fill"></i> {{ job.tag }}
-                            </div>
+											<!-- Additional Tag -->
+											<div class="text-muted mb-3">
+												<i class="bi bi-star-fill"></i>
+												{{ job.tag }}
+											</div>
 
-                            <!-- Offer of the week -->
-                            {% if job.is_offer_of_week %}
-                                <div class="d-inline-block py-1 px-3 rounded-pill border text-center fw-bold">
-                                    <i class="bi bi-fire"></i> En savoir plus
-                                </div>
-                            {% endif %}
-                </div>
-            {% endfor %}
-                </div>
-            </div>
+											<!-- Offer of the week -->
+											{% if job.is_offer_of_week %}
+												<div class="d-inline-block py-1 px-3 rounded-pill border text-center fw-bold">
+													<i class="bi bi-fire"></i>
+													En savoir plus
+												</div>
+											{% endif %}
+										</div>
+									{% endfor %}
+								</div>
+							</div>
 
-            <!-- Section Expériences et Formations -->
-            <div class="container my-5">
-    <h4 class="text-xl font-semibold mb-4">Dernières Offres Publiées</h4>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for job in suggested_jobs %}
-                <div class="col">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="d-flex justify-content-center py-3">
-                            <img src="https://via.placeholder.com/100" 
-                                 class="img-fluid" 
-                                 alt="Logo de {{ job.titre }}" 
-                                 style="max-width: 80px; max-height: 80px;">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ job.titre }}</h5>
-                            <p class="text-muted mb-3">{{ job.localisation }}</p>
-                            <div class="d-flex justify-content-between text-center border-top pt-3">
-                                <div>
-                                    <h6 class="mb-1">Localisation</h6>
-                                    <p class="small text-muted">{{ job.localisation }}</p>
-                                </div>
-                                <div>
-                                    <h6 class="mb-1">Salaire</h6>
-                                    <p class="small text-muted">{{ job.salaire }}</p>
-                                </div>
-                                <div>
-                                    <h6 class="mb-1">ID</h6>
-                                    <p class="small text-muted">{{ job.id }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-  
+							<!-- Section Expériences et Formations -->
+							<div class="container my-5">
+								<h4 class="text-xl font-semibold mb-4">Dernières Offres Publiées</h4>
+								<div class="row row-cols-1 row-cols-md-3 g-4">
+									{% for job in suggested_jobs %}
+										<div class="col">
+											<div class="card shadow-sm border-0 h-100">
+												<div class="d-flex justify-content-center py-3">
+													<img src="https://via.placeholder.com/100" class="img-fluid" alt="Logo de {{ job.titre }}" style="max-width: 80px; max-height: 80px;">
+												</div>
+												<div class="card-body">
+													<h5 class="card-title">{{ job.titre }}</h5>
+													<p class="text-muted mb-3">{{ job.localisation }}</p>
+													<div class="d-flex justify-content-between text-center border-top pt-3">
+														<div>
+															<h6 class="mb-1">Localisation</h6>
+															<p class="small text-muted">{{ job.localisation }}</p>
+														</div>
+														<div>
+															<h6 class="mb-1">Salaire</h6>
+															<p class="small text-muted">{{ job.salaire }}</p>
+														</div>
+														<div>
+															<h6 class="mb-1">ID</h6>
+															<p class="small text-muted">{{ job.id }}</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
 
-  </main>
-</div>
-{% endblock %}
+
+						</main>
+					</div>
+				{% endblock %}
