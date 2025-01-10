@@ -66,7 +66,7 @@ class FicheDePosteController extends AbstractController
 
         // Récupération des fiches de poste associées à cette entreprise
         $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
-            ->findBy(['entreprise' => $company]);
+            ->findBy(['company' => $company]);
 
         // Affichage du formulaire
         return $this->render('fiche_de_poste/index.html.twig', [

@@ -40,7 +40,7 @@ class Company
 
 
 
-    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: FicheDePoste::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: FicheDePoste::class, cascade: ['persist', 'remove'])]
     private $fichesDePostes;
 
     #[ORM\OneToOne(inversedBy: 'entreprise', targetEntity: User::class, cascade: ['persist', 'remove'])]

@@ -1,202 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="author" content="Untree.co">
-		<link rel="shortcut icon" href="https://cdn0.iconfinder.com/data/icons/job-seeker/256/choose_job_seeker_employee_unemployee_work-512.png">
+{% extends 'navbarDev.html.twig' %}
+{% block title %}Offre
+{% endblock %}
 
-		<meta name="description" content=""/>
-		<meta name="keywords" content="Boostrap"/>
+{% block body %}
+	{# 
+							<style>
+								#favoriteBtn.active .bi-heart {
+									display: none;
+								}
+						
+								#favoriteBtn.active .bi-heart-fill {
+									display: inline;
+								}
+							</style> #}
 
 
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+	<div class="site-section bg-light d-flex">
+		<div class="container">
+			<div class="card shadow-lg">
+				<div class="card-header bg-primary text-white text-center">
+					<h2 class="mb-0 text-white">{{ fiche.titre }}</h2>
+				</div>
+				<div class="card-body">
+					<h4 class="text-primary">Informations générales</h4>
+					<p>
+						<strong>Localisation :</strong>
+						{{ fiche.localisation }}</p>
+					<p>
+						<strong>Technologies :</strong>
+						{{ fiche.technologies }}</p>
+					<p>
+						<strong>Niveau d'expérience :</strong>
+						{{ fiche.niveauExperience }}
+						ans</p>
+					<p>
+						<strong>Salaire proposé :</strong>
+						{{ fiche.salairePropose }}</p>
+					<p>
+						<strong>Description :</strong>
+						{{ fiche.description }}</p>
+					<div class="text-center mt-4">
+						<a href="{{ path('app_success') }}" class="btn btn-primary btn-lg">Candidature simplifiée</a>
+						<a href="{{ path('app_success') }}" class="btn btn-outline-primary btn-lg ml-2">Enregistrer</a>
+					</div>
+				</div>
+			</div>
+			<div
+				class="container mt-5">
+				<!-- Titre principal -->
+				<div class="mb-4">
+					<h1 class="fw-bold">STAGE FIN D'ETUDE - Consultant financement de l'innovation (Bagneux)</h1>
+				</div>
 
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/owl.carousel.min.css">
-		<link rel="stylesheet" href="css/owl.theme.default.min.css">
-		<link rel="stylesheet" href="fonts/icomoon/style.css">
-		<link rel="stylesheet" href="fonts/feather/style.css">
-		<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-		<link rel="stylesheet" href="css/jquery.fancybox.min.css">
-		<link rel="stylesheet" href="css/aos.css">
-		<link rel="stylesheet" href="css/style.css">
-		<title>Détails de l'offre - AdopteUnDev</title>
-	</head>
-	<body>
+				<!-- Informations principales -->
+				<div class="d-flex align-items-center mb-3">
+					<div class="me-3">
+						<i class="bi bi-briefcase"></i>
+						Stage 6 mois
+					</div>
+					<div>
+						<i class="bi bi-geo-alt"></i>
+						Paris
+					</div>
+				</div>
 
-		<div class="container w-100" style="margin-bottom:5rem;width:100vw">
-			<nav class="site-nav" style="width:100vw;">
-				<div class="logo">
-					<a class="text-black">AdopteUnDev<span class="text-black">.</span>
+				<!-- Entreprise -->
+				<div class="d-flex align-items-center mb-3 p-2">
+					<div class="me-3">
+						<img src="https://via.placeholder.com/100" alt="Logo de l'entreprise" class="rounded-circle">
+					</div>
+					<div>
+						<h5 class="mb-1 fw-bold">B.Conseil</h5>
+						<p class="mb-0 text-muted">Start-up • 50 employés • Conseil</p>
+					</div>
+				</div>
+
+				<!-- Date de publication -->
+				<p class="text-muted">Publiée le 10 janvier 2025</p>
+
+				<!-- Boutons -->
+				<div class="d-flex align-items-center mb-4 space-x-3">
+					<a href="#" class="btn btn-primary mr-4" style="border-radius: 1.3rem;">
+						<i class="bi bi-lightning-fill"></i>
+						Candidature simplifiée
 					</a>
-				</div>
-				<div class="row align-items-center">
+					<button class="btn btn-outline-secondary" style="border: 2px solid #000; border-radius: 5px;" id="favoriteBtn">
+						<i class="bi bi-heart" id="heartIcon" style="color: black; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);"></i>
+					</button>
 
-					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
-						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
-							<li>
-								<a class="text-black" href="{{path('app_developer')}}">Accueil</a>
-							</li>
-							<li class="active">
-								<a class="text-black font-weight-bold" href="{{path('app_offre')}}">Offres</a>
-							</li>
-							<li class="active">
-								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
-							</li>
-							<li>
-								<a class="text-black" href="{{ path('app_notifications') }}">
-									Notifications
-									<span class="icon-notifications"></span>
-								</a>
-							</li>
-							<li>
-								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
-							</li>
-							<li class="has-children">
-								<a href="#" class="text-black">Mon compte</a>
-								<ul class="dropdown">
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_login')}}">Connexion</a>
-									</li>
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-
-					</div>
+					<script>
+						document.getElementById('favoriteBtn').addEventListener('click', function () {
+var icon = document.getElementById('heartIcon');
+icon.classList.toggle('bi-heart-fill');
+icon.classList.toggle('bi-heart');
+});
+					</script>
 
 				</div>
-			</nav>
-		</div>
 
-		<div class="site-section bg-light d-flex">
-			<div class="container">
-				<div class="card shadow-lg">
-					<div class="card-header bg-primary text-white text-center">
-						<h2 class="mb-0 text-white">{{ fiche.titre }}</h2>
-					</div>
-					<div class="card-body">
-						<h4 class="text-primary">Informations générales</h4>
-						<p>
-							<strong>Localisation :</strong>
-							{{ fiche.localisation }}</p>
-						<p>
-							<strong>Technologies :</strong>
-							{{ fiche.technologies }}</p>
-						<p>
-							<strong>Niveau d'expérience :</strong>
-							{{ fiche.niveauExperience }}
-							ans</p>
-						<p>
-							<strong>Salaire proposé :</strong>
-							{{ fiche.salairePropose }}</p>
-						<p>
-							<strong>Description :</strong>
-							{{ fiche.description }}</p>
-						<div class="text-center mt-4">
-							<a href="{{ path('app_success') }}" class="btn btn-primary btn-lg">Candidature simplifiée</a>
-							<a href="{{ path('app_success') }}" class="btn btn-outline-primary btn-lg ml-2">Enregistrer</a>
-						</div>
-					</div>
+
+				<!-- Informations complémentaires -->
+				<div class="text-white p-4 mb-4 " style="border-radius: 1.3rem; background-color: #081c37;">
+					<table class="table text-white mb-0" style="border-collapse: collapse; width: 100%;">
+						<tr>
+							<td style="border-right: 1px solid white; border-top: none; width: 25%;">
+								<p class="mb-1">Date de début</p>
+								<h6 class="font-weight-bold">Janvier 2025</h6>
+							</td>
+							<td style="border-right: 1px solid white; border-top: none;">
+								<p class="mb-1">Niveau d'étude</p>
+								<h6 class="font-weight-bold">Niveau Master, MSc ou Programme Grande Ecole</h6>
+							</td>
+							<td style="border-top: none; width: 25%;">
+								<p class="mb-1">Télétravail</p>
+								<h6 class="font-weight-bold">Partiel</h6>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+
+				<!-- Description -->
+				<div>
+					<p>Hello,</p>
+					<p>Je suis Aurélien Barrière le fondateur de B.Conseil !</p>
+					<p>Mon rêve c’est de créer un groupe de conseil puissant ayant un maximum d’impact social sur la vie des collaborateurs tout en apportant un maximum de valeur à nos clients.</p>
+					<p>Mon challenge est triple :</p>
+					<!-- Ajoute d'autres détails ici si nécessaire -->
 				</div>
 			</div>
+
 		</div>
+	</div>
 
-		<div class="site-footer text-white">
-			<div class="container">
-				<div class="row justify-content-between">
-					<div class="col-lg-4">
-						<div class="widget">
-							<h3>À propos</h3>
-							<p class="text-black">AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
-						</div>
-						<div class="widget">
-							<h3>Connectez-vous avec nous</h3>
-							<ul class="social list-unstyled">
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-facebook"></span>
-									</a>
-								</li>
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-twitter"></span>
-									</a>
-								</li>
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-instagram"></span>
-									</a>
-								</li>
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-linkedin"></span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-12">
-								<div class="widget">
-									<h3>Navigation</h3>
-								</div>
-							</div>
-							<div class="col-6 col-sm-6 col-md-4">
-								<div class="widget">
-									<ul class="links list-unstyled">
-										<li>
-											<a href="{{path('app_developer')}}">Accueil</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Offres</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Matching</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Favoris</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Contact</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-6 col-sm-6 col-md-4">
-								<div class="widget">
-									<ul class="links list-unstyled">
-										<li>
-											<a href="{{path('app_offre')}}">À propos de nous</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">FAQ</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Carrières</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Support</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</body>
-</html></div><div id="overlayer"></div><div class="loader">
-<div class="spinner-border" role="status">
-	<span class="sr-only">Loading...</span>
-
-</div></div><script src="{{ asset("js/jquery-3.5.1.min.js") }}"></script><script src="{{asset("js/jquery-migrate-3.0.0.min.js")}}"></script><script src="{{asset("js/popper.min.js")}}"></script><script src="{{asset("js/bootstrap.min.js")}}"></script><script src="{{asset("js/owl.carousel.min.js")}}"></script><script src="{{asset("js/aos.js")}}"></script><script src="{{asset("js/imagesloaded.pkgd.js")}}"></script><script src="{{asset("js/isotope.pkgd.min.js")}}"></script><script src="{{asset("js/jquery.animateNumber.min.js")}}"></script><script src="{{asset("js/jquery.stellar.min.js")}}"></script><script src="{{asset("js/jquery.waypoints.min.js")}}"></script><script src="{{asset("js/jquery.fancybox.min.js")}}"></script><script src="{{asset("js/custom.js")}}"></script></body></html>
+{% endblock %}
