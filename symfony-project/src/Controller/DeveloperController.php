@@ -51,6 +51,36 @@ class DeveloperController extends AbstractController
 
     }
 
+    #[Route('', name: '')]
+    public function base(EntityManagerInterface $entityManager): Response
+    {
+
+        $user = $this->getUser();
+        $developer = null;
+
+        if ($user instanceof User) {
+            $developer = $user->getDeveloper();
+        }
+
+
+        //Les postes récents
+        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy([], ['createdAt' => 'DESC'], 3);
+
+        // Les postes populaires
+        $offres = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy([], ['views' => 'DESC'], 3);
+
+
+        return $this->render('base.html.twig', [
+            'fiches_de_poste' => $fichesDePoste,
+            'offres' => $offres,
+            'developer' => $developer,
+
+        ]);
+
+    }
+
     #[Route('/inscription-dev', name: 'app_inscription', methods: ['GET', 'POST'])]
     public function inscription_dev(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {

@@ -2,6 +2,26 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="Untree.co">
+		<link rel="shortcut icon" href="favicon.png">
+
+		<meta name="description" content=""/>
+		<meta name="keywords" content="bootstrap, bootstrap4"/>
+
+
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/owl.carousel.min.css">
+		<link rel="stylesheet" href="css/owl.theme.default.min.css">
+		<link rel="stylesheet" href="fonts/icomoon/style.css">
+		<link rel="stylesheet" href="fonts/feather/style.css">
+		<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+		<link rel="stylesheet" href="css/jquery.fancybox.min.css">
+		<link rel="stylesheet" href="css/aos.css">
+		<link rel="stylesheet" href="css/style.css">
 		<title>
 			{% block title %}AdopteUnDev
 			{% endblock %}
@@ -9,6 +29,167 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> {% block stylesheets %}{% endblock %}{% block javascripts %}{% endblock %}
 		</head>
 		<body>
-			{% block body %}{% endblock %}
-		</body>
-	</html>
+
+			<div class="container">
+
+
+				<nav class="site-nav">
+					<div class="logo">
+						<a href="{{path('app_home')}}" class="text-white">AdopteUnDev<span class="text-black">.</span>
+						</a>
+					</div>
+					<div class="row align-items-center">
+
+						<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
+							<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
+								<li class="active">
+									<a class="font-weight-bold" href="{{path('app_developer')}}">Accueil</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">Offres</a>
+								</li>
+								<li>
+									{% if app.session.get('user_id') is not empty %}
+										<a href="{{path('app_matching')}}">Matching</a>
+									{% endif %}
+
+								</li>
+								<li>
+									<a href="{{ path('app_notifications') }}">
+										Notifications
+										<span class="icon-notifications"></span>
+									</a>
+								</li>
+								<li>
+								{% if app.session.get('user_id') is not empty %}
+										<a href="{{path('app_favori')}}">Favoris</a>
+									{% endif %}
+				
+								</li>
+
+								{# sdljsf #}
+
+								<li class="has-children">
+									<a href="#">Mon compte</a>
+									<ul class="dropdown">
+
+										{% if app.session.get('user_id') is not empty %}
+
+											<li>
+												<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_profile')}}">Parametre</a>
+											</li>
+										{% else %}
+											<li>
+												<a class="text-black text-bold" style="cursor:pointer;" href="{{path('app_developer_login')}}">Connexion</a>
+											</li>
+											<li>
+												<a class="text-black text-bold" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
+											</li>
+										{% endif %}
+
+
+									</ul>
+								</li>
+							</ul>
+
+						</div>
+
+					</div>
+				</nav>
+
+</div>
+<!-- END container -->
+
+
+{% block body %}{% endblock %}
+
+		<div class="site-footer text-white">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-4">
+						<div class="widget">
+							<h3>À propos</h3>
+							<p class="text-black">AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
+						</div>
+						<div class="widget">
+							<h3>Connectez-vous avec nous</h3>
+							<ul class="social list-unstyled">
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-facebook"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-twitter"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-instagram"></span>
+									</a>
+								</li>
+								<li>
+									<a href="{{path('app_offre')}}">
+										<span class="icon-linkedin"></span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-12">
+								<div class="widget">
+									<h3>Navigation</h3>
+								</div>
+							</div>
+							<div class="col-6 col-sm-6 col-md-4">
+								<div class="widget">
+									<ul class="links list-unstyled">
+										<li>
+											<a href="{{path('app_offre')}}">Accueil</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Offres</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Matching</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Favoris</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Contact</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-6 col-sm-6 col-md-4">
+								<div class="widget">
+									<ul class="links list-unstyled">
+										<li>
+											<a href="{{path('app_offre')}}">À propos de nous</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">FAQ</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Carrières</a>
+										</li>
+										<li>
+											<a href="{{path('app_offre')}}">Support</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+</body></html>
