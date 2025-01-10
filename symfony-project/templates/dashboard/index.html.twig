@@ -4,7 +4,23 @@
 
 {% block body %}
 	<style>
+		.text-marine {
+			color: rgb(1, 29, 56); /* Bleu marine */
+		}
 
+		.fw-bold {
+			font-weight: bold; /* Met en gras */
+		}
+		.button-edit,
+		.d-flex {
+			display: flex;
+			margin-bottom: 16px; /* Ajoute de l'espace entre les divs */
+
+		}
+		.d-flex .bi {
+			font-size: 1.3rem; /* Augmente la taille de l'icône */
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Applique une ombre pour renforcer l'icône */
+		}
 		.customDev {
 			padding: 40px;
 			box-shadow: 0 4px 6px rgba(0.1, 0.1, 0.1, 0.1);
@@ -40,7 +56,6 @@
 
 		.card-body2 h5 {
 			font-size: 22px;
-			font-weight: bold;
 			margin-top: 20px;
 		}
 
@@ -63,8 +78,10 @@
 			margin-right: 5px;
 		}
 		.button-edit .btn {
-			padding: 10px 15px; /* Ajuste les espacements internes du bouton */
 			font-size: 12px; /* Réduit la taille du texte */
+			justify-content: center;
+			align-items: center;
+			text-align: center;
 		}
 	</style>
 
@@ -111,7 +128,7 @@
 					<!-- Colonne Profil -->
 					<div class="col-md-3">
 						<div
-							class="card shadow-sm border-0 p-4">
+							class="card card-custom1 shadow-sm border-0 p-4">
 							<!-- Image utilisateur -->
 							<div class="d-flex justify-content-center mb-3">
 								<img src="https://via.placeholder.com/100" alt="Photo de profil" class="rounded-circle">
@@ -127,27 +144,33 @@
 									<i class="bi bi-calendar"></i>
 									Diplômé·e en 2025</li>
 							</ul>
-							<div class="button-edit d-flex justify-content-between align-items-center">
+
+							<div class="button-edit  d-flex flex-column justify-content-center">
 								<a href="/page-de-redirection" class="btn btn-primary">
 									<i class="bi bi-pencil"></i>
-									Modifier mon profil
+									<span>Modifier mon profil</span>
 								</a>
 							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<a href="#" class="text-primary">
-									<i class="bi bi-pencil"></i>
-									Mes offres favorites</a>
+							<div class="d-flex">
+								<a href="#" class="text-marine fw-bold">
+									<i class="bi bi-heart"></i>
+									<span>Mes offres favorites</span>
+								</a>
 							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<a href="#" class="text-primary">
-									<i class="bi bi-pencil"></i>
-									Mes candidatures</a>
+							<div class="d-flex">
+								<a href="#" class="text-marine fw-bold">
+									<i class="bi bi-person-badge"></i>
+									<span>Mes candidatures</span>
+								</a>
 							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<a href="#" class="text-primary">
-									<i class="bi bi-pencil"></i>
-									Mes matchs</a>
+							<div class="d-flex">
+								<a href="#" class="text-marine fw-bold">
+									<i class="bi bi-puzzle"></i>
+									<span>Mes matchs</span>
+								</a>
 							</div>
+
+
 						</div>
 					</div>
 
@@ -171,7 +194,7 @@
 											</div>
 
 											<!-- Job Title -->
-											<h5 class="fw-bold">{{ job.title }}</h5>
+											<h5>{{ job.title }}</h5>
 
 											<!-- Additional Details -->
 											<div class="d-flex align-items-center text-muted mb-3">
@@ -203,7 +226,7 @@
 
 							<!-- Section Expériences et Formations -->
 							<div class="container my-5">
-								<h4 class="text-xl font-semibold mb-4">Dernières Offres Publiées</h4>
+								<h4 class=" fw-bold text-xl font-semibold mb-4">Dernières Offres Publiées</h4>
 								<div class="row row-cols-1 row-cols-md-3 g-4">
 									{% for job in suggested_jobs %}
 										<div class="col">
@@ -236,6 +259,10 @@
 							</div>
 
 
-						</main>
+						</div>
+
 					</div>
-				{% endblock %}
+				</div>
+			</main>
+		</div>
+	{% endblock %}
