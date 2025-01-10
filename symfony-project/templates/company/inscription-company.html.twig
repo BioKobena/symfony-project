@@ -54,195 +54,211 @@
 				</nav>
 			</div>
 
-		<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
+			<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
 				<div class="register-card bg-white shadow p-4 rounded w-75 w-md-50 w-lg-40">
 					<h2 class="text-center mb-4 text-primary h4">Inscrivez votre entreprise sur AdopteUnDev</h2>
-					<form action="{{ path('inscription-company') }}" method="POST" enctype="multipart/form-data">
-						<div class="form-row">
-							<div class="col-md-6 form-group">
-								<label for="nom">Nom de l'entreprise</label>
-								<input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" required>
-							</div>
-							<div class="col-md-6 form-group">
-								<label for="localisation">Localisation</label>
-								<input type="text" id="localisation" name="localisation" class="form-control" placeholder="Votre localisation" required>
-							</div>
+
+					{{ form_start(form) }}
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							{{ form_label(form.nom) }}
+							{{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+							{{ form_errors(form.nom) }}
+						</div>
+						<div class="col-md-6 form-group">
+							{{ form_label(form.localisation) }}
+							{{ form_widget(form.localisation, {'attr': {'class': 'form-control', 'placeholder': 'Votre localisation'}}) }}
+							{{ form_errors(form.localisation) }}
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							{{ form_label(form.email) }}
+							{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre e-mail'}}) }}
+							{{ form_errors(form.email) }}
+						</div>
+						<div class="col-md-6 form-group">
+							{{ form_label(form.password) }}
+							{{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
+							{{ form_errors(form.password) }}
+						</div>
+						<div class="col-md-6 form-group">
+							{{ form_label(form.confirmPassword) }}
+							{{ form_widget(form.confirmPassword, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'}}) }}
+							{{ form_errors(form.confirmPassword) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.description) }}
+						{{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Décrivez brièvement votre entreprise'}}) }}
+						{{ form_errors(form.description) }}
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							{{ form_label(form.taille_entreprise) }}
+							{{ form_widget(form.taille_entreprise, {'attr': {'class': 'form-control', 'placeholder': 'Ex : 10-50 employés'}}) }}
+							{{ form_errors(form.taille_entreprise) }}
 						</div>
 
-						<div class="form-row">
-							<div class="col-md-6 form-group">
-								<label for="email">Adresse e-mail</label>
-								<input type="email" id="email" name="email" class="form-control" placeholder="Votre e-mail" required>
-							</div>
-							<div class="col-md-6 form-group">
-								<label for="password">Mot de passe</label>
-								<input type="password" id="password" name="password" class="form-control" placeholder="Votre mot de passe" required>
-							</div>
+						<div class="col-md-6 form-group">
+							{{ form_label(form.secteur) }}
+							{{ form_widget(form.secteur, {'attr': {'class': 'form-control', 'placeholder': 'Votre secteur d\'activité'}}) }}
+                {{ form_errors(form.secteur) }}
+            </div>
+        </div>
 
-							<div class="col-md-6 form-group">
-								<label for="confirmPassword">Confirmez le mot de passe</label>
-								<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirmez votre mot de passe" required>
-							</div>
-						</div>
+        <div class="form-group">
+            {{ form_label(form.type_entreprise) }}
+            {{ form_widget(form.type_entreprise, {'attr': {'class': 'form-control', 'placeholder': 'Ex : Start-up, PME, Multinationale'}}) }}
+            {{ form_errors(form.type_entreprise) }}
+        </div>
 
-						<div class="form-group">
-							<label for="description">Description</label>
-							<textarea id="description" name="description" class="form-control" rows="3" placeholder="Décrivez brièvement votre entreprise"></textarea>
-						</div>
-
-						<div class="form-row">
-							<div class="col-md-6 form-group">
-								<label for="taille_entreprise">Taille de l'entreprise</label>
-								<input type="text" id="taille_entreprise" name="taille_entreprise" class="form-control" placeholder="Ex : 10-50 employés">
-							</div>
-
-							<div class="col-md-6 form-group">
-								<label for="secteur">Secteur</label>
-								<input type="text" id="secteur" name="secteur" class="form-control" placeholder="Votre secteur d'activité" required>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="type_entreprise">Type d'entreprise</label>
-							<input type="text" id="type_entreprise" name="type_entreprise" class="form-control" placeholder="Ex : Start-up, PME, Multinationale" required>
-						</div>
-
-						<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
-					</form>
-
-					<p class="text-center mt-3">
-						Déjà un compte ?
-						<a href="{{path('app_company_login')}}">Se connecter</a>
-					</p>
+			<div class="form-group">
+					{{ form_label(form.avatar) }}
+					{{ form_widget(form.avatar, {'attr': {'class': 'form-control-file'}}) }}
+					<small class="form-text text-muted">Formats acceptés : JPG, PNG, GIF.</small>
 				</div>
 
-			</div>
-		</div>
-		<div class="site-footer text-white">
-			<div class="container">
-				<div class="row justify-content-between">
-					<div class="col-lg-4">
-						<div class="widget">
-							<h3>À propos</h3>
-							<p class="text-black">
-								AdopteUnDev, la plateforme qui connecte développeurs talentueux et entreprises ambitieuses pour un matching parfait. Rejoignez-nous pour construire un avenir numérique collaboratif !
+        <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+
+        {{ form_end(form) }}
+
+							<p class="text-center mt-3">
+								Déjà un compte ?
+								<a href="{{ path('app_company_login') }}">Se connecter</a>
 							</p>
 						</div>
-						<div class="widget">
-							<h3>Restez connecté</h3>
-							<ul class="social list-unstyled">
-								<li>
-									<a href="#">
-										<span class="icon-facebook"></span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="icon-twitter"></span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="icon-instagram"></span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="icon-linkedin"></span>
-									</a>
-								</li>
-							</ul>
+					</div>
+
+					<div class="site-footer text-white">
+						<div class="container">
+							<div class="row justify-content-between">
+								<div class="col-lg-4">
+									<div class="widget">
+										<h3>À propos</h3>
+										<p class="text-black">
+											AdopteUnDev, la plateforme qui connecte développeurs talentueux et entreprises ambitieuses pour un matching parfait. Rejoignez-nous pour construire un avenir numérique collaboratif !
+										</p>
+									</div>
+									<div class="widget">
+										<h3>Restez connecté</h3>
+										<ul class="social list-unstyled">
+											<li>
+												<a href="#">
+													<span class="icon-facebook"></span>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<span class="icon-twitter"></span>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<span class="icon-instagram"></span>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<span class="icon-linkedin"></span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="col-lg-2">
+									<div class="widget">
+										<h3>Pour les développeurs</h3>
+										<ul class="links list-unstyled">
+											<li>
+												<a href="#">Nous rejoindre</a>
+											</li>
+											<li>
+												<a href="#">Créer un profil</a>
+											</li>
+											<li>
+												<a href="#">Nos offres</a>
+											</li>
+											<li>
+												<a href="#">Favoris</a>
+											</li>
+											<li>
+												<a href="#">Contact support</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<!-- Section Pour les entreprises -->
+								<div class="col-lg-2">
+									<div class="widget">
+										<h3>Pour les entreprises</h3>
+										<ul class="links list-unstyled">
+											<li>
+												<a href="#">Publier une offre</a>
+											</li>
+											<li>
+												<a href="#">Trouver un développeur</a>
+											</li>
+											<li>
+												<a href="#">Nos solutions</a>
+											</li>
+											<li>
+												<a href="#">Évaluer un développeur</a>
+											</li>
+											<li>
+												<a href="#">Assistance</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<!-- Section Légal -->
+								<div class="col-lg-2">
+									<div class="widget">
+										<h3>Légal</h3>
+										<ul class="links list-unstyled">
+											<li>
+												<a href="#">Mentions légales</a>
+											</li>
+											<li>
+												<a href="#">Politique de confidentialité</a>
+											</li>
+											<li>
+												<a href="#">Conditions générales</a>
+											</li>
+											<li>
+												<a href="#">Politique de cookies</a>
+											</li>
+											<li>
+												<a href="#">FAQ</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!-- Bas de page -->
+							<div class="row mt-4">
+								<div class="col-12 text-center">
+									<p class="mb-0">
+										Copyright © AdopteUnDev 2024 - Tous droits réservés.
+										<a href="#">Mentions légales</a>
+										|
+										<a href="#">Cookies</a>
+										|
+										<a href="#">Confidentialité</a>
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<div class="col-lg-2">
-						<div class="widget">
-							<h3>Pour les développeurs</h3>
-							<ul class="links list-unstyled">
-								<li>
-									<a href="#">Nous rejoindre</a>
-								</li>
-								<li>
-									<a href="#">Créer un profil</a>
-								</li>
-								<li>
-									<a href="#">Nos offres</a>
-								</li>
-								<li>
-									<a href="#">Favoris</a>
-								</li>
-								<li>
-									<a href="#">Contact support</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+				</body>
 
-					<!-- Section Pour les entreprises -->
-					<div class="col-lg-2">
-						<div class="widget">
-							<h3>Pour les entreprises</h3>
-							<ul class="links list-unstyled">
-								<li>
-									<a href="#">Publier une offre</a>
-								</li>
-								<li>
-									<a href="#">Trouver un développeur</a>
-								</li>
-								<li>
-									<a href="#">Nos solutions</a>
-								</li>
-								<li>
-									<a href="#">Évaluer un développeur</a>
-								</li>
-								<li>
-									<a href="#">Assistance</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- Section Légal -->
-					<div class="col-lg-2">
-						<div class="widget">
-							<h3>Légal</h3>
-							<ul class="links list-unstyled">
-								<li>
-									<a href="#">Mentions légales</a>
-								</li>
-								<li>
-									<a href="#">Politique de confidentialité</a>
-								</li>
-								<li>
-									<a href="#">Conditions générales</a>
-								</li>
-								<li>
-									<a href="#">Politique de cookies</a>
-								</li>
-								<li>
-									<a href="#">FAQ</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<!-- Bas de page -->
-				<div class="row mt-4">
-					<div class="col-12 text-center">
-						<p class="mb-0">
-							Copyright © AdopteUnDev 2024 - Tous droits réservés.
-							<a href="#">Mentions légales</a>
-							|
-							<a href="#">Cookies</a>
-							|
-							<a href="#">Confidentialité</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</body>
-
-</html>
+			</html>

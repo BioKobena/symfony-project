@@ -25,11 +25,16 @@ class HomeController extends AbstractController
         // Compter le nombre d'entreprises
         $nombreEntreprises = $entityManager->getRepository(Company::class)->count([]);
 
+        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
+        ->findBy([], ['createdAt' => 'DESC'], 3);
+
+
 
         return $this->render('home/index.html.twig', [
             'offres' => $offres,
             'nombreDevs' => $nombreDevs,
             'nombreEntreprises' => $nombreEntreprises,
+            'fiches' => $fichesDePoste,
         ]);
     }
 }

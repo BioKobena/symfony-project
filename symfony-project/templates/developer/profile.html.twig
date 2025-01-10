@@ -66,6 +66,7 @@
 									<li>
 										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_profile')}}">Profil</a>
 									</li>
+									
 								</ul>
 							</li>
 						</ul>
@@ -76,70 +77,119 @@
 			</nav>
 		</div>
 
-		<div class="section-grey bg-light" id="profile-section" style="padding: 3rem; margin-top: 5rem; display: flex; justify-content: center; align-items: center; width: 100%;">
-			<div class="card shadow-lg p-4 rounded" style="max-width: 700px; width: 100%;">
-				<div class="card-body">
-					<h5 class="text-primary mb-3">Informations personnelles</h5>
-					<ul class="list-group mb-4">
-						<li class="list-group-item">
-							<strong>
-								<i class="fas fa-user"></i>
-								Nom :</strong>
-							{{ developer.nom }}
-						</li>
-						<li class="list-group-item">
-							<strong>
-								<i class="fas fa-user"></i>
-								Prenom :</strong>
-							{{ developer.prenom }}
-						</li>
-						<li class="list-group-item">
-							<strong>
-								<i class="fas fa-map-marker-alt"></i>
-								Localisation :</strong>
-							{{ developer.localisation }}
-						</li>
-						<li class="list-group-item">
-							<strong>
-								<i class="fas fa-envelope"></i>
-								Vu du profil :</strong>
-							{{ developer.views}}
-							<span class="icon-eye"></span>
+		<div
+			class="container-fluid" style="padding-top: 3rem;">
 
-						</li>
-						<li class="list-group-item">
-							<strong>
-								<i class="fas fa-briefcase"></i>
-								Niveau d'expérience :</strong>
-							{{ developer.experience }}
-							ans
-						</li>
-						<li class="list-group-item">
-							<strong>
-								<i class="fas fa-euro-sign"></i>
-								Salaire minimum souhaité :</strong>
-							{{ developer.salaireMin }}
-							€
-						</li>
-					</ul>
-
-					<h5 class="text-primary mb-3">Compétences</h5>
-					<div class="mb-4">
-						<span class="badge fs-3 bg-secondary text-white p-3 me-2 mb-2">{{ developer.languages }}</span>
+			<!-- Dashboard Row -->
+			<div class="container-fluid mt-5">
+				<div
+					class="row">
+					<!-- Sidebar (Profil à gauche) -->
+					<div class="col-md-3">
+						<div class="card shadow-lg p-4 rounded">
+							<div class="card-body">
+								<div class="text-center mb-3">
+									{% if developer.avatar %}
+										<img style="width:7rem; height:7rem; border-radius:50%;" src="{{ asset('uploads/photos/' ~ developer.avatar) }}">
+									{% else %}
+										<p>Aucune photo disponible</p>
+									{% endif %}
+								</div>
+								<h5 class="text-primary text-center mb-4">Profil</h5>
+								<ul class="list-group mb-4">
+									<li class="list-group-item">
+										<strong>Nom :</strong>
+										{{ developer.nom }}
+									</li>
+									<li class="list-group-item">
+										<strong>Prénom :</strong>
+										{{ developer.prenom }}
+									</li>
+									<li class="list-group-item">
+										<strong>Localisation :</strong>
+										{{ developer.localisation }}
+									</li>
+									<li class="list-group-item">
+										<strong>Expérience :</strong>
+										{{ developer.experience }}
+										ans
+									</li>
+									<li class="list-group-item">
+										<strong>Salaire souhaité :</strong>
+										{{ developer.salaireMin }}
+										€
+									</li>
+								</ul>
+								<div class="text-center">
+									<a href="{{ path('app_update_profile', {'id': developer.id}) }}" class="btn btn-primary">
+										<i class="fas fa-edit"></i>
+										Modifier
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
 
-					<h5 class="text-primary mb-3">Biographie</h5>
-					<p class="text-muted">{{ developer.bio }}</p>
-				</div>
+					<!-- Main Content (Section centrale) -->
+					<div class="col-md-6">
+						<div class="card shadow-lg p-4 rounded mb-4">
+							<div class="card-body">
+								<h5 class="text-primary mb-3">Compétences</h5>
+								<div>
+									{% for language in developer.languages %}
+										<span class="badge bg-secondary text-white p-2 me-2 mb-2">{{ language }}</span>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
 
-				<!-- Edit Profile Button -->
-				{# <div class="card-footer text-center">
-									<a href="{{ path('edit_profile') }}" class="btn btn-primary">
-										<i class="fas fa-edit"></i>
-										Modifier mon profil
-									</a>
-								</div> #}
+						<div class="card shadow-lg p-4 rounded">
+							<div class="card-body">
+								<h5 class="text-primary mb-3">Biographie</h5>
+								<p>{{ developer.bio }}</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Sidebar complémentaire (Widgets ou Infos supplémentaires) -->
+					<div class="col-md-3">
+						<div class="card shadow-lg p-4 rounded mb-4">
+							<div class="card-body">
+								<h5 class="text-primary mb-3">Statistiques</h5>
+								<ul class="list-group">
+									<li class="list-group-item">
+										<strong>Projets en cours :</strong>
+										{# {{ ongoing_projects }} #}
+									</li>
+									<li class="list-group-item">
+										<strong>Projets terminés :</strong>
+										{# {{ completed_projects }} #}
+									</li>
+									<li class="list-group-item">
+										<strong>Notifications :</strong>
+										{# {{ notifications_count }} #}
+									</li>
+									<li class="list-group-item">
+										<strong>Alertes critiques :</strong>
+										{# {{ critical_alerts }} #}
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="card shadow-lg p-4 rounded">
+							<div class="card-body">
+								<h5 class="text-primary mb-3">Progrès des projets</h5>
+								<!-- Placeholder for chart -->
+								<div
+									id="chartContainer" style="height: 200px;"><!-- Your chart rendering logic goes here -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+
 		</div>
 
 
@@ -236,4 +286,4 @@
 </html></div><div id="overlayer"></div><div class="loader">
 <div class="spinner-border" role="status">
 	<span class="sr-only">Loading...</span>
-</div></div><script src="{{ asset("js/jquery-3.5.1.min.js") }}"></script><script src="{{asset("js/jquery-migrate-3.0.0.min.js")}}"></script><script src="{{asset("js/popper.min.js")}}"></script><script src="{{asset("js/bootstrap.min.js")}}"></script><script src="{{asset("js/owl.carousel.min.js")}}"></script><script src="{{asset("js/aos.js")}}"></script><script src="{{asset("js/imagesloaded.pkgd.js")}}"></script><script src="{{asset("js/isotope.pkgd.min.js")}}"></script><script src="{{asset("js/jquery.animateNumber.min.js")}}"></script><script src="{{asset("js/jquery.stellar.min.js")}}"></script><script src="{{asset("js/jquery.waypoints.min.js")}}"></script><script src="{{asset("js/jquery.fancybox.min.js")}}"></script><script src="{{asset("js/custom.js")}}"></script></body></html>
+</div></div> <script src="{{ asset("js/jquery-3.5.1.min.js") }}"></script> <script src="{{asset("js/jquery-migrate-3.0.0.min.js")}}"></script> <script src="{{asset("js/popper.min.js")}}"></script> <script src="{{asset("js/bootstrap.min.js")}}"></script> <script src="{{asset("js/owl.carousel.min.js")}}"></script> <script src="{{asset("js/aos.js")}}"></script> <script src="{{asset("js/imagesloaded.pkgd.js")}}"></script> <script src="{{asset("js/isotope.pkgd.min.js")}}"></script> <script src="{{asset("js/jquery.animateNumber.min.js")}}"></script> <script src="{{asset("js/jquery.stellar.min.js")}}"></script> <script src="{{asset("js/jquery.waypoints.min.js")}}"></script> <script src="{{asset("js/jquery.fancybox.min.js")}}"></script> <script src="{{asset("js/custom.js")}}"></script></body></html>

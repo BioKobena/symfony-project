@@ -30,6 +30,8 @@ class MatchingController extends AbstractController
             throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
         }
 
+    
+
         // Récupérer le développeur correspondant à l'utilisateur connecté
         $developer = $developerRepository->findOneBy(['user' => $user]);
 

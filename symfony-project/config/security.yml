@@ -28,7 +28,7 @@ security:
             provider: app_user_provider
             custom_authenticator: App\Security\CompanyAuthenticateAuthenticator
             logout:
-                path: app_logout
+                path: app_logout_company
                 target: app_company_login
 
             # activate different ways to authenticate

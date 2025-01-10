@@ -7,12 +7,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Company;
+use App\Form\CompanyType;
 use App\Entity\Favoris;
 use App\Repository\DeveloperRepository;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Developer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CompanyController extends AbstractController
@@ -21,9 +25,12 @@ class CompanyController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
 
+
+
         $user = $this->getUser();
         $company = null;
         $userId = null;
+        // dd($user);
 
         if ($user instanceof User) {
             $userId = $user->getId();
@@ -53,51 +60,83 @@ class CompanyController extends AbstractController
     }
 
     #[Route('/inscription-company', name: 'inscription-company')]
-    public function inscription_company(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
-    {
-        if ($request->isMethod('POST')) {
-            // Récupération des données du formulaire
-            $nom = $request->request->get('nom');
-            $localisation = $request->request->get('localisation');
-            $email = $request->request->get('email');
-            $password = $request->request->get('password');
-            $confirmPassword = $request->request->get('confirmPassword');
-            $description = $request->request->get('description');
-            $tailleEntreprise = $request->request->get('taille_entreprise');
-            $secteur = $request->request->get('secteur');
-            $typeEntreprise = $request->request->get('type_entreprise');
+    public function inscriptionCompany(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher,
+        SluggerInterface $slugger
 
+    ) {
+        // Créer une nouvelle instance d'entité Company
+        $company = new Company();
+
+
+        // Crée un nouvel utilisateur pour l'entreprise
+        $user = new User();
+
+        // Créer le formulaire de l'entreprise
+        $form = $this->createForm(CompanyType::class, $company);
+
+        // Gérer l'envoi du formulaire
+        $form->handleRequest($request);
+
+        $avatarFile = $form->get('avatar')->getData();
+        if ($avatarFile) {
+            $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
+
+            try {
+                $avatarFile->move(
+                    $this->getParameter('uploads_directory'),
+                    $newFilename
+                );
+                $company->setAvatar($newFilename);
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Erreur lors de l\'upload de l\'avatar.');
+                return $this->redirectToRoute('app_developer_login');
+            }
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération des données du formulaire
+            // $data = $form->getData();
+
+            // // Récupérer le mot de passe et le confirmer
+            // $password = $data['password'];
+            // $confirmPassword = $data['confirmPassword'];
+            $email = $form->get('email')->getData();
+            $password = $form->get('password')->getData();
+            $confirmPassword = $form->get('confirmPassword')->getData();
 
             if ($password !== $confirmPassword) {
                 $this->addFlash('error', 'Les mots de passe ne correspondent pas.');
-                return $this->redirectToRoute('app_inscription');
+                return $this->redirectToRoute('app_inscription_company');
             }
 
-            $user = new User();
+            // Hashage du mot de passe
             $user->setRoles(['ROLE_COMPANY']);
             $user->setEmail($email)
                 ->setPassword($passwordHasher->hashPassword($user, $password));
 
+            // Sauvegarde de l'utilisateur
             $entityManager->persist($user);
-            // Création de l'entité Company
-            $company = new Company();
-            $company->setNom($nom)
-                ->setLocalisation($localisation)
-                ->setDescription($description)
-                ->setTailleEntreprise($tailleEntreprise)
-                ->setSecteur($secteur)
-                ->setTypeEntreprise($typeEntreprise);
+
+            // Sauvegarde de l'entreprise avec l'utilisateur associé
             $company->setUser($user);
-
-
             $entityManager->persist($company);
             $entityManager->flush();
 
+            // Message de succès
             $this->addFlash('success', 'Votre entreprise a été inscrite avec succès !');
-            return $this->redirectToRoute('app_company_login'); // Redirection après succès
+
+            // Rediriger après inscription
+            return $this->redirectToRoute('app_company_login');
         }
 
-        return $this->render('company/inscription-company.html.twig');
+        // Si le formulaire n'est pas soumis ou n'est pas valide, afficher le formulaire
+        return $this->render('company/inscription-company.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/{id}-developper-adopte-un-dev', name: 'developer_detail')]
