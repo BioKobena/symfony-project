@@ -26,17 +26,18 @@ class Company
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $taille_entreprise = null;
+    #[ORM\Column(type: 'json')]
+    private array $taille_entreprise = [];
 
-    #[ORM\Column]
-    private ?string $secteur = null;
+    #[ORM\Column(type: 'json')]
+    private array $secteur = [];
 
-    // #[ORM\Column(length: 255)]
-    // private ?string $avatar = null;
+    #[ORM\Column(type: 'json')]
+    private array $type_entreprise = [];
 
-    #[ORM\Column(length: 255)]
-    private ?string $type_entreprise = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $avatar = null;
+
 
 
     #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: FicheDePoste::class, cascade: ['persist', 'remove'])]
@@ -100,35 +101,35 @@ class Company
         return $this;
     }
 
-    public function getTailleEntreprise(): ?string
+    public function getTailleEntreprise(): array
     {
         return $this->taille_entreprise;
     }
 
-    public function setTailleEntreprise(string $taille_entreprise): static
+    public function setTailleEntreprise(array $taille_entreprise): self
     {
         $this->taille_entreprise = $taille_entreprise;
 
         return $this;
     }
 
-    public function getSecteur(): ?string
+    public function getSecteur(): array
     {
         return $this->secteur;
     }
 
-    public function setSecteur(string $secteur): static
+    public function setSecteur(array $secteur): self
     {
         $this->secteur = $secteur;
 
         return $this;
     }
-    public function getTypeEntreprise(): ?string
+    public function getTypeEntreprise(): array
     {
         return $this->type_entreprise;
     }
 
-    public function setTypeEntreprise(string $type_entreprise): static
+    public function setTypeEntreprise(array $type_entreprise): self
     {
         $this->type_entreprise = $type_entreprise;
 
@@ -147,7 +148,7 @@ class Company
     {
         if (!$this->fichesDePostes->contains($ficheDePoste)) {
             $this->fichesDePostes[] = $ficheDePoste;
-            $ficheDePoste->setEntreprise($this);
+            $ficheDePoste->setCompany($this);
         }
 
         return $this;
@@ -156,8 +157,8 @@ class Company
     public function removeFicheDePoste(FicheDePoste $ficheDePoste): self
     {
         if ($this->fichesDePostes->removeElement($ficheDePoste)) {
-            if ($ficheDePoste->getEntreprise() === $this) {
-                $ficheDePoste->setEntreprise(null);
+            if ($ficheDePoste->getCompany() === $this) {
+                $ficheDePoste->setCompany(null);
             }
         }
 
@@ -172,6 +173,18 @@ class Company
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): static
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

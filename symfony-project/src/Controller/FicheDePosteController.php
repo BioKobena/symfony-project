@@ -28,7 +28,7 @@ class FicheDePosteController extends AbstractController
         if ($request->isMethod('POST')) {
             // Création d'une nouvelle fiche de poste
             $ficheDePoste = new FicheDePoste();
-            $ficheDePoste->setEntreprise($company); // Associer directement l'entreprise de l'utilisateur connecté
+            $ficheDePoste->setCompany($company); // Associer directement l'entreprise de l'utilisateur connecté
 
             // Récupération des données de la requête
             $titre = $request->request->get('titre', '');

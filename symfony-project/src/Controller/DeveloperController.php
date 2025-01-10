@@ -17,6 +17,11 @@ use App\Repository\DeveloperRepository;
 use App\Repository\FicheDePosteRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Form\DeveloperType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 // #[IsGranted('ROLE_DEV')]
 class DeveloperController extends AbstractController
@@ -24,7 +29,6 @@ class DeveloperController extends AbstractController
     #[Route('/developer', name: 'app_developer')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-
         $user = $this->getUser();
         $developer = null;
 
@@ -33,105 +37,90 @@ class DeveloperController extends AbstractController
         }
 
 
-        //Les postes récents
+        // Les postes récents
         $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
             ->findBy([], ['createdAt' => 'DESC'], 3);
 
+
+        // dd($fichesDePoste);
         // Les postes populaires
         $offres = $entityManager->getRepository(FicheDePoste::class)
             ->findBy([], ['views' => 'DESC'], 3);
 
-
+        // Passer toutes les données à la vue, y compris les fiches de poste
         return $this->render('developer/index.html.twig', [
             'fiches_de_poste' => $fichesDePoste,
             'offres' => $offres,
             'developer' => $developer,
-
         ]);
 
     }
 
-    #[Route('', name: '')]
-    public function base(EntityManagerInterface $entityManager): Response
-    {
 
-        $user = $this->getUser();
-        $developer = null;
-
-        if ($user instanceof User) {
-            $developer = $user->getDeveloper();
-        }
-
-
-        //Les postes récents
-        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
-            ->findBy([], ['createdAt' => 'DESC'], 3);
-
-        // Les postes populaires
-        $offres = $entityManager->getRepository(FicheDePoste::class)
-            ->findBy([], ['views' => 'DESC'], 3);
-
-
-        return $this->render('base.html.twig', [
-            'fiches_de_poste' => $fichesDePoste,
-            'offres' => $offres,
-            'developer' => $developer,
-
-        ]);
-
-    }
 
     #[Route('/inscription-dev', name: 'app_inscription', methods: ['GET', 'POST'])]
-    public function inscription_dev(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
-    {
-        if ($request->isMethod('POST')) {
-            // Récupération des données du formulaire
-            $firstName = $request->request->get('firstName');
-            $lastName = $request->request->get('lastName');
-            $email = $request->request->get('email');
-            $password = $request->request->get('password');
-            $confirmPassword = $request->request->get('confirmPassword');
-            $location = $request->request->get('location');
-            $languages = $request->request->get('languages');
-            $experience = $request->request->get('experience');
-            $salary = $request->request->get('salary');
-            $bio = $request->request->get('bio');
+    public function register(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher,
+        SluggerInterface $slugger
+    ): Response {
+        $developer = new Developer();
+        $form = $this->createForm(DeveloperType::class, $developer);
+        $form->handleRequest($request);
 
-            // Validation des champs
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Champs non mappés (qui n'appartiennent pas au Développeur de façon directe)
+            $email = $form->get('email')->getData();
+            $password = $form->get('password')->getData();
+            $confirmPassword = $form->get('confirmPassword')->getData();
+
             if ($password !== $confirmPassword) {
                 $this->addFlash('error', 'Les mots de passe ne correspondent pas.');
-                return $this->redirectToRoute('app_inscription');
+                return $this->redirectToRoute('app_developer_register');
             }
 
-
-
-            // Création du User
+            // Création de l'utilisateur associé (User dans la base de données)
             $user = new User();
+            $user->setEmail($email);
+            $hashedPassword = $passwordHasher->hashPassword($user, $password);
+            $user->setPassword($hashedPassword);
             $user->setRoles(['ROLE_DEV']);
-            $user->setEmail($email)
-                ->setPassword($passwordHasher->hashPassword($user, $password));
 
+            // Lier le Developer au User (Pour stocker ses identifiants et son rôle)
+            $developer->setUser($user);
+
+            // Gestion de l'upload de l'avatar
+            $avatarFile = $form->get('avatar')->getData();
+            if ($avatarFile) {
+                $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
+
+                try {
+                    $avatarFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                    $developer->setAvatar($newFilename);
+                } catch (\Exception $e) {
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'avatar.');
+                    return $this->redirectToRoute('app_developer_login');
+                }
+            }
+
+            // Enregistrement dans la base de données
             $entityManager->persist($user);
-
-            // Création de l'entité Developer
-            $developer = new Developer();
-            $developer->setNom($firstName)
-                ->setPrenom($lastName)
-                ->setLocalisation($location)
-                ->setLanguages($languages)
-                ->setExperience($experience)
-                ->setSalaireMin($salary)
-                ->setBio($bio);
-            $developer->setUser($user); // Association de l'utilisateur avec le développeur
-
-
             $entityManager->persist($developer);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre inscription a été effectuée avec succès !');
-            return $this->redirectToRoute('app_developer_login'); // Redirection après succès
+            $this->addFlash('success', 'Inscription réussie !');
+            return $this->redirectToRoute('app_developer_login');
         }
-        return $this->render('developer/inscription.html.twig');
+
+        return $this->render('developer/inscription.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 
@@ -175,7 +164,7 @@ class DeveloperController extends AbstractController
             'fiches_de_poste' => $fichesDePoste,
         ]);
     }
-    
+
     public function searchOffres(EntityManagerInterface $entityManager, string $searchTerm): array
     {
         $queryBuilder = $entityManager->getRepository(FicheDePoste::class)->createQueryBuilder('f');
@@ -252,6 +241,46 @@ class DeveloperController extends AbstractController
         }
 
         return $this->render('developer/profile.html.twig', [
+            'developer' => $developer,
+        ]);
+    }
+
+    #[Route('/developer/update/{id}', name: 'app_update_profile')]
+    public function updateProfile(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        
+        $developer = $entityManager->getRepository(Developer::class)->find($id);
+
+        if (!$developer) {
+            throw $this->createNotFoundException('Développeur non trouvé.');
+        }
+
+        if ($request->isMethod('POST')) {
+            $developer->setPrenom($request->request->get('firstName'));
+            $developer->setNom($request->request->get('lastName'));
+            $developer->setLocalisation($request->request->get('location'));
+            $developer->setExperience($request->request->get('experience'));
+            $developer->setSalaireMin($request->request->get('salary'));
+            // $developer->setLanguages($request->request->get('languages'));
+            $developer->setBio($request->request->get('bio'));
+
+            $photo = $request->files->get('photo');
+            if ($photo) {
+                $uploadsDir = $this->getParameter('uploads_directory');
+                $newFilename = uniqid() . '.' . $photo->guessExtension();
+                $photo->move($uploadsDir, $newFilename);
+                $developer->setAvatar($newFilename);
+            }
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Profil mis à jour avec succès.');
+
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        return $this->render('developer/update_profile.html.twig', [
             'developer' => $developer,
         ]);
     }

@@ -36,8 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Developer::class, cascade: ['persist', 'remove'])]
     private ?Developer $developer = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Company::class, cascade: ['persist', 'remove'])]
-    private ?Company $company= null;
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Company::class, fetch: 'EAGER', cascade: ['persist', 'remove'])]
+    private ?Company $company = null;
 
     public function getId(): ?int
     {

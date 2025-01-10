@@ -34,7 +34,9 @@ class FicheDePoste
 
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'fichesDePostes')]
     #[ORM\JoinColumn(nullable: false)]
-    private $entreprise;
+    private ?Company $entreprise = null;
+
+
 
     #[ORM\Column]
     private int $views = 0;
@@ -116,19 +118,17 @@ class FicheDePoste
         return $this;
     }
 
-    public function getEntreprise(): ?Company
+    public function getCompany(): ?Company
     {
-        return $this->entreprise;
+        return $this->company;
     }
 
-    public function setEntreprise(?Company $entreprise): static
+    public function setCompany(?Company $company): self
     {
-        $this->entreprise = $entreprise;
-
-        if ($entreprise !== null && !$entreprise->getFichesDePostes()->contains($this)) {
-            $entreprise->addFicheDePoste($this);
+        $this->company = $company;
+        if ($company !== null && !$company->getFichesDePostes()->contains($this)) {
+            $company->addFicheDePoste($this);
         }
-
         return $this;
     }
 

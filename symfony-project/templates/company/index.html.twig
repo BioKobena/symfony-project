@@ -110,32 +110,29 @@
 		<div class="py-3">
 			<div class="container">
 
-				<div class="owl-logos owl-carousel d-flex justify-center align-center">
-
+				<div class="owl-logos owl-carousel">
 					<div class="item">
-						<img src="https://telecomnancy.univ-lorraine.fr/wp-content/uploads/2022/10/LOGO-ssg-1024x137.png" alt="Image" class="img-fluid">
+						<img src="images/logo-puma.png" alt="Image" class="img-fluid">
 					</div>
 					<div class="item">
-						<img src="https://bim-w.com/wp-content/uploads/3DS_Corp_Logotype_Blue_RGB.png" alt="Image" class="img-fluid">
+						<img src="images/logo-adobe.png" alt="Image" class="img-fluid">
 					</div>
 					<div class="item">
-						<img src="https://rennesbusinessmag.fr/wp-content/uploads/2021/03/Logo_6TM21.png" alt="Image" class="img-fluid">
+						<img src="images/logo-google.png" alt="Image" class="img-fluid">
 					</div>
 					<div class="item">
-						<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" alt="Image" class="img-fluid">
+						<img src="images/logo-paypal.png" alt="Image" class="img-fluid">
 					</div>
 					<div class="item">
-						<img src="https://cdn.cookielaw.org/logos/9c9e1da5-cb5e-4789-be00-8f37c0e84ef3/2ffce58c-95ef-42c4-9c00-42881e5a0889/7c02a52b-9889-4293-99bd-553ef548c490/Randstad_Digital_Logo.png" alt="Image" class="img-fluid">
+						<img src="images/logo-adobe.png" alt="Image" class="img-fluid">
 					</div>
-
-
+					<div class="item">
+						<img src="images/logo-google.png" alt="Image" class="img-fluid">
+					</div>
 				</div>
-
-
 			</div>
 
 		</div>
-
 
 		<div class="container mt-5">
 			<div class="row text-center mb-5">
@@ -147,7 +144,14 @@
 					<div class="col-md-6 col-lg-4 mb-4">
 						<div class="card shadow-sm position-relative">
 							<div class="position-relative top-0 end-0 p-3">
-								<img src="{{ developer.avatarUrl | default('https://via.placeholder.com/150') }}" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
+								{% if app.session.get('user_id') is not empty %}
+
+									{% if developer %}
+										<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;">
+									{% endif %}
+								{% else %}
+									<img src="{{'https://via.placeholder.com/150'}}" alt="Profil Avatar">
+								{% endif %}
 							</div>
 							<div class="card-body">
 								<h5 class="card-title">{{ developer.nom }}</h5>
@@ -164,7 +168,9 @@
 						</div>
 					</div>
 				{% else %}
-					<p class="text-center text-muted">Aucun développeur disponible pour le moment.</p>
+					<li class="list-group-item text-center">
+						Aucun développeur inscrit
+					</li>
 				{% endfor %}
 			</div>
 
@@ -181,7 +187,14 @@
 						<div class="col-md-6 col-lg-4 mb-4">
 							<div class="card shadow-sm position-relative">
 								<div class="position-relative top-0 end-0 p-3">
-									<img src="{{ developer.avatarUrl | default('https://img.freepik.com/free-photo/portrait-serious-man_23-2148780115.jpg') }}" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;" alt="Profil Avatar">
+									{% if app.session.get('user_id') is not empty %}
+
+										{% if developer %}
+											<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;">
+										{% endif %}
+									{% else %}
+										<img src="{{'https://via.placeholder.com/150'}}" alt="Profil Avatar">
+									{% endif %}
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">{{ developer.nom }}</h5>
@@ -198,7 +211,9 @@
 							</div>
 						</div>
 					{% else %}
-						<p class="text-center text-muted">Aucun développeur disponible pour le moment.</p>
+						<li class="list-group-item text-center">
+							Aucun développeur inscrit
+						</li>
 					{% endfor %}
 				</div>
 				<div class="row mt-5">
@@ -340,4 +355,4 @@
 <div class="spinner-border" role="status">
 	<span class="sr-only">Loading...</span>
 
-</div></div><script src="{{ asset("js/jquery-3.5.1.min.js") }}"></script><script src="{{asset("js/jquery-migrate-3.0.0.min.js")}}"></script><script src="{{asset("js/popper.min.js")}}"></script><script src="{{asset("js/bootstrap.min.js")}}"></script><script src="{{asset("js/owl.carousel.min.js")}}"></script><script src="{{asset("js/aos.js")}}"></script><script src="{{asset("js/imagesloaded.pkgd.js")}}"></script><script src="{{asset("js/isotope.pkgd.min.js")}}"></script><script src="{{asset("js/jquery.animateNumber.min.js")}}"></script><script src="{{asset("js/jquery.stellar.min.js")}}"></script><script src="{{asset("js/jquery.waypoints.min.js")}}"></script><script src="{{asset("js/jquery.fancybox.min.js")}}"></script><script src="{{asset("js/custom.js")}}"></script></body></html>
+</div></div> <script src="{{ asset("js/jquery-3.5.1.min.js") }}"></script> <script src="{{asset("js/jquery-migrate-3.0.0.min.js")}}"></script> <script src="{{asset("js/popper.min.js")}}"></script> <script src="{{asset("js/bootstrap.min.js")}}"></script> <script src="{{asset("js/owl.carousel.min.js")}}"></script> <script src="{{asset("js/aos.js")}}"></script> <script src="{{asset("js/imagesloaded.pkgd.js")}}"></script> <script src="{{asset("js/isotope.pkgd.min.js")}}"></script> <script src="{{asset("js/jquery.animateNumber.min.js")}}"></script> <script src="{{asset("js/jquery.stellar.min.js")}}"></script> <script src="{{asset("js/jquery.waypoints.min.js")}}"></script> <script src="{{asset("js/jquery.fancybox.min.js")}}"></script> <script src="{{asset("js/custom.js")}}"></script></body></html>

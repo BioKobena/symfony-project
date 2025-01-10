@@ -50,10 +50,10 @@
 					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
 							<li class="active">
-								<a class="font-weight-bold " href="{{path('app_developer')}}">Développeurs</a>
+								<a class="fs-3 badge text-primary bg-white" href="{{path('app_developer')}}">Développeurs</a>
 							</li>
 							<li class="active">
-								<a class="font-weight-bold " href="{{path('app_company')}}">Entreprises</a>
+								<a class="fs-3 badge text-white bg-success" href="{{path('app_company_login')}}">Entreprises</a>
 							</li>
 						</ul>
 
@@ -163,7 +163,7 @@
 						<h2 class="font-weight-bold mb-4 heading">Faîtes de votre talent une opportunité</h2>
 						<p class="mb-4">Matchez avec une entreprise à vos goûts et valeurs.</p>
 						<p>
-							<a href="{{path('app_company')}}" class="btn btn-primary">Développeurs</a>
+							<a href="{{path('app_developer')}}" class="btn btn-primary">Développeurs</a>
 						</p>
 
 					</div>
@@ -184,7 +184,7 @@
 						<h2 class="font-weight-bold mb-4">Vos collaborateurs en un clique</h2>
 						<p class="mb-4">Découvrez vos futurs Devs</p>
 						<p>
-							<a href="{{path('app_developer')}}" class="btn btn-primary">Développeurs</a>
+							<a href="{{path('app_company_login')}}" class="btn btn-primary">Entreprises</a>
 						</p>
 
 					</div>
@@ -275,7 +275,7 @@
 				<div class="container">
 					<div class="container">
 						<div class="row">
-							{% for fiche in offres %}
+							{% for fiche in fiches %}
 								<div class="col-md-6 col-lg-4 mb-4">
 									<div class="card shadow-sm p-3">
 										<img src="https://www.digital-aquitaine.com/wp-content/uploads/2024/12/CAPGEMINI47976684200187.png" class="card-img-top" alt="Offre Image">
