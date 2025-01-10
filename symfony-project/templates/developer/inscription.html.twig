@@ -1,235 +1,85 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends 'navbarDev.html.twig' %}
+{% block title %}Dashboard Développeur
+{% endblock %}
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		<title>Inscription - AdopteUnDev</title>
-	</head>
-
-	<body>
-		<div class="container" style="margin-bottom:5rem;width:100vw">
-			<nav class="site-nav min-vw-100">
-				<div class="logo">
-					<a class="text-black">AdopteUnDev<span class="font-weight-bold">.</span>
-					</a>
+{% block body %}
+	<div class="site-section bg-light d-flex justify-content-center align-items-center min-vh-100">
+		<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40 bg-white">
+			<h2 class="text-center mb-4 text-primary h4">Inscrivez-vous pour trouver votre voie avec AdopteUnDev</h2>
+			{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+			<div class="form-row">
+				<div class="col-md-6 form-group">
+					{{ form_label(form.nom) }}
+					{{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
 				</div>
-				<div class="row align-items-center">
-
-					<div class="col-12 col-sm-12 col-lg-12 site-navigation text-center">
-						<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu">
-							<li>
-								<a class="text-black" href="{{path('app_developer')}}">Accueil</a>
-							</li>
-							<li class="active">
-								<a class="text-black" href="{{path('app_offre')}}">Offres</a>
-							</li>
-							<li class="active">
-								<a class="text-black" href="{{path('app_matching')}}">Matching</a>
-							</li>
-							<li>
-								<a class="text-black" href="{{ path('app_notifications') }}">
-									Notifications
-									<span class="icon-notifications"></span>
-								</a>
-							</li>
-							<li>
-								<a class="text-black" href="{{path('app_favori')}}">Favoris</a>
-							</li>
-							<li class="has-children">
-								<a href="#" class="text-black font-weight-bold">Mon compte</a>
-								<ul class="dropdown">
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_login')}}">Connexion</a>
-									</li>
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_inscription')}}">Inscription</a>
-									</li>
-									<li>
-										<a class="text-black" style="cursor:pointer;" href="{{path('app_developer_profile')}}">Profil</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-
-					</div>
-
+				<div class="col-md-6 form-group">
+					{{ form_label(form.prenom) }}
+					{{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
 				</div>
-			</nav>
-		</div>
+			</div>
 
-		<div class="site-section bg-light d-flex justify-content-center align-items-center min-vh-100">
-			<div class="register-card shadow p-4 rounded w-75 w-md-50 w-lg-40 bg-white">
-				<h2 class="text-center mb-4 text-primary h4">Inscrivez-vous pour trouver votre voie avec AdopteUnDev</h2>
-				{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
-				<div class="form-row">
-					<div class="col-md-6 form-group">
-						{{ form_label(form.nom) }}
-						{{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
-					</div>
-					<div class="col-md-6 form-group">
-						{{ form_label(form.prenom) }}
-						{{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
-					</div>
+			<div class="form-row">
+				<div class="col-md-6 form-group">
+					{{ form_label(form.email) }}
+					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre e-mail'}}) }}
 				</div>
-
-				<div class="form-row">
-					<div class="col-md-6 form-group">
-						{{ form_label(form.email) }}
-						{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre e-mail'}}) }}
-					</div>
-					<div class="col-md-6 form-group">
-						{{ form_label(form.localisation) }}
-						{{ form_widget(form.localisation, {'attr': {'class': 'form-control', 'placeholder': 'Votre localisation'}}) }}
-					</div>
+				<div class="col-md-6 form-group">
+					{{ form_label(form.localisation) }}
+					{{ form_widget(form.localisation, {'attr': {'class': 'form-control', 'placeholder': 'Votre localisation'}}) }}
 				</div>
+			</div>
 
-				<div class="form-row">
-					<div class="col-md-6 form-group">
-						{{ form_label(form.password) }}
-						{{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
-					</div>
-					<div class="col-md-6 form-group">
-						{{ form_label(form.confirmPassword) }}
-						{{ form_widget(form.confirmPassword, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'}}) }}
-					</div>
+			<div class="form-row">
+				<div class="col-md-6 form-group">
+					{{ form_label(form.password) }}
+					{{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
 				</div>
-
-				<div class="form-row">
-					<div class="col-md-6 form-group">
-						{{ form_label(form.experience) }}
-						{{ form_widget(form.experience, {'attr': {'class': 'form-control', 'placeholder': 'Ex : 3 (sur 5)', 'min': 1, 'max': 5}}) }}
-					</div>
-					<div class="col-md-6 form-group">
-						{{ form_label(form.salaire_min) }}
-						{{ form_widget(form.salaire_min, {'attr': {'class': 'form-control', 'placeholder': 'Ex : 40000'}}) }}
-					</div>
+				<div class="col-md-6 form-group">
+					{{ form_label(form.confirmPassword) }}
+					{{ form_widget(form.confirmPassword, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'}}) }}
 				</div>
+			</div>
 
-				<div class="form-group">
-					{{ form_label(form.languages) }}
-					{{ form_widget(form.languages, {
+			<div class="form-row">
+				<div class="col-md-6 form-group">
+					{{ form_label(form.experience) }}
+					{{ form_widget(form.experience, {'attr': {'class': 'form-control', 'placeholder': 'Ex : 3 (sur 5)', 'min': 1, 'max': 5}}) }}
+				</div>
+				<div class="col-md-6 form-group">
+					{{ form_label(form.salaire_min) }}
+					{{ form_widget(form.salaire_min, {'attr': {'class': 'form-control', 'placeholder': 'Ex : 40000'}}) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{{ form_label(form.languages) }}
+				{{ form_widget(form.languages, {
         'attr': {
             'class': 'form-control', 
             'placeholder': 'Sélectionnez vos langages de programmation'
         }
     }) }}
-				</div>
-
-
-				<div class="form-group">
-					{{ form_label(form.bio) }}
-					{{ form_widget(form.bio, {'attr': {'class': 'form-control', 'rows': 3, 'placeholder': 'Décrivez-vous brièvement'}}) }}
-				</div>
-
-				<div class="form-group">
-					{{ form_label(form.avatar) }}
-					{{ form_widget(form.avatar, {'attr': {'class': 'form-control-file'}}) }}
-					<small class="form-text text-muted">Formats acceptés : JPG, PNG, GIF.</small>
-				</div>
-
-				<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
-				<p class="text-center mt-3">
-					Déjà un compte ?
-					<a href="{{ path('app_developer_login') }}">Se connecter</a>
-				</p>
-				{{ form_end(form) }}
 			</div>
 
-		</div>
 
-
-		<div class="site-footer text-white">
-			<div class="container">
-				<div class="row justify-content-between">
-					<div class="col-lg-4">
-						<div class="widget">
-							<h3>À propos</h3>
-							<p class="text-black">AdopteUnDev transforme les idées en solutions numériques extraordinaires en connectant développeurs et entreprises pour un écosystème innovant et collaboratif.</p>
-						</div>
-						<div class="widget">
-							<h3>Connectez-vous avec nous</h3>
-							<ul class="social list-unstyled">
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-facebook"></span>
-									</a>
-								</li>
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-twitter"></span>
-									</a>
-								</li>
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-instagram"></span>
-									</a>
-								</li>
-								<li>
-									<a href="{{path('app_offre')}}">
-										<span class="icon-linkedin"></span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-12">
-								<div class="widget">
-									<h3>Navigation</h3>
-								</div>
-							</div>
-							<div class="col-6 col-sm-6 col-md-4">
-								<div class="widget">
-									<ul class="links list-unstyled">
-										<li>
-											<a href="{{path('app_offre')}}">Accueil</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Offres</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Matching</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Favoris</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Contact</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-6 col-sm-6 col-md-4">
-								<div class="widget">
-									<ul class="links list-unstyled">
-										<li>
-											<a href="{{path('app_offre')}}">À propos de nous</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Politique de confidentialité</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">FAQ</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Carrières</a>
-										</li>
-										<li>
-											<a href="{{path('app_offre')}}">Support</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
+			<div class="form-group">
+				{{ form_label(form.bio) }}
+				{{ form_widget(form.bio, {'attr': {'class': 'form-control', 'rows': 3, 'placeholder': 'Décrivez-vous brièvement'}}) }}
 			</div>
-		</div>
-	</body>
 
-</html>
+			<div class="form-group">
+				{{ form_label(form.avatar) }}
+				{{ form_widget(form.avatar, {'attr': {'class': 'form-control-file'}}) }}
+				<small class="form-text text-muted">Formats acceptés : JPG, PNG, GIF.</small>
+			</div>
+
+			<button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+			<p class="text-center mt-3">
+				Déjà un compte ?
+				<a href="{{ path('app_developer_login') }}">Se connecter</a>
+			</p>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}
