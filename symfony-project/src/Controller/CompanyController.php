@@ -158,52 +158,52 @@ class CompanyController extends AbstractController
 
     #[Route('/favorites/add/{developperId}', name: 'company_add_fiche_favoris')]
     public function add(
-        int $developperId, 
+        int $developperId,
         EntityManagerInterface $entityManager
     ): Response {
         // Récupérer l'utilisateur connecté
         $user = $this->getUser();
-    
+
         // Vérifiez que l'utilisateur est bien connecté et qu'il est associé à une entreprise
         if (!$user) {
             throw $this->createAccessDeniedException('Vous devez être connecté pour effectuer cette action.');
         }
-    
+
         $company = $entityManager->getRepository(Company::class)->findOneBy(['user' => $user]);
-    
+
         if (!$company) {
             throw $this->createNotFoundException('Aucune entreprise associée à cet utilisateur.');
         }
-    
+
         // Récupérer le développeur par ID
         $developer = $entityManager->getRepository(Developer::class)->find($developperId);
-    
+
         if (!$developer) {
             throw $this->createNotFoundException('Développeur introuvable.');
         }
-    
+
         // Vérifiez si le favori existe déjà
         $existingFavorite = $entityManager->getRepository(Favoris::class)->findOneBy([
             'company' => $company,
             'developer' => $developer,
         ]);
-    
+
         if (!$existingFavorite) {
             $favorite = new Favoris();
             $favorite->setCompany($company);
             $favorite->setDeveloper($developer);
-    
+
             $entityManager->persist($favorite);
             $entityManager->flush();
-    
+
             $this->addFlash('success', 'Développeur ajouté aux favoris.');
         } else {
             $this->addFlash('info', 'Ce développeur est déjà dans vos favoris.');
         }
-    
+
         return $this->redirectToRoute('app_company');
     }
-    
+
 
     #[Route("/search-developers", name: "search_developers", methods: ['GET'])]
     public function searchDevelopers(Request $request, DeveloperRepository $developerRepository): Response
@@ -214,6 +214,53 @@ class CompanyController extends AbstractController
 
         return $this->render('profil/index.html.twig', [
             'developers' => $developers,
+        ]);
+    }
+
+    #[Route('/company-update-{id}', name: 'app_update_company_profile')]
+    // #[Route('/company-update-{id}', name: 'app_update_entreprise')]
+    public function updateCompanyProfile(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer l'entreprise en fonction de l'ID
+        $entreprise = $entityManager->getRepository(Company::class)->find($id);
+
+        // Vérifier si l'entreprise existe
+        if (!$entreprise) {
+            throw $this->createNotFoundException('Entreprise non trouvée');
+        }
+
+        // Si le formulaire est soumis
+        if ($request->isMethod('POST')) {
+            // Mise à jour des informations de l'entreprise
+            $entreprise->setNom($request->request->get('nom'));
+            // $entreprise->setSecteur($request->request->get('secteur'));
+            $entreprise->setLocalisation($request->request->get('localisation'));
+            $entreprise->setDescription($request->request->get('description'));
+            // $entreprise->setTailleEntreprise($request->request->get('taille_entreprise'));
+            // $entreprise->setTypeEntreprise($request->request->get('type_entreprise'));
+
+            // Gestion du logo
+            $logo = $request->files->get('avatar');
+            if ($logo) {
+                $uploadsDir = $this->getParameter('uploads_directory');
+                $newFilename = uniqid() . '.' . $logo->guessExtension();
+                $logo->move($uploadsDir, $newFilename);
+                $entreprise->setAvatar($newFilename);
+            }
+
+            // Sauvegarde en base de données
+            $entityManager->flush();
+
+            // Message de succès
+            $this->addFlash('success', 'Profil de l\'entreprise mis à jour avec succès.');
+
+            // Redirection vers le tableau de bord
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        // Passer la variable 'entreprise' à la vue
+        return $this->render('company/update_profile.html.twig', [
+            'entreprise' => $entreprise,
         ]);
     }
 }

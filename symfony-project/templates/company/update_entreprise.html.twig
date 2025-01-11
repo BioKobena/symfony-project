@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mettre à jour le profil de l'entreprise
+{% endblock %}
+
+{% block body %}
+	<div class="container" style="margin-top:7rem;">
+		<div
+			class="row">
+			<!-- Section Profil de l'entreprise -->
+			<div class="col-md-4">
+				<div
+					class="card card-custom1 shadow-sm border-0 p-4">
+					<!-- Logo de l'entreprise -->
+					{% if company.logo %}
+						<div class="d-flex justify-content-center mb-3">
+							<img class="rounded-circle w-75" src="{{ asset('uploads/logos/' ~ company.logo) }}">
+						</div>
+					{% else %}
+						<p>Aucun logo disponible</p>
+					{% endif %}
+
+					<!-- Nom de l'entreprise -->
+					<h4 class="text-center fw-bold">{{ company.nom }}</h4>
+
+					<!-- Détails de l'entreprise -->
+					<ul class="list-unstyled">
+						<li>
+							<strong>Email :</strong>
+							{{ company.user.email }}</li>
+						<li>
+							<strong>Localisation :</strong>
+							{{ company.localisation }}</li>
+						<li>
+							<strong>Secteur d'activité :</strong>
+							{{ company.secteurActivite }}</li>
+					</ul>
+
+					<div class="mb-3">
+						<strong>Description :</strong>
+						<p>{{ company.description }}</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Section Formulaire de mise à jour -->
+			<div class="col-md-8 shadow p-4 rounded bg-white">
+				<h2 class="text-center text-primary mb-4 h4">Mettre à jour votre profil d'entreprise</h2>
+				<form action="{{ path('app_update_entreprise', {id: company.id}) }}" method="POST" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="nom">Nom de l'entreprise</label>
+							<input type="text" id="nom" name="nom" class="form-control" value="{{ entreprise.nom }}" required>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="secteur">Secteur d'activité</label>
+							<input type="text" id="secteur" name="secteur" class="form-control" value="{{ entreprise.secteur }}">
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="email">Adresse e-mail</label>
+							<input type="email" id="email" name="email" class="form-control" value="{{ entreprise.email }}" required readonly>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="localisation">Localisation</label>
+							<input type="text" id="localisation" name="localisation" class="form-control" value="{{ entreprise.localisation }}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="description">Description de l'entreprise :</label>
+						<textarea id="description" name="description" class="form-control" rows="3">{{ entreprise.description }}</textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="taille_entreprise">Taille de l'entreprise :</label>
+						<input type="text" id="taille_entreprise" name="taille_entreprise" class="form-control" value="{{ entreprise.taille_entreprise }}">
+					</div>
+
+					<div class="form-group">
+						<label for="type_entreprise">Type d'entreprise :</label>
+						<input type="text" id="type_entreprise" name="type_entreprise" class="form-control" value="{{ entreprise.type_entreprise }}">
+					</div>
+
+					<div class="form-group">
+						<label for="logo">Logo de l'entreprise :</label>
+						<input type="file" id="logo" name="avatar" class="form-control-file">
+						{% if entreprise.avatar %}
+							<small class="form-text text-muted">Laisser vide pour conserver l'image actuelle.</small>
+						{% endif %}
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-block">Mettre à jour</button>
+					<p class="text-center mt-3">
+						<a href="{{ path('app_dashboard_entreprise') }}">Revenir au tableau de bord</a>
+					</p>
+				</form>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
