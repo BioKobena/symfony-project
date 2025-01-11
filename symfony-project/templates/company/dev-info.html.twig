@@ -4,54 +4,55 @@
 
 {% block body %}
 
-		<!-- END container -->
 
-		<div class="site-section bg-light h-100" style="display:flex; justify-content:center; align-items:center">
-			<div class="container team" style="display:flex; justify-content:center; align-items:center">
-				<div class="col-md-6 col-lg-6 pic">
-					{% if app.session.get('user_id') is not empty %}
+	<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
 
-						{% if developer %}
-							<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="w-75">
-						{% endif %}
-					{% else %}
-						<img style="width:2rem; height:2rem; border-radius:4rem;" src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_1_essential-app-ui-avatar-profile-user-account-1024.png"/>
+		<div class="container team" style="display:flex; justify-content:center; align-items:center">
+			<div class="col-md-6 col-lg-6 pic">
+				{% if app.session.get('user_id') is not empty %}
+
+					{% if developer %}
+						<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="w-75">
 					{% endif %}
-				</div>
+				{% else %}
+					<img style="width:2rem; height:2rem; border-radius:4rem;" src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_1_essential-app-ui-avatar-profile-user-account-1024.png"/>
+				{% endif %}
+			</div>
 
-				<div class="col-md-6 col-lg-6 d-flex flex-column my-8 justify-center align-center">
-					<h3>
-						<a href="#">
-							<span>{{ developer.nom }}</span>
-							{{ developer.prenom }}</a>
-					</h3>
-					<span class="d-block position">{{ developer.localisation }}</span>
-					<p>
-						<strong>Localisation:</strong>
-						{{ developer.localisation }}
-					</p>
-					<div class="mb-4">
-						{% for language in developer.languages %}
-							<span class="badge fs-3 bg-secondary text-white p-3 me-2 mb-2">{{ language }}</span>
-						{% endfor %}
-					</div>
-					<p>
-						<strong>Niveau d'expérience:</strong>
-						{{ developer.experience }}
-						ans
-					</p>
-					{# <p>
-																															<strong>Salaire minimum souhaité:</strong>
-																															{{ developer.salaire_min }} €
-																														</p> #}
-					<p>
-						<strong>Biographie:</strong>
-						{{ developer.bio }}
-					</p>
-					<p class="mb-0">
-						<a class="btn btn-primary text-white mt-2">Contacter</a>
-					</p>
+			<div class="col-md-6 col-lg-6 d-flex flex-column my-8 justify-center align-center">
+				<h3>
+					<a href="#">
+						<span>{{ developer.nom }}</span>
+						{{ developer.prenom }}</a>
+				</h3>
+				<span class="d-block position">{{ developer.localisation }}</span>
+				<p>
+					<strong>Localisation:</strong>
+					{{ developer.localisation }}
+				</p>
+				<div class="mb-4">
+					{% for language in developer.languages %}
+						<span class="badge fs-3 bg-secondary text-white p-3 me-2 mb-2">{{ language }}</span>
+					{% endfor %}
 				</div>
+				<p>
+					<strong>Niveau d'expérience:</strong>
+					{{ developer.experience }}
+					ans
+				</p>
+				<p>
+					<strong>Salaire minimum souhaité:</strong>
+					{{ developer.salaireMin }}
+					€
+				</p>
+				<p>
+					<strong>Biographie:</strong>
+					{{ developer.bio }}
+				</p>
+				<p class="mb-0">
+					<a class="btn btn-primary text-white mt-2">Contacter</a>
+				</p>
 			</div>
 		</div>
+	</div>
 {% endblock %}

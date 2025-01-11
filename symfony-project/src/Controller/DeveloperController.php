@@ -187,8 +187,9 @@ class DeveloperController extends AbstractController
 
         // Vérifier que l'utilisateur est bien connecté
         if (!$user) {
-            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+            return $this->redirectToRoute('app_developer_login');
         }
+
 
         // Récupérer le développeur correspondant à l'utilisateur connecté
         $developer = $developerRepository->findOneBy(['user' => $user]);
@@ -202,6 +203,8 @@ class DeveloperController extends AbstractController
         if (!$ficheDePoste) {
             throw $this->createNotFoundException('Fiche de poste introuvable.');
         }
+
+        // dd($ficheDePoste);
 
         $favoris = $entityManager->getRepository(Favoris::class)->findOneBy([
             'developer' => $developer,
@@ -245,11 +248,11 @@ class DeveloperController extends AbstractController
         ]);
     }
 
-    #[Route('/developer/update/{id}', name: 'app_update_profile')]
+    #[Route('/developer-update-{id}', name: 'app_update_profile')]
     public function updateProfile(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        
+
         $developer = $entityManager->getRepository(Developer::class)->find($id);
 
         if (!$developer) {

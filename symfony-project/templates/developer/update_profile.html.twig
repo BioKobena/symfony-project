@@ -1,69 +1,114 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mettre à jour le profil{% endblock %}
+{% block title %}Mettre à jour le profil
+{% endblock %}
 
 {% block body %}
-<div class="update-profile-card shadow p-4 rounded w-75 w-md-50 w-lg-40 bg-white mx-auto">
-    <h2 class="text-center mb-4 text-primary h4">Mettre à jour votre profil</h2>
-    <form action="{{ path('app_update_profile', {id: developer.id}) }}" method="POST" enctype="multipart/form-data">
-        <div class="form-row">
-            <div class="col-md-6 form-group">
-                <label for="firstName">Prénom</label>
-                <input type="text" id="firstName" name="firstName" class="form-control" value="{{ developer.prenom }}" required>
-            </div>
-            <div class="col-md-6 form-group">
-                <label for="lastName">Nom</label>
-                <input type="text" id="lastName" name="lastName" class="form-control" value="{{ developer.nom }}" required>
-            </div>
-        </div>
 
-        <div class="form-row">
-            <div class="col-md-6 form-group">
-                <label for="email">Adresse e-mail</label>
-                <input type="email" id="email" name="email" class="form-control" value="{{ developer.user.email }}" required readonly>
-            </div>
-            <div class="col-md-6 form-group">
-                <label for="location">Localisation</label>
-                <input type="text" id="location" name="location" class="form-control" value="{{ developer.localisation }}">
-            </div>
-        </div>
+	<div class="container" style="margin-top:7rem;">
+		<div
+			class="row">
+			<!-- Section Profil -->
+			<div class="col-md-4">
+				<div
+					class="card card-custom1 shadow-sm border-0 p-4">
+					<!-- Image utilisateur -->
+					{% if developer.avatar %}
+						<div class="d-flex justify-content-center mb-3">
+							<img class="rounded-circle w-75" src="{{ asset('uploads/photos/' ~ developer.avatar) }}">
+						</div>
+					{% else %}
+						<p>Aucune photo disponible</p>
+					{% endif %}
+					<!-- Nom et prénom -->
+					<h4 class="text-center fw-bold">{{ developer.nom }}
+						{{ developer.prenom }}</h4>
 
-        <div class="form-row">
-            <div class="col-md-6 form-group">
-                <label for="experience">Niveau d'expérience :</label>
-                <input type="number" id="experience" name="experience" class="form-control" value="{{ developer.experience }}" min="1" max="5">
-            </div>
-            <div class="col-md-6 form-group">
-                <label for="salary">Salaire minimum souhaité (en €)</label>
-                <input type="number" id="salary" name="salary" class="form-control" value="{{ developer.salaireMin }}">
-            </div>
-        </div>
+					<!-- Expérience -->
+					<p class="text-center text-muted">{{ developer.experience }}
+						ans d'expérience</p>
 
-        {# <div class="form-group">
-            <label for="languages">Langages de programmation :</label>
-            <input type="text" id="languages" name="languages" class="form-control" value="{{ developer.languages }}">
-        </div> #}
+					<!-- Détails du profil -->
+					<ul class="list-unstyled">
+						<li>
+							<strong>Email :</strong>
+							{{ developer.user.email }}</li>
+						<li>
+							<strong>Localisation :</strong>
+							{{ developer.localisation }}</li>
+						<li>
+							<strong>Salaire Min :</strong>
+							{{ developer.salaireMin }}
+							€</li>
+                            <li>
+							<strong>Niveau d'expérience :</strong>
+							{{ developer.experience }} ans
+							</li>
+					</ul>
+					<div class="mb-3">
+						<strong>Biographie :</strong>
+						<p>{{ developer.bio }}</p>
+					</div>
+				</div>
+			</div>
 
-        <div class="form-group">
-            <label for="bio">Courte biographie :</label>
-            <textarea id="bio" name="bio" class="form-control" rows="3">{{ developer.bio }}</textarea>
-        </div>
+			<!-- Section Formulaire -->
+			<div class="col-md-8 shadow p-4 rounded bg-white">
+				<h2 class="text-center text-primary mb-4 h4">Mettre à jour votre profil</h2>
+				<form action="{{ path('app_update_profile', {id: developer.id}) }}" method="POST" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="firstName">Prénom</label>
+							<input type="text" id="firstName" name="firstName" class="form-control" value="{{ developer.prenom }}" required>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="lastName">Nom</label>
+							<input type="text" id="lastName" name="lastName" class="form-control" value="{{ developer.nom }}" required>
+						</div>
+					</div>
 
-        <div class="form-group">
-            <label for="photo">Photo de profil :</label>
-            <input type="file" id="photo" name="photo" class="form-control-file">
-            {% if developer.avatar %}
-                <div class="mt-3">
-                    <img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Photo de {{ developer.nom }}" class="img-thumbnail" style="max-width: 150px;">
-                </div>
-            {% endif %}
-            <small class="form-text text-muted">Laisser vide pour conserver l'image actuelle.</small>
-        </div>
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="email">Adresse e-mail</label>
+							<input type="email" id="email" name="email" class="form-control" value="{{ developer.user.email }}" required readonly>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="location">Localisation</label>
+							<input type="text" id="location" name="location" class="form-control" value="{{ developer.localisation }}">
+						</div>
+					</div>
 
-        <button type="submit" class="btn btn-primary btn-block">Mettre à jour</button>
-        <p class="text-center mt-3">
-            <a href="{{ path('app_developer') }}">Revenir au tableau de bord</a>
-        </p>
-    </form>
-</div>
+					<div class="form-row">
+						<div class="col-md-6 form-group">
+							<label for="experience">Niveau d'expérience :</label>
+							<input type="number" id="experience" name="experience" class="form-control" value="{{ developer.experience }}" min="1" max="5">
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="salary">Salaire minimum souhaité (en €)</label>
+							<input type="number" id="salary" name="salary" class="form-control" value="{{ developer.salaireMin }}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="bio">Courte biographie :</label>
+						<textarea id="bio" name="bio" class="form-control" rows="3">{{ developer.bio }}</textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="photo">Photo de profil :</label>
+						<input type="file" id="photo" name="photo" class="form-control-file">
+						{% if developer.avatar %}
+							<small class="form-text text-muted">Laisser vide pour conserver l'image actuelle.</small>
+						{% endif %}
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-block">Mettre à jour</button>
+					<p class="text-center mt-3">
+						<a href="{{ path('app_developer') }}">Revenir au tableau de bord</a>
+					</p>
+				</form>
+
+			</div>
+		</div>
+	</div>
 {% endblock %}

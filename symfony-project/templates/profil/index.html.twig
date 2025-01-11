@@ -3,123 +3,125 @@
 {% endblock %}
 
 {% block body %}
-		<style>
-			.search-bar {
-				display: flex;
-				align-items: center;
-				max-width: 900px;
-				margin: 0 auto;
-			}
+	<style>
+		.search-bar {
+			display: flex;
+			align-items: center;
+			max-width: 900px;
+			margin: 0 auto;
+		}
 
-			.search-bar input {
-				flex: 1;
-				padding: 15px;
-				border: 1px solid #ccc;
-				border-radius: 5px;
-				font-size: 16px;
-			}
+		.search-bar input {
+			flex: 1;
+			padding: 15px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+		}
 
-			.search-bar button {
-				padding: 15px 25px;
-				margin-left: 10px;
-				background-color: #007bff;
-				color: #fff;
-				border: none;
-				border-radius: 5px;
-				cursor: pointer;
-			}
+		.search-bar button {
+			padding: 15px 25px;
+			margin-left: 10px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
 
-			.search-bar button:hover {
-				background-color: #0056b3;
-			}
-		</style>
-		<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
+		.search-bar button:hover {
+			background-color: #0056b3;
+		}
+	</style>
+	<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
 
-			<div class="container mt-5">
-				<div class="text-center mb-4">
-					<h4 class="font-weight-bold">Consultez les profils</h4>
-					<p class="text-muted">Trouvez les développeurs correspondant à vos critères</p>
-				</div>
-
-				<form action="{{ path('search_developers') }}" method="GET" class="bg-white m-4 p-4 shadow-sm rounded">
-					<div
-						class="row">
-						<!-- Salaire -->
-						<div class="col-md-4 mb-3">
-							<label for="salary" class="form-label">Salaire minimum souhaité (€)</label>
-							<input type="number" id="salary" name="salary" class="form-control" placeholder="Ex : 40000">
-						</div>
-
-						<!-- Localisation -->
-						<div class="col-md-4 mb-3">
-							<label for="location" class="form-label">Localisation</label>
-							<input type="text" id="location" name="location" class="form-control" placeholder="Ex : Paris, France">
-						</div>
-
-						<!-- Niveau d'expérience -->
-						<div class="col-md-4 mb-3">
-							<label for="experience" class="form-label">Niveau d'expérience</label>
-							<input type="number" id="experience" name="experience" class="form-control" min="1" max="5" placeholder="Ex : 3">
-						</div>
-					</div>
-
-					{# <div class="form-group mb-3">
-																<label for="languages" class="form-label">Langages ou technologies</label>
-																<select id="languages" name="languages[]" class="form-control" multiple>
-																	<option value="python">Python</option>
-																	<option value="javascript">JavaScript</option>
-																	<option value="java">Java</option>
-																	<option value="php">PHP</option>
-																	<option value="csharp">C#</option>
-																</select>
-																<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
-															</div> #}
-
-					<!-- Bouton de recherche -->
-					<div class="text-center">
-						<button type="submit" class="btn btn-primary">Trouver des Devs</button>
-					</div>
-				</form>
-
+		<div class="container mt-5">
+			<div class="text-center mb-4">
+				<h4 class="font-weight-bold">Consultez les profils</h4>
+				<p class="text-muted">Trouvez les développeurs correspondant à vos critères</p>
 			</div>
 
-			<div class="container site-section">
-				<div class="row">
-					{% if developers is not empty %}
-						{% for developer in developers %}
-							<div class="col-md-6 col-lg-4 mb-4">
-								<div class="card shadow-sm position-relative">
-									<div class="position-relative top-0 end-0 p-3">
-										{% if app.session.get('user_id') is not empty %}
-											{% if developer %}
-												<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;">
-											{% endif %}
-										{% else %}
-											<img src="{{'https://via.placeholder.com/150'}}" alt="Profil Avatar">
+			<form action="{{ path('search_developers') }}" method="GET" class="bg-white m-4 p-4 shadow-sm rounded">
+				<div
+					class="row">
+					<!-- Salaire -->
+					<div class="col-md-4 mb-3">
+						<label for="salary" class="form-label">Salaire minimum souhaité (€)</label>
+						<input type="number" id="salary" name="salary" class="form-control" placeholder="Ex : 40000">
+					</div>
+
+					<!-- Localisation -->
+					<div class="col-md-4 mb-3">
+						<label for="location" class="form-label">Localisation</label>
+						<input type="text" id="location" name="location" class="form-control" placeholder="Ex : Paris, France">
+					</div>
+
+					<!-- Niveau d'expérience -->
+					<div class="col-md-4 mb-3">
+						<label for="experience" class="form-label">Niveau d'expérience</label>
+						<input type="number" id="experience" name="experience" class="form-control" min="1" max="5" placeholder="Ex : 3">
+					</div>
+				</div>
+
+				<div class="form-group mb-3">
+					<label for="languages" class="form-label">Langages ou technologies</label>
+					<select id="languages" name="languages[]" class="form-control" multiple>
+						<option value="python">Python</option>
+						<option value="javascript">JavaScript</option>
+						<option value="java">Java</option>
+						<option value="php">PHP</option>
+						<option value="csharp">C#</option>
+					</select>
+					<small class="form-text text-muted">Maintenez Ctrl ou Cmd pour sélectionner plusieurs options</small>
+				</div>
+
+				<!-- Bouton de recherche -->
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">Trouver des Devs</button>
+				</div>
+			</form>
+
+		</div>
+
+		<div class="container mt-4">
+			<h2>Résultats de recherche</h2>
+
+			<div class="row">
+				{% if developers is not empty %}
+					{% for developer in developers %}
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm position-relative">
+								<div class="position-relative top-0 end-0 p-3">
+									{% if app.session.get('user_id') is not empty %}
+										{% if developer %}
+											<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;">
 										{% endif %}
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">{{ developer.nom }}</h5>
-										<p class="card-text">
-											{{ developer.localisation }}<br>
-											{{ developer.experience }}
-											ans d'expérience<br>
-											{{ developer.bio }}
-										</p>
-										<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
-											Voir le profil
-										</a>
-										<a href="{{ path('company_add_fiche_favoris', {developperId: developer.id}) }}" class="btn btn-secondary text-white btn-sm">
-											Ajouter
-										</a>
-									</div>
+									{% else %}
+										<img src="{{'https://via.placeholder.com/150'}}" alt="Profil Avatar">
+									{% endif %}
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">{{ developer.nom }}</h5>
+									<p class="card-text">
+										{{ developer.localisation }}<br>
+										{{ developer.experience }}
+										ans d'expérience<br>
+										{{ developer.bio }}
+									</p>
+									<a href="{{ path('developer_detail', {id: developer.id}) }}" class="btn btn-primary text-white btn-sm">
+										Voir le profil
+									</a>
+									<a href="{{ path('company_add_fiche_favoris', {developperId: developer.id}) }}" class="btn btn-secondary text-white btn-sm">
+										Ajouter
+									</a>
 								</div>
 							</div>
-						{% endfor %}
-					{% else %}
-						<li class="list-group-item text-center">Aucun développeur trouvé pour ces critères.</li>
-					{% endif %}
-				</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					<li class="list-group-item text-center">Aucun développeur trouvé pour ces critères.</li>
+				{% endif %}
 			</div>
 		</div>
-		 {% endblock %}
+	</div>
+{% endblock %}

@@ -4,31 +4,47 @@
 
 {% block body %}
 
-		<div class="site-section bg-light d-flex min-vh-100">
+	<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
+		<div class="container">
+			<div class="row">
+				<h2 class="font-weight-bold text-center text-primary">Vos favoris</h2>
+			</div>
 			<div class="container">
 				<div class="row">
-					<h2 class="font-weight-bold text-center text-primary">Vos favoris</h2>
-				</div>
-				<div class="container">
-					<div class="row">
-						{% for fiche in fiches_de_poste %}
-							<div class="col-md-6 col-lg-4 mb-4">
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">{{ fiche.nom }}</h5>
-										<p class="card-text">Localisation :
-											{{ fiche.localisation }}</p>
-										<p class="card-text">Salaire souhaité :
-											{{ fiche.salaireMin }}</p>
-										<a href="{{ path('app_favori_remove', { 'id': fiche.id }) }}" class="btn btn-danger">Supprimer</a>
-										<a href="{{ path('developer_detail', {'id': fiche.id}) }}" class="btn btn-success btn-sm">Voir le profil</a>
-									</div>
+					{% for developer in developers %}
+						<div class="col-md-6 col-lg-4 mb-4">
+							<div class="card shadow-sm position-relative">
+								<div class="position-relative top-0 end-0 p-3">
+									{% if app.session.get('user_id') is not empty %}
+
+										{% if developer %}
+											<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="rounded-circle border" style="width: 60px; height: 60px; object-fit: cover;">
+										{% endif %}
+									{% else %}
+										<img src="{{'https://via.placeholder.com/150'}}" alt="Profil Avatar">
+									{% endif %}
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">{{ developer.nom }}</h5>
+									<p class="card-text">
+										{{ developer.bio }}
+										<br>
+										{{ developer.experience }}
+										ans d'expérience
+									</p>
+									<a href="{{ path('app_favori_remove', { 'id': developer.id }) }}" class="btn btn-danger">Supprimer</a>
+									<a href="{{ path('developer_detail', {'id': developer.id}) }}" class="btn btn-success btn-sm">Voir le profil</a>
 								</div>
 							</div>
-						{% endfor %}
-					</div>
+						</div>
+					{% else %}
+						<p style="border-radius:0.3rem;" class="text-center text-white bg-info w-100 p-2">Aucun favori ajouté.</p>
+
+					{% endfor %}
 				</div>
 			</div>
 		</div>
+	</div>
 
-	{% endblock %}
+
+{% endblock %}

@@ -36,8 +36,6 @@ class FicheDePoste
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $company = null;
 
-
-
     #[ORM\Column]
     private int $views = 0;
 

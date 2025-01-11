@@ -21,7 +21,7 @@ class Favoris
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'favoris')]
     private ?Company $company;
 
-    #[ORM\ManyToOne(targetEntity: FicheDePoste::class)]
+    #[ORM\ManyToOne(targetEntity: FicheDePoste::class, fetch: 'EAGER')]
     private ?FicheDePoste $ficheDePoste;
 
     public function getId(): ?int

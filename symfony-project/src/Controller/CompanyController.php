@@ -157,39 +157,53 @@ class CompanyController extends AbstractController
     }
 
     #[Route('/favorites/add/{developperId}', name: 'company_add_fiche_favoris')]
-    public function add(int $developperId, Developer $developer, EntityManagerInterface $entityManager): Response
-    {
-        $company = $entityManager->getRepository(Company::class)->find(1); // Assurez-vous que l'utilisateur est une entreprise
-
-        $developer = $entityManager->getRepository(Developer::class)->find($developperId);
-
-        if (!$developer) {
-            throw $this->createNotFoundException('Fiche de poste introuvable.');
+    public function add(
+        int $developperId, 
+        EntityManagerInterface $entityManager
+    ): Response {
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+    
+        // Vérifiez que l'utilisateur est bien connecté et qu'il est associé à une entreprise
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour effectuer cette action.');
         }
-
-
+    
+        $company = $entityManager->getRepository(Company::class)->findOneBy(['user' => $user]);
+    
+        if (!$company) {
+            throw $this->createNotFoundException('Aucune entreprise associée à cet utilisateur.');
+        }
+    
+        // Récupérer le développeur par ID
+        $developer = $entityManager->getRepository(Developer::class)->find($developperId);
+    
+        if (!$developer) {
+            throw $this->createNotFoundException('Développeur introuvable.');
+        }
+    
         // Vérifiez si le favori existe déjà
         $existingFavorite = $entityManager->getRepository(Favoris::class)->findOneBy([
             'company' => $company,
             'developer' => $developer,
         ]);
-
-
+    
         if (!$existingFavorite) {
             $favorite = new Favoris();
             $favorite->setCompany($company);
             $favorite->setDeveloper($developer);
-
+    
             $entityManager->persist($favorite);
             $entityManager->flush();
-
+    
             $this->addFlash('success', 'Développeur ajouté aux favoris.');
         } else {
             $this->addFlash('info', 'Ce développeur est déjà dans vos favoris.');
         }
-
+    
         return $this->redirectToRoute('app_company');
     }
+    
 
     #[Route("/search-developers", name: "search_developers", methods: ['GET'])]
     public function searchDevelopers(Request $request, DeveloperRepository $developerRepository): Response

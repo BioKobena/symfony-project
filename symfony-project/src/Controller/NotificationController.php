@@ -44,20 +44,25 @@ class NotificationController extends AbstractController
     public function companyNotifications(CompanyRepository $companyRepository): Response
     {
         // Récupérer l'entreprise par ID
-        $company = $this->getUser()->getCompany();
+        $user = $this->getUser();
 
-        if (!$company) {
-            throw $this->createNotFoundException('Entreprise non trouvée.');
+
+
+        if (!$user) {
+            return $this->redirectToRoute('app_company_login');
         }
+
+        $company = $user->getCompany();
+
 
         // Récupérer les notifications associées à cette entreprise
         $notifications = $company->getNotifications();
+
+        
 
         return $this->render('notification/notification_company.html.twig', [
             'company' => $company,
             'notifications' => $notifications,
         ]);
     }
-
-
 }

@@ -19,6 +19,19 @@ class NotificationService
 
     public function notifyCompanyAboutMatchingDeveloper(Company $company, Developer $developer, FicheDePoste $job): void
     {
+        // Vérifier si une notification similaire existe déjà
+        $existingNotification = $this->entityManager->getRepository(Notification::class)->findOneBy([
+            'company' => $company,
+            'developer' => $developer,
+            'job' => $job,
+        ]);
+
+        // Si une notification existe déjà, ne rien faire
+        if ($existingNotification) {
+            return;
+        }
+
+        // Sinon, créer une nouvelle notification
         $notification = new Notification();
         $notification->setMessage(sprintf(
             'Un nouveau développeur (%s) correspond à la fiche de poste "%s".',
@@ -27,11 +40,13 @@ class NotificationService
         ));
         $notification->setCreatedAt(new \DateTimeImmutable());
         $notification->setCompany($company);
+        $notification->setDeveloper($developer);
         $notification->setJob($job);
 
         $this->entityManager->persist($notification);
         $this->entityManager->flush();
     }
+
     public function notifyDeveloper(Developer $developer, FicheDePoste $job): void
     {
         $notification = new Notification();

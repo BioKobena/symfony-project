@@ -46,7 +46,7 @@ class MatchingService
             foreach ($developers as $developer) {
                 $score = $this->calculateDeveloperMatchScore($company, $developer);
                 foreach ($jobs as $job) {
-                    if ($score >= 50) {
+                    if ($score >= 0) {
                         $this->notificationService->notifyCompanyAboutMatchingDeveloper($company, $developer, $job);
                     }
                 }

@@ -83,7 +83,9 @@ class DashboardController extends AbstractController
         $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
             ->findBy([], ['createdAt' => 'DESC'], 3);
 
+        // dd($fichesDePoste);
 
+        
         // dd($fichesDePoste);
         // Les postes populaires
         $offres = $entityManager->getRepository(FicheDePoste::class)
@@ -111,8 +113,16 @@ class DashboardController extends AbstractController
             'new_projects_percentage' => $new_projects_percentage,
             'projects_count' => $projects_count,
         ]);
-
-
     }
+
+
+
+    #[Route('/dashboard-entreprise', name: 'app_dashboard_entreprise')]
+    public function index_entreprise(): Response
+    {
+        // Redirige directement vers la vue du tableau de bord statique
+        return $this->render('dashboard/dashboardEnterprise.html.twig');
+    }
+
 }
 
