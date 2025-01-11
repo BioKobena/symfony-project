@@ -3,84 +3,42 @@
 {% endblock %}
 
 {% block body %}
-	{# 
-							<style>
-								#favoriteBtn.active .bi-heart {
-									display: none;
-								}
-						
-								#favoriteBtn.active .bi-heart-fill {
-									display: inline;
-								}
-							</style> #}
-
 
 	<div class="site-section bg-light d-flex">
 		<div class="container">
-			<div class="card shadow-lg">
-				<div class="card-header bg-primary text-white text-center">
-					<h2 class="mb-0 text-white">{{ fiche.titre }}</h2>
-				</div>
-				<div class="card-body">
-					<h4 class="text-primary">Informations générales</h4>
-					<p>
-						<strong>Localisation :</strong>
-						{{ fiche.localisation }}</p>
-					<p>
-						<strong>Technologies :</strong>
-						{{ fiche.technologies }}</p>
-					<p>
-						<strong>Niveau d'expérience :</strong>
-						{{ fiche.niveauExperience }}
-						ans</p>
-					<p>
-						<strong>Salaire proposé :</strong>
-						{{ fiche.salairePropose }}</p>
-					<p>
-						<strong>Description :</strong>
-						{{ fiche.description }}</p>
-					<div class="text-center mt-4">
-						<a href="{{ path('app_success') }}" class="btn btn-primary btn-lg">Candidature simplifiée</a>
-						<a href="{{ path('app_success') }}" class="btn btn-outline-primary btn-lg ml-2">Enregistrer</a>
-					</div>
-				</div>
-			</div>
 			<div
-				class="container mt-5">
+				class="container">
 				<!-- Titre principal -->
 				<div class="mb-4">
-					<h1 class="fw-bold">STAGE FIN D'ETUDE - Consultant financement de l'innovation (Bagneux)</h1>
+					<h2 class="font-weight-bold">{{ fiche.titre }}</h2>
 				</div>
 
 				<!-- Informations principales -->
-				<div class="d-flex align-items-center mb-3">
-					<div class="me-3">
-						<i class="bi bi-briefcase"></i>
-						Stage 6 mois
-					</div>
+				<div class="d-flex align-items-center mt-3 gap-4">
+				
 					<div>
-						<i class="bi bi-geo-alt"></i>
-						Paris
+						<i class="bi bi-geo-alt mt-5" style="color: black; padding: 5px; font-size: 1.5rem;"></i>
+						<span class="ms-2" style="color: black; font-weight: 500;">{{ fiche.localisation }}</span>
 					</div>
 				</div>
 
+
 				<!-- Entreprise -->
 				<div class="d-flex align-items-center mb-3 p-2">
-					<div class="me-3">
+					<div class="me-3 mr-3">
 						<img src="https://via.placeholder.com/100" alt="Logo de l'entreprise" class="rounded-circle">
 					</div>
 					<div>
-						<h5 class="mb-1 fw-bold">B.Conseil</h5>
-						<p class="mb-0 text-muted">Start-up • 50 employés • Conseil</p>
+						<h5 class="mb-1 fw-bold">a mettre</h5>
 					</div>
 				</div>
 
 				<!-- Date de publication -->
-				<p class="text-muted">Publiée le 10 janvier 2025</p>
+				<p class="text-muted">Publiée le {{ fiche.createdAt|date('d/m/Y H:i') }}</p>
 
 				<!-- Boutons -->
 				<div class="d-flex align-items-center mb-4 space-x-3">
-					<a href="#" class="btn btn-primary mr-4" style="border-radius: 1.3rem;">
+					<a href="{{ path('app_success') }}" class="btn btn-primary mr-4" style="border-radius: 1.3rem;">
 						<i class="bi bi-lightning-fill"></i>
 						Candidature simplifiée
 					</a>
@@ -100,35 +58,33 @@ icon.classList.toggle('bi-heart');
 
 
 				<!-- Informations complémentaires -->
-				<div class="text-white p-4 mb-4 " style="border-radius: 1.3rem; background-color: #081c37;">
+				<div class="text-white p-4 mb-7 " style="border-radius: 1.3rem; background-color: #081c37;">
 					<table class="table text-white mb-0" style="border-collapse: collapse; width: 100%;">
 						<tr>
-							<td style="border-right: 1px solid white; border-top: none; width: 25%;">
-								<p class="mb-1">Date de début</p>
-								<h6 class="font-weight-bold">Janvier 2025</h6>
+							<td style="border-right: 1px solid white; border-top: none; width: 30%;">
+								<p class="mb-1">Niveau d'expérience</p>
+								<h6 class="font-weight-bold">{{ fiche.niveauExperience }} ans</h6>
 							</td>
 							<td style="border-right: 1px solid white; border-top: none;">
-								<p class="mb-1">Niveau d'étude</p>
-								<h6 class="font-weight-bold">Niveau Master, MSc ou Programme Grande Ecole</h6>
+								<p class="mb-1">Technologies</p>
+								<h6 class="font-weight-bold">{{ fiche.technologies }}</h6>
 							</td>
-							<td style="border-top: none; width: 25%;">
-								<p class="mb-1">Télétravail</p>
-								<h6 class="font-weight-bold">Partiel</h6>
+							<td style="border-top: none; width: 30%;">
+								<p class="mb-1">Salaire proposé</p>
+								<h6 class="font-weight-bold">{{ fiche.salairePropose }} € / an</h6>
 							</td>
 						</tr>
 					</table>
 				</div>
 
-
-				<!-- Description -->
-				<div>
-					<p>Hello,</p>
-					<p>Je suis Aurélien Barrière le fondateur de B.Conseil !</p>
-					<p>Mon rêve c’est de créer un groupe de conseil puissant ayant un maximum d’impact social sur la vie des collaborateurs tout en apportant un maximum de valeur à nos clients.</p>
-					<p>Mon challenge est triple :</p>
-					<!-- Ajoute d'autres détails ici si nécessaire -->
-				</div>
 			</div>
+			<!-- Description -->
+				<div class="container" style="margin-top: 40px;">
+					<div class="card-body shadow-lg text-black" style="border-radius: 5px; border: none{# 2px solid #081c37 #}; text-align: justify;">
+						<p>{{ fiche.description }}</p>
+						<!-- Ajoute d'autres détails ici si nécessaire -->
+					</div>
+				</div>
 
 		</div>
 	</div>

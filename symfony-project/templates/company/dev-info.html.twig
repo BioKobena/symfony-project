@@ -1,58 +1,68 @@
+
 {% extends 'base.html.twig' %}
-{% block title %}Information developpeur
-{% endblock %}
+{% block title %}Information developpeur{% endblock %}
 
 {% block body %}
 
+<div class="site-section h-100" style="display:flex; justify-content:center; align-items:center">
+    <div class="container mt-5" style="width:60%;"> <!-- Réduire la largeur du conteneur -->
+        <div class="card shadow-lg position-relative">
+            <div class="row g-0">
+                <!-- Section gauche -->
+                <div class="col-md-4 bg-light p-4"> <!-- Réduire le padding ici -->
+                    <div class="text-center">
+                        <img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="w-75" width="100" height="200"> <!-- Réduire la taille de l'image -->
+                        <h4 style="font-weight: 600; font-size: 1.1rem;">{{ developer.nom }} {{ developer.prenom }}</h4> <!-- Taille du titre -->
+                        <p class="text-muted" style="font-size: 0.9rem;">DEVELOPPEUR</p> <!-- Taille du texte -->
+                    </div>
+                    <hr>
+                    <h5 style="font-size: 1rem; margin-bottom: 10px;">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        ADRESSE</h5>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">{{ developer.localisation }}</p>
 
-	<div class="section-grey bg-light" id="blog-section" style="display:flex; flex-direction:column; justify-content:center; align-items:center; width:100vw ; padding:3rem; margin-top:5rem">
+                    <h5 style="font-size: 1rem; margin-bottom: 10px;">
+                        <i class="bi bi-envelope-fill"></i>
+                        EMAIL</h5>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">{{ developer.nom }}.{{ developer.prenom }}@gmail.com</p>
 
-		<div class="container team" style="display:flex; justify-content:center; align-items:center">
-			<div class="col-md-6 col-lg-6 pic">
-				{% if app.session.get('user_id') is not empty %}
+                    <h5 style="font-size: 1rem; margin-bottom: 10px;">
+                        <i class="bi bi-telephone-fill"></i>
+                        TÉLÉPHONE</h5>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">06 01 02 03 04</p>
 
-					{% if developer %}
-						<img src="{{ asset('uploads/photos/' ~ developer.avatar) }}" alt="Image" class="w-75">
-					{% endif %}
-				{% else %}
-					<img style="width:2rem; height:2rem; border-radius:4rem;" src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_1_essential-app-ui-avatar-profile-user-account-1024.png"/>
-				{% endif %}
-			</div>
+                    <hr>
+                    <h5 style="font-size: 1rem; margin-bottom: 20px;">
+                        <i class="bi bi-tools"></i>
+                        COMPÉTENCES</h5>
+                    <ul style="font-size: 0.9rem;">
+                        {% for language in developer.languages %}
+                            <li>{{ language }}</li>
+                        {% endfor %}
+                    </ul>
 
-			<div class="col-md-6 col-lg-6 d-flex flex-column my-8 justify-center align-center">
-				<h3>
-					<a href="#">
-						<span>{{ developer.nom }}</span>
-						{{ developer.prenom }}</a>
-				</h3>
-				<span class="d-block position">{{ developer.localisation }}</span>
-				<p>
-					<strong>Localisation:</strong>
-					{{ developer.localisation }}
-				</p>
-				<div class="mb-4">
-					{% for language in developer.languages %}
-						<span class="badge fs-3 bg-secondary text-white p-3 me-2 mb-2">{{ language }}</span>
-					{% endfor %}
-				</div>
-				<p>
-					<strong>Niveau d'expérience:</strong>
-					{{ developer.experience }}
-					ans
-				</p>
-				<p>
-					<strong>Salaire minimum souhaité:</strong>
-					{{ developer.salaireMin }}
-					€
-				</p>
-				<p>
-					<strong>Biographie:</strong>
-					{{ developer.bio }}
-				</p>
-				<p class="mb-0">
-					<a class="btn btn-primary text-white mt-2">Contacter</a>
-				</p>
-			</div>
-		</div>
-	</div>
+                </div>
+
+                <!-- Section droite -->
+                <div class="col-md-8 p-4"> <!-- Réduire le padding de la section droite -->
+                    <div>
+                        <h4 style="font-weight: 700; font-size: 1.2rem; margin-top: 30px;">
+                            <i class="bi bi-person-fill"></i>
+                            À PROPOS DE MOI</h4>
+                        <p style="font-size: 0.9rem;">{{ developer.bio }}</p> <!-- Texte plus petit -->
+                    </div>
+                    <hr>
+                    
+
+                    <div class="p-3">
+                        <button class="btn btn-primary" style="font-size: 0.9rem;">
+                            <i class="bi bi-chat-dots"></i> Contacter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
