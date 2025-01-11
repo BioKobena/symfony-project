@@ -5,25 +5,39 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\DeveloperRepository;
+use App\Entity\Company;
+use App\Entity\Developer;
+use App\Repository\CompanyRepository;
+use App\Entity\FicheDePoste;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Favoris;
+
 
 class DashboardController extends AbstractController
 {
     #[Route('/dashboard', name: 'app_dashboard')]
-    public function index(): Response
+    public function index(DeveloperRepository $developerRepository, EntityManagerInterface $entityManager): Response
     {
-        // Exemple de données pour un développeur
-        $developer = [
-            'nom' => 'Dupont',
-            'prenom' => 'Jean',
-            'localisation' => 'Paris, France',
-        ];
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
 
+        // Vérifier que l'utilisateur est bien connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        // Récupérer le développeur correspondant à l'utilisateur connecté
+        $developer = $developerRepository->findOneBy(['user' => $user]);
+
+
+        // dd($developer);
         // Données fictives pour les postes suggérés
         $suggestedJobs = [
             ['titre' => 'Développeur PHP', 'localisation' => 'Paris', 'salaire' => '40k', 'id' => 1, 'image' => '/images/tiny_tots.jpg',],
             ['titre' => 'Développeur Frontend', 'localisation' => 'Lyon', 'salaire' => '45k', 'id' => 2, 'image' => '/images/little_explorers.jpg',],
             ['titre' => 'Développeur PHP', 'localisation' => 'Paris', 'salaire' => '40k', 'id' => 1, 'image' => '/images/tiny_tots.jpg',],
-            ];
+        ];
 
         // Données fictives pour les postes populaires
         $jobs = [
@@ -61,19 +75,35 @@ class DashboardController extends AbstractController
         $new_projects_percentage = 18.33;
         $projects_count = 864;
 
+        $favoris = $entityManager->getRepository(Favoris::class)
+            ->findBy(['developer' => $developer]);
+
+
+        // Les postes récents
+        $fichesDePoste = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy([], ['createdAt' => 'DESC'], 3);
+
+
+        // dd($fichesDePoste);
+        // Les postes populaires
+        $offres = $entityManager->getRepository(FicheDePoste::class)
+            ->findBy([], ['views' => 'DESC'], 3);
+
+
+        $nombreFavoris = count($favoris);
         // Passer toutes les données nécessaires au template Twig
         return $this->render('dashboard/index.html.twig', [
             'developer' => $developer,
-            'jobs' => $jobs,
+            'jobs' => $fichesDePoste,
             'profile_views' => $profile_views,
             'profile_views_percentage' => $profile_views_percentage,
             'applications_sent' => $applications_sent,
             'applications_sent_percentage' => $applications_sent_percentage,
-            'favorites_count' => $favorites_count,
+            'favorites_count' => $nombreFavoris,
             'favorites_count_percentage' => $favorites_count_percentage,
             'recruiters_response_rate' => $recruiters_response_rate,
-            'suggested_jobs' => $suggestedJobs,
-            'latest_jobs' => $latestJobs,
+            'suggested_jobs' => $offres,
+            'latest_jobs' => $offres,
             'new_clients_count' => $new_clients_count,
             'new_clients_percentage' => $new_clients_percentage,
             'earnings_of_month' => $earnings_of_month,
@@ -82,6 +112,7 @@ class DashboardController extends AbstractController
             'projects_count' => $projects_count,
         ]);
 
-        
+
     }
 }
+
