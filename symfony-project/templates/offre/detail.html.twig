@@ -11,6 +11,7 @@
 				<!-- Titre principal -->
 				<div class="mb-4">
 					<h2 class="font-weight-bold">{{ fiche.titre }}</h2>
+					<p class="text-muted">Publiée le {{ fiche.createdAt|date('d/m/Y H:i') }}</p>
 				</div>
 
 				<!-- Informations principales -->
@@ -26,15 +27,15 @@
 				<!-- Entreprise -->
 				<div class="d-flex align-items-center mb-3 p-2">
 					<div class="me-3 mr-3">
-						<img src="https://via.placeholder.com/100" alt="Logo de l'entreprise" class="rounded-circle">
+						<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/b/b5/Capgemini_Logo.svg/120px-Capgemini_Logo.svg.png?20190416190508 alt=alt="Offre Image" class="card-">
 					</div>
 					<div>
-						<h5 class="mb-1 fw-bold">{{ company.nom }}</h5>
+						<h5 class="mb-1 fw-bold">{{ enterprise.nom }}</h5>
 					</div>
 				</div>
 
 				<!-- Date de publication -->
-				<p class="text-muted">Publiée le {{ fiche.createdAt|date('d/m/Y H:i') }}</p>
+				<p>{{ fiche.views }} vues pour cette offre </p>
 
 				<!-- Boutons -->
 				<div class="d-flex align-items-center mb-4 space-x-3">

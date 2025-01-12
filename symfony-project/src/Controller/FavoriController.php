@@ -131,24 +131,24 @@ class FavoriController extends AbstractController
     }
     
 
+/* 
+    #[Route('/favori-company', name: 'favorite_company')]
+    public function favoris_company(EntityManagerInterface $entityManager, DeveloperRepository $developerRepository): Response
+    {
+        $developer = $developerRepository->find(17); ou récupérer un utilisateur spécifique si nécessaire
+        $favoris = $entityManager->getRepository(Favoris::class)
+            ->findBy(['developer' => $developer]);
 
-    // #[Route('/favori-company', name: 'favorite_company')]
-    // public function favoris_company(EntityManagerInterface $entityManager, DeveloperRepository $developerRepository): Response
-    // {
-    //     $developer = $developerRepository->find(17); // ou récupérer un utilisateur spécifique si nécessaire
-    //     $favoris = $entityManager->getRepository(Favoris::class)
-    //         ->findBy(['developer' => $developer]);
+        // Associer les fiches de postes aux favoris
+        $fichesDePoste = [];
+        foreach ($favoris as $favori) {
+            $fichesDePoste[] = $favori->getFicheDePoste();
+        }
 
-    //     // Associer les fiches de postes aux favoris
-    //     $fichesDePoste = [];
-    //     foreach ($favoris as $favori) {
-    //         $fichesDePoste[] = $favori->getFicheDePoste();
-    //     }
-
-    //     return $this->render('favori/favoris_entreprise.html.twig', [
-    //         'fiches_de_poste' => $fichesDePoste,
-    //     ]);
-    // }
+        return $this->render('favori/favoris_entreprise.html.twig', [
+            'fiches_de_poste' => $fichesDePoste,
+        ]);
+    } */
 
 
 }
